@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.domain.movie;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
