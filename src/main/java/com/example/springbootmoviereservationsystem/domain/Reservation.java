@@ -8,7 +8,7 @@ public class Reservation {
 
     private final Consumer consumer;
     private final int audienceCount;
-    private final Movie movie;
+    private final Screening screening;
     private final Long fee;
 
 }
