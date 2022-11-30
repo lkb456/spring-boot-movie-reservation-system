@@ -15,7 +15,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long movieId; // 순번
+    private Long id; // 순번
 
     private String title; // 제목
     private Long fee; // 요금
