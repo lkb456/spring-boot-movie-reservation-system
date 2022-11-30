@@ -3,11 +3,15 @@ package com.example.springbootmoviereservationsystem.domain.movie;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +27,9 @@ public class Movie {
 
     @Enumerated(value = EnumType.STRING)
     private ReleaseStatus releaseStatus; // 개봉 상태
+
+    @CreatedDate
+    private LocalDateTime createAt;
 
     public void changeReleaseStatus(ReleaseStatus releaseStatus) {
         this.releaseStatus = releaseStatus;
