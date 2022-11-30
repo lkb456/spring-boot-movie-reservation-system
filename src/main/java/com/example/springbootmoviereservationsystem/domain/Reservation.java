@@ -15,7 +15,6 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne
     private Consumer consumer; // 고객 정보
     private int audienceCount; // 고객 인원 수
