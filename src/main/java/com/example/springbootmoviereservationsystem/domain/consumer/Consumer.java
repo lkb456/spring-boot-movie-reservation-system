@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.domain.consumer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
