@@ -7,7 +7,7 @@ public class Screening {
 
     private List<Movie> movies = new ArrayList<>();
 
-    public void screeningMovie(List<Movie> movies) {
+    public void addReleaseMovie(List<Movie> movies) {
         // 영화 리스트를 순회 한다.
         for (Movie movie : movies) {
             // 영화 상태가 개봉인 상태만 저장한다.
