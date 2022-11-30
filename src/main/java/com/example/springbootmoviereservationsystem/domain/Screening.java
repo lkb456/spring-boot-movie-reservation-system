@@ -12,7 +12,7 @@ public class Screening {
         for (Movie movie : movies) {
             // 영화 상태가 개봉인 상태만 저장한다.
             if (movie.isReleaseMovie()) {
-                movies.add(movie);
+                this.movies.add(movie);
             }
         }
     }
