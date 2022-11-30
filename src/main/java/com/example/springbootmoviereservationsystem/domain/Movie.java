@@ -1,5 +1,8 @@
 package com.example.springbootmoviereservationsystem.domain;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class Movie {
 
     private Long fee;
