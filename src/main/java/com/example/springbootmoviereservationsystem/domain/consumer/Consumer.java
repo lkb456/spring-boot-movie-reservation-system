@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +24,7 @@ public class Consumer {
     @Column(unique = true)
     private String phoneNumber;
 
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime createAt;
 
 }
