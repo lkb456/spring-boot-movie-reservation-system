@@ -14,11 +14,11 @@ public class ConsumerSaveRequestDto {
 
     @JsonProperty("nick_name")
     @NotBlank(message = "공백 없이 입력하세요.")
-    private String nickName;
+    private String nickName; // 고객 닉네임
 
     @JsonProperty("phone_number")
     @NotBlank(message = "공백 없이 입력하세요.")
-    private String phoneNumber;
+    private String phoneNumber; // 고객 핸드폰 번호
 
     public Consumer toEntity() {
         return Consumer.builder()

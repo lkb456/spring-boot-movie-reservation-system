@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class ConsumerSaveResponseDto {
 
-    private final String nickname;
-    private final String phoneNumber;
+    private final String nickname; // 고객 닉네임
+    private final String phoneNumber; // 고객 핸드폰 번호
 
     @Builder
     public ConsumerSaveResponseDto(String nickName, String phoneNumber) {

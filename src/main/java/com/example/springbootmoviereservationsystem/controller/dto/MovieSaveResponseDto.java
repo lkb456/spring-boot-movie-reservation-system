@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MovieSaveResponseDto {
 
-    private final Long id;
-    private final String title;
-    private final Long fee;
-    private final Duration runningTime;
-    private final ReleaseStatus releaseStatus;
-    private final LocalDateTime createAt;
+    private final Long id; // 저장 순번
+    private final String title; // 제목
+    private final Long fee; // 요금
+    private final Duration runningTime; // 상영 시간
+    private final ReleaseStatus releaseStatus; // 개봉 상태
+    private final LocalDateTime createAt; // 정보 저장 시간
 
     public static MovieSaveResponseDto of(Movie movie) {
         return MovieSaveResponseDto.builder()
