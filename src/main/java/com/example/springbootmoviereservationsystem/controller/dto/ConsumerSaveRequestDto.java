@@ -22,7 +22,7 @@ public class ConsumerSaveRequestDto {
 
     public Consumer toEntity() {
         return Consumer.builder()
-                .nickName(this.nickName)
+                .nickname(this.nickName)
                 .phoneNumber(this.phoneNumber)
                 .build();
     }

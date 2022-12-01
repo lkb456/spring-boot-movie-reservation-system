@@ -19,7 +19,7 @@ public class Consumer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nickName;
+    private String nickname;
 
     @Column(unique = true)
     private String phoneNumber;
