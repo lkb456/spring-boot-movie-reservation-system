@@ -3,12 +3,10 @@ package com.example.springbootmoviereservationsystem.domain.reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
@@ -21,7 +19,7 @@ public class Reservation {
     private Consumer consumer; // 고객 정보
     private int audienceCount; // 고객 인원 수
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Screening screening; // 상영 정보
     private Long fee; // 예매 요금
 
