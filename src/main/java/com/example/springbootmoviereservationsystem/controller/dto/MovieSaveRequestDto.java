@@ -14,8 +14,8 @@ import java.time.Duration;
 @AllArgsConstructor
 public class MovieSaveRequestDto {
 
-    private String title;
-    private Long fee;
+    private String title; // 영화 제목
+    private Long fee; // 영화 요금
 
     @JsonProperty("time")
     private Duration runningTime;

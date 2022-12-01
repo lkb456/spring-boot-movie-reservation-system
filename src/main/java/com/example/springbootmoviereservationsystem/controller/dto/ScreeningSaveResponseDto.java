@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 public class ScreeningSaveResponseDto {
 
     @JsonProperty("screening_id")
-    private final Long id;
+    private final Long id; // 상영 순번
 
     @JsonProperty("movie")
-    private final MovieSaveResponseDto movieSaveResponseDto;
+    private final MovieSaveResponseDto movieSaveResponseDto; // 영화 정보
 
     @JsonProperty("when")
-    private final LocalDateTime whenScreened;
+    private final LocalDateTime whenScreened; // 상영 시간
 
     public static ScreeningSaveResponseDto of(Long id, MovieSaveResponseDto movieSaveResponseDto, LocalDateTime whenScreened) {
         return ScreeningSaveResponseDto.builder()
