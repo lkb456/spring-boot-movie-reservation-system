@@ -29,10 +29,10 @@ public class ConsumerService {
     }
 
     public Consumer findConsumer(String phoneNumber) {
-        return find(phoneNumber);
+        return consumerFind(phoneNumber);
     }
 
-    private Consumer find(String phoneNumber) {
+    private Consumer consumerFind(String phoneNumber) {
         return consumerRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 핸드폰 번호입니다."));
     }
