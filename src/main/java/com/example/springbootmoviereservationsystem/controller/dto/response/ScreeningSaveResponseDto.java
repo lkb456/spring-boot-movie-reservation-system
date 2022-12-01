@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.dto.response;
 
+import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,11 +22,11 @@ public class ScreeningSaveResponseDto {
     @JsonProperty("when")
     private final LocalDateTime whenScreened; // 상영 시간
 
-    public static ScreeningSaveResponseDto of(Long id, MovieSaveResponseDto movieSaveResponseDto, LocalDateTime whenScreened) {
+    public static ScreeningSaveResponseDto of(Screening savedScreening) {
         return ScreeningSaveResponseDto.builder()
-                .id(id)
-                .movieSaveResponseDto(movieSaveResponseDto)
-                .whenScreened(whenScreened)
+                .id(savedScreening.getId())
+                .movieSaveResponseDto(MovieSaveResponseDto.of(savedScreening.getMovie()))
+                .whenScreened(savedScreening.getWhenScreened())
                 .build();
     }
 }

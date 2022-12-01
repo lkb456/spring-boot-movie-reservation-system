@@ -1,6 +1,5 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.response.MovieSaveResponseDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
@@ -23,9 +22,7 @@ public class ScreeningService {
     public ScreeningSaveResponseDto saveScreen(Long movieId, LocalDateTime whenScreened) {
         Movie movie = movieFind(movieId);
         Screening savedScreening = screenSave(whenScreened, movie);
-        return ScreeningSaveResponseDto.of(savedScreening.getId(),
-                MovieSaveResponseDto.of(movie),
-                savedScreening.getWhenScreened());
+        return ScreeningSaveResponseDto.of(savedScreening);
 
     }
 
