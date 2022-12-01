@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.ScreeningSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

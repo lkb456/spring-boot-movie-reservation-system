@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.controller.dto;
+package com.example.springbootmoviereservationsystem.controller.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

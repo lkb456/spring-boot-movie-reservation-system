@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.MovieSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.MovieSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.request.MovieSaveRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.response.MovieSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.service.MovieService;
