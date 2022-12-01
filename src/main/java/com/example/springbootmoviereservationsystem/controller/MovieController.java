@@ -18,9 +18,9 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping("/movies")
-    public ResponseEntity<MovieSaveResponseDto> movieSave(@RequestBody MovieSaveRequestDto movieSaveRequestDto) {
+    public ResponseEntity<Long> movieSave(@RequestBody MovieSaveRequestDto movieSaveRequestDto) {
         Movie savedMovie = movieRepository.save(movieSaveRequestDto.toEntity());
-        return ResponseEntity.status(HttpStatus.CREATED).body(MovieSaveResponseDto.of(savedMovie));
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie.getId());
     }
 
     @GetMapping("/movies/{id}")
