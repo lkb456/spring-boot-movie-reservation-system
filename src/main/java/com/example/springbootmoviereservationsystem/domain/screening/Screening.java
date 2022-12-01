@@ -26,20 +26,20 @@ public class Screening {
     private Movie movie;
     private LocalDateTime whenScreened;
 
-    public Reservation reserve(Consumer consumer, int audienceCount, int movieSequence) {
+    public Reservation reserve(Consumer consumer, int audienceCount) {
         if (movie.isReleaseMovie()) {
             return Reservation.builder()
                     .consumer(consumer)
                     .audienceCount(audienceCount)
                     .screening(this)
-                    .fee(calculateFee(movieSequence))
+                    .fee(calculateFee(audienceCount))
                     .build();
         }
 
         throw new IllegalArgumentException("Movie is UnRelease Exception !!");
     }
 
-    private Long calculateFee(int movieSequence) {
-        return movie.calculateMovieFee(movieSequence);
+    private Long calculateFee(int audienceCount) {
+        return movie.calculateMovieFee(audienceCount);
     }
 }
