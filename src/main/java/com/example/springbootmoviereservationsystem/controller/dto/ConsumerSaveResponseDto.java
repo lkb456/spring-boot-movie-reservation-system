@@ -7,18 +7,18 @@ import lombok.Getter;
 @Getter
 public class ConsumerSaveResponseDto {
 
-    private final String nickName;
+    private final String nickname;
     private final String phoneNumber;
 
     @Builder
     public ConsumerSaveResponseDto(String nickName, String phoneNumber) {
-        this.nickName = nickName;
+        this.nickname = nickName;
         this.phoneNumber = phoneNumber;
     }
 
     public static ConsumerSaveResponseDto of(Consumer consumer) {
          return ConsumerSaveResponseDto.builder()
-                 .nickName(consumer.getNickName())
+                 .nickName(consumer.getNickname())
                  .phoneNumber(consumer.getPhoneNumber())
                  .build();
     }
