@@ -25,7 +25,7 @@ public class MovieController {
 
     @GetMapping("/movies/{id}")
     public ResponseEntity<MovieSaveResponseDto> movieFind(@PathVariable("id") Long movieId) {
-        MovieSaveResponseDto movieSaveResponseDto = movieService.findMovie(movieId);
+        MovieSaveResponseDto movieSaveResponseDto = MovieSaveResponseDto.of(movieService.findMovie(movieId));
         return ResponseEntity.status(HttpStatus.OK).body(movieSaveResponseDto);
     }
 }

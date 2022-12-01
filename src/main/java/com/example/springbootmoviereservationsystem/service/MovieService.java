@@ -1,6 +1,5 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.response.MovieSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +11,8 @@ public class MovieService {
 
     public final MovieRepository movieRepository;
 
-    public MovieSaveResponseDto findMovie(Long movieId) {
-        return MovieSaveResponseDto.of(find(movieId));
+    public Movie findMovie(Long movieId) {
+        return find(movieId);
     }
 
     private Movie find(Long movieId) {

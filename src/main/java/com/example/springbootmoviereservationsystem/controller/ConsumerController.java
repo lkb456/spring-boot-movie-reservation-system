@@ -24,7 +24,7 @@ public class ConsumerController {
 
     @GetMapping("/consumers")
     public ResponseEntity<ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
-        ConsumerSaveResponseDto consumerSaveResponseDto = consumerService.findConsumer(phoneNumber);
+        ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
         return ResponseEntity.status(HttpStatus.OK).body(consumerSaveResponseDto);
     }
 }

@@ -1,8 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.screening.ScreeningRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +13,18 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ScreeningService {
 
-    private final MovieRepository movieRepository;
     private final ScreeningRepository screeningRepository;
+    private final MovieService movieService;
 
     @Transactional
-    public ScreeningSaveResponseDto saveScreen(Long movieId, LocalDateTime whenScreened) {
-        Movie movie = movieFind(movieId);
-        Screening savedScreening = screenSave(whenScreened, movie);
-        return ScreeningSaveResponseDto.of(savedScreening);
+    public Screening saveScreen(Long movieId, LocalDateTime whenScreened) {
+        Movie movie = movieService.findMovie(movieId);
+        return screenSave(whenScreened, movie);
+    }
 
+    public Screening findScreen(Long screenId) {
+        return screeningRepository.findById(screenId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상영정보입니다."));
     }
 
     private Screening screenSave(LocalDateTime whenScreened, Movie movie) {
@@ -31,10 +32,5 @@ public class ScreeningService {
                 .movie(movie)
                 .whenScreened(whenScreened)
                 .build());
-    }
-
-    private Movie movieFind(Long movieId) {
-        return movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
     }
 }

@@ -1,7 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.dto.request.ConsumerSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.ConsumerSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +28,8 @@ public class ConsumerService {
         return consumerRepository.existsByPhoneNumber(phoneNumber);
     }
 
-    public ConsumerSaveResponseDto findConsumer(String phoneNumber) {
-        return ConsumerSaveResponseDto.of(find(phoneNumber));
+    public Consumer findConsumer(String phoneNumber) {
+        return find(phoneNumber);
     }
 
     private Consumer find(String phoneNumber) {
