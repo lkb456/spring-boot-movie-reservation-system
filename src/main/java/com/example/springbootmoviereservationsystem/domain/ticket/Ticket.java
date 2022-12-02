@@ -16,8 +16,8 @@ import java.util.UUID;
 @Table(name = "TICKETS")
 public class Ticket {
 
-    @Id @GeneratedValue(generator = "UUID2")
-    @GenericGenerator(name="UUID2", strategy = "UUID2")
+    @Id @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)", name = "SERIAL_NUMBER")
     private UUID serialNumber; // 티켓 시리얼 번호
 
