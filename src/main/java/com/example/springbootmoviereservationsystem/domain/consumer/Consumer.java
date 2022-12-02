@@ -10,27 +10,31 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "CONSUMERS")
 public class Consumer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "consumers_id")
+    @Column(name = "CONSUMERS_ID")
     private Long id; // pk값
+
+    @Column(name = "NICKNAME")
     private String nickname; // 닉네임
 
-    @Column(unique = true)
+    @Column(name = "PHONE_NUMBER" ,unique = true)
     private String phoneNumber; // 휴대전화 번호
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "serial_number")
+    @JoinColumn(name = "SERIAL_NUMBER")
     private Ticket ticket; // 예매 티켓
 
     @CreationTimestamp
+    @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
     public void receive(Ticket ticket) {

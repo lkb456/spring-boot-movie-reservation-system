@@ -4,26 +4,28 @@ import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Entity
+@Table(name = "SCREENS")
 public class Screening {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SCREENS_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "MOVIE")
     private Movie movie;
+
+    @Column(name = "WHEN_SCREENED")
     private LocalDateTime whenScreened;
 
     public Reservation reserve(Consumer consumer, int audienceCount) {
