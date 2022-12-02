@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConsumerSaveRequestDto {
 
-    @JsonProperty("nick_name")
+    @JsonProperty("nickname")
     @NotBlank(message = "공백 없이 입력하세요.")
     private String nickName; // 고객 닉네임
 
