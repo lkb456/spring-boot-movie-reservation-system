@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CONSUMERS")
+@Table(name = "CONSUMERS", indexes = @Index(columnList = "PHONE_NUMBER"))
 public class Consumer {
 
     @Id
