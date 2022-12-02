@@ -38,7 +38,7 @@ public class Movie {
 
     @CreationTimestamp
     @Column(name = "CREATE_AT")
-    private LocalDateTime createAt;
+    private LocalDateTime createAt; // 생성 시간
 
     public void changeReleaseStatus(ReleaseStatus releaseStatus) {
         this.releaseStatus = releaseStatus;
