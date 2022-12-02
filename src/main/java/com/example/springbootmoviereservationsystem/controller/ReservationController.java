@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,5 +20,11 @@ public class ReservationController {
                                   @RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
         ReservationSaveResponseDto reservationSaveResponseDto = reservationService.reserveSave(screeningId, reservationSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationSaveResponseDto);
+    }
+
+    @PutMapping("/reservation/{id}/ticket")
+    public ResponseEntity<String> createTicket(@PathVariable("id") Long reservationId) {
+        reservationService.ticketPublish(reservationId);
+        return ResponseEntity.status(HttpStatus.OK).body("ticket");
     }
 }
