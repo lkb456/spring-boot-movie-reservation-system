@@ -22,7 +22,6 @@ public class Screening {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "MOVIE")
     private Movie movie;
 
     @Column(name = "WHEN_SCREENED")
