@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
@@ -31,8 +32,9 @@ public class Ticket {
 
     private LocalDateTime whenScreened; // 상영 시간
 
-    private boolean isPublish; // 티켓 발행 상태
+    private boolean isPublish = false; // 티켓 발행 상태
 
+    @CreationTimestamp
     private LocalDateTime publishTime; // 발행 시간
 
     public boolean isPublish() {
