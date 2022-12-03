@@ -23,8 +23,8 @@ public class ReservationController {
     }
 
     @PutMapping("/reservation/{id}/ticket")
-    public ResponseEntity<String> createTicket(@PathVariable("id") Long reservationId) {
+    public ResponseEntity<Void> createTicket(@PathVariable("id") Long reservationId) {
         reservationService.ticketPublish(reservationId);
-        return ResponseEntity.status(HttpStatus.OK).body("ticket");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
