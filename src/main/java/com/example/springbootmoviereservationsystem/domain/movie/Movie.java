@@ -40,10 +40,6 @@ public class Movie {
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
-    public void changeReleaseStatus(ReleaseStatus releaseStatus) {
-        this.releaseStatus = releaseStatus;
-    }
-
     public boolean isReleaseMovie() {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
     }
@@ -54,5 +50,12 @@ public class Movie {
 
     private Long multiply(int audienceCount) {
         return this.fee * audienceCount;
+    }
+
+    public void update(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+        this.title = title;
+        this.fee = fee;
+        this.runningTime = runningTime;
+        this.releaseStatus = releaseStatus;
     }
 }
