@@ -23,10 +23,10 @@ public class Consumer {
     @Column(name = "CONSUMERS_ID")
     private Long id; // pk값
 
-    @Column(name = "NICKNAME")
+    @Column(name = "NICKNAME", unique = true)
     private String nickname; // 닉네임
 
-    @Column(name = "PHONE_NUMBER" ,unique = true)
+    @Column(name = "PHONE_NUMBER", unique = true)
     private String phoneNumber; // 휴대전화 번호
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
