@@ -25,8 +25,8 @@ public class ScreeningController {
     public ResponseEntity<ScreeningSaveResponseDto> screenSave(@PathVariable(name = "id") Long movieId,
                                                                @RequestParam("when")
                                                                @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime whenScreened) {
-        ScreeningSaveResponseDto screeningSaveResponseDto = ScreeningSaveResponseDto
-                .of(screeningService.saveScreen(movieId, whenScreened));
+        ScreeningSaveResponseDto screeningSaveResponseDto =
+                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, whenScreened));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 }
