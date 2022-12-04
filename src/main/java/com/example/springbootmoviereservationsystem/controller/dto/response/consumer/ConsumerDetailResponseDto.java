@@ -1,7 +1,8 @@
-package com.example.springbootmoviereservationsystem.controller.dto.response;
+package com.example.springbootmoviereservationsystem.controller.dto.response.consumer;
 
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class ConsumerDetailResponseDto {
     @JsonProperty("phone")
     private final String phoneNumber; // 휴대전화 번호
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final Ticket ticket; // 예매 티켓
 
     @JsonProperty("create_at")

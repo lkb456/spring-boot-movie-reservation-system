@@ -1,7 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.request.ConsumerSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.request.ConsumerUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +13,13 @@ public class ConsumerService {
 
     private final ConsumerRepository consumerRepository;
 
-    public Long saveConsumer(ConsumerSaveRequestDto consumerSaveRequestDto) {
+    public Long saveConsumer(ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
         duplicateCheck(consumerSaveRequestDto);
         Consumer savedConsumer = consumerRepository.save(consumerSaveRequestDto.toEntity());
         return savedConsumer.getId();
     }
 
-    private void duplicateCheck(ConsumerSaveRequestDto consumerSaveRequestDto) {
+    private void duplicateCheck(ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
         if (isExists(consumerSaveRequestDto.getPhoneNumber())) {
             throw new IllegalArgumentException("중복된 전화번호 입니다.");
         }
@@ -35,9 +34,9 @@ public class ConsumerService {
     }
 
     @Transactional
-    public void updateConsumer(String phoneNumber, ConsumerUpdateRequestDto consumerUpdateRequestDto) {
+    public void updateConsumer(String phoneNumber, ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
         Consumer consumer = findConsumer(phoneNumber);
-        consumer.update(consumerUpdateRequestDto.getNickname(), consumerUpdateRequestDto.getPhoneNumber());
+        consumer.update(consumerSaveAndUpdateRequestDto.getNickname(), consumerSaveAndUpdateRequestDto.getPhoneNumber());
     }
 
     private Consumer consumerFind(String phoneNumber) {
