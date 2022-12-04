@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.request.ConsumerUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.ConsumerDetailResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerDetailResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,8 @@ public class AdminController {
 
     @PutMapping("/admin/consumer/{phone}")
     public ResponseEntity<Void> consumerUpdate(@PathVariable(name = "phone") String phoneNumber,
-                                               @RequestBody ConsumerUpdateRequestDto consumerUpdateRequestDto) {
-        consumerService.updateConsumer(phoneNumber, consumerUpdateRequestDto);
+                                               @RequestBody ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
+        consumerService.updateConsumer(phoneNumber, consumerSaveAndUpdateRequestDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

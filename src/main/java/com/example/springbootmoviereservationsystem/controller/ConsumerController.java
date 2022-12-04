@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.request.ConsumerSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.ConsumerSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class ConsumerController {
     private final ConsumerService consumerService;
 
     @PostMapping("/consumers")
-    public ResponseEntity<Long> consumerAdd(@RequestBody ConsumerSaveRequestDto consumerSaveRequestDto) {
+    public ResponseEntity<Long> consumerAdd(@RequestBody ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
         Long savedId =  consumerService.saveConsumer(consumerSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedId);
     }
