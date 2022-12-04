@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -37,6 +38,9 @@ public class Consumer {
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
+    @UpdateTimestamp
+    private LocalDateTime updateAt; // 수정 시간
+
     public void receive(Ticket ticket) {
         if (ticket.isPublish()) {
             this.ticket = ticket;
@@ -44,5 +48,10 @@ public class Consumer {
         }
 
         throw new IllegalArgumentException("티켓 발행이 되지 않았습니다.");
+    }
+
+    public void update(String nickname, String phoneNumber) {
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
     }
 }
