@@ -27,4 +27,9 @@ public class MovieService {
                 movieUpdateRequestDto.getReleaseStatus());
         return movieId;
     }
+
+    public void deleteMovie(Long movieId) {
+        Movie movie = findMovie(movieId);
+        movieRepository.delete(movie);
+    }
 }

@@ -38,4 +38,10 @@ public class MovieController {
         Long updatedMovieId = movieService.updateMovie(movieId, movieUpdateRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedMovieId);
     }
+
+    @DeleteMapping("/movies/{id}")
+    public ResponseEntity<Void> movieDelete(@PathVariable("id") Long movieId) {
+        movieService.deleteMovie(movieId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
