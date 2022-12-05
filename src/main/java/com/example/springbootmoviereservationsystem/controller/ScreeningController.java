@@ -2,7 +2,6 @@ package com.example.springbootmoviereservationsystem.controller;
 
 import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Valid

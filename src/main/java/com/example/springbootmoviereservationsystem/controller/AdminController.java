@@ -3,12 +3,13 @@ package com.example.springbootmoviereservationsystem.controller;
 import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerDetailResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Valid
 @RestController

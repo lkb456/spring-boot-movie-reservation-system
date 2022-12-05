@@ -1,12 +1,12 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
