@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.SearchMovieRequestDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.screening.ScreeningRepository;
@@ -19,9 +20,9 @@ public class ScreeningService {
     private final MovieService movieService;
 
     @Transactional
-    public Screening saveScreen(Long movieId, LocalDateTime whenScreened) {
+    public Screening saveScreen(Long movieId, LocalDateTime startTime) {
         Movie movie = movieService.findMovie(movieId);
-        return screenSave(whenScreened, movie);
+        return screenSave(startTime, movie);
     }
 
     public Screening findScreen(Long screenId) {
@@ -29,8 +30,12 @@ public class ScreeningService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상영정보입니다."));
     }
 
-    public PageMovieResponseDto searchScreening(String title, LocalDateTime startTime, Pageable pageable) {
-        return PageMovieResponseDto.of(screeningRepository.findScreeningStartTimeAfterAndTitle(title, startTime, pageable));
+    public PageMovieResponseDto searchScreening(SearchMovieRequestDto searchMovieRequestDto, Pageable pageable) {
+        return PageMovieResponseDto
+                .of(screeningRepository.findScreeningStartTimeAfterAndTitle(
+                        searchMovieRequestDto.getTitle(),
+                        searchMovieRequestDto.getStartTime(),
+                        pageable));
     }
 
     private Screening screenSave(LocalDateTime whenScreened, Movie movie) {

@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
 import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.SearchMovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +25,16 @@ public class ScreeningController {
     @PostMapping("/movies/{id}/screenings")
     public ResponseEntity<ScreeningSaveResponseDto> screenSave(@PathVariable(name = "id") Long movieId,
                                                                @RequestParam("when")
-                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime whenScreened) {
+                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime startTime) {
         ScreeningSaveResponseDto screeningSaveResponseDto =
-                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, whenScreened));
+                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, startTime));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 
     @GetMapping("/screenings")
-    public ResponseEntity<PageMovieResponseDto> screenFind(@RequestParam(value = "title", required = false) String title,
-                                                           @RequestParam(value = "when", required = false) LocalDateTime whenScreened,
+    public ResponseEntity<PageMovieResponseDto> screenFind(@RequestBody(required = false) SearchMovieRequestDto searchMovieRequestDto,
                                                            @PageableDefault Pageable pageable) {
-        PageMovieResponseDto pageMovieResponseDto = screeningService.searchScreening(title, whenScreened, pageable);
+        PageMovieResponseDto pageMovieResponseDto = screeningService.searchScreening(searchMovieRequestDto, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(pageMovieResponseDto);
     }
 }
