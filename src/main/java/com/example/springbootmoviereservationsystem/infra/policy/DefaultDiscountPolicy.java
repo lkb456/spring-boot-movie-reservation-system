@@ -1,7 +1,8 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.infra.policy;
 
 import com.example.springbootmoviereservationsystem.domain.reservation.DiscountPolicy;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.infra.condition.DiscountCondition;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

@@ -1,6 +1,7 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.infra.condition;
 
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.infra.condition.DiscountCondition;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

@@ -1,7 +1,10 @@
 package com.example.springbootmoviereservationsystem.infra;
 
-import com.example.springbootmoviereservationsystem.domain.*;
 import com.example.springbootmoviereservationsystem.domain.reservation.DiscountPolicy;
+import com.example.springbootmoviereservationsystem.infra.condition.*;
+import com.example.springbootmoviereservationsystem.infra.policy.AmountDiscountPolicy;
+import com.example.springbootmoviereservationsystem.infra.policy.NoneDiscountPolicy;
+import com.example.springbootmoviereservationsystem.infra.policy.PercentDiscountPolicy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
