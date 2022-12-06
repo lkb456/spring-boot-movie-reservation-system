@@ -5,7 +5,6 @@ import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
 import lombok.*;
 
-
 import javax.persistence.*;
 
 @Builder

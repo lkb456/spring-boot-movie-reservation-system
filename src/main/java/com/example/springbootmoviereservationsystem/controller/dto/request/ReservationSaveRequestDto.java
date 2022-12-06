@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class ReservationSaveRequestDto {
 
     @NotNull
+    @JsonProperty("screening_id")
     private Long screeningId; // 상영 정보
 
     @JsonProperty("phone")
