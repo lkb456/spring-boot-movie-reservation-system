@@ -1,19 +1,21 @@
 package com.example.springbootmoviereservationsystem.domain;
 
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
 public class PeriodCondition implements DiscountCondition {
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
     private LocalTime endTime;
+
+    public PeriodCondition(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime) {
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     @Override
     public boolean isSatisfiedBy(Screening screening) {
