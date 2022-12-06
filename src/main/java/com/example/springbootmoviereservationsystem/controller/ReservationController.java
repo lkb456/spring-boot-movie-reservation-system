@@ -16,14 +16,13 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @PostMapping("/screenings/{id}/reservation")
-    public ResponseEntity<ReservationSaveResponseDto> reserve(@PathVariable("id") Long screeningId,
-                                  @RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
-        ReservationSaveResponseDto reservationSaveResponseDto = reservationService.reserveSave(screeningId, reservationSaveRequestDto);
+    @PostMapping("/reservation")
+    public ResponseEntity<ReservationSaveResponseDto> reserve(@RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
+        ReservationSaveResponseDto reservationSaveResponseDto = reservationService.reserveSave(reservationSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationSaveResponseDto);
     }
 
-    @PutMapping("/reservation/{id}/ticket")
+    @PostMapping("/reservation/{id}/ticket")
     public ResponseEntity<Void> createTicket(@PathVariable("id") Long reservationId) {
         reservationService.ticketPublish(reservationId);
         return ResponseEntity.status(HttpStatus.OK).build();

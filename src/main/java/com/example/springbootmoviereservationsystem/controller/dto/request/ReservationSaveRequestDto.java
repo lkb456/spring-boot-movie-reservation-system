@@ -8,12 +8,16 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationSaveRequestDto {
+
+    @NotNull
+    private Long screeningId; // 상영 정보
 
     @JsonProperty("phone")
     @NotBlank(message = "공백 없이 입력하세요.")

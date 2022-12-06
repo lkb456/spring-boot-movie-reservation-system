@@ -24,11 +24,11 @@ public class ReservationService {
     private final TicketRepository ticketRepository;
 
     @Transactional
-    public ReservationSaveResponseDto reserveSave(Long screeningId, ReservationSaveRequestDto reservationSaveRequestDto) {
+    public ReservationSaveResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getPhoneNumber());
-        Screening screening = screeningService.findScreen(screeningId);
-        Reservation savedReservation = reservationRepository.save(screening
-                .reserve(consumer, reservationSaveRequestDto.getAudienceCount()));
+        Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
+        Reservation savedReservation = reservationRepository
+                .save(screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount()));
         return ReservationSaveResponseDto.of(savedReservation);
     }
 
