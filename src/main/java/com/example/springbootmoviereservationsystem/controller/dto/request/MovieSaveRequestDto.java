@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Duration;
 
 @Getter
@@ -22,9 +23,11 @@ public class MovieSaveRequestDto {
     private Long fee; // 영화 요금
 
     @JsonProperty("time")
+    @NotNull
     private Duration runningTime;
 
     @JsonProperty("status")
+    @NotNull
     private ReleaseStatus releaseStatus;
 
     public Movie toEntity() {
