@@ -3,16 +3,11 @@ package com.example.springbootmoviereservationsystem.domain.reservation;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
-<<<<<<< HEAD
-import jakarta.persistence.*;
 import lombok.*;
 
-=======
-import lombok.*;
 
 import javax.persistence.*;
 
->>>>>>> feature/test
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

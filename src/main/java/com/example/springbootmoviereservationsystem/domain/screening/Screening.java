@@ -3,15 +3,9 @@ package com.example.springbootmoviereservationsystem.domain.screening;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
-<<<<<<< HEAD
-import jakarta.persistence.*;
-import lombok.*;
-
-=======
 import lombok.*;
 
 import javax.persistence.*;
->>>>>>> feature/test
 import java.time.LocalDateTime;
 
 @Getter

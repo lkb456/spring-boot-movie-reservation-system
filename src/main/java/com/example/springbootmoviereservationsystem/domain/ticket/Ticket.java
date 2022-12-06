@@ -1,17 +1,10 @@
 package com.example.springbootmoviereservationsystem.domain.ticket;
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
-=======
->>>>>>> feature/test
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
-<<<<<<< HEAD
-=======
 import javax.persistence.*;
->>>>>>> feature/test
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -23,12 +16,8 @@ import java.util.UUID;
 @Table(name = "TICKETS")
 public class Ticket {
 
-<<<<<<< HEAD
-    @Id @GeneratedValue(generator = "uuid2")
-=======
     @Id
     @GeneratedValue(generator = "uuid2")
->>>>>>> feature/test
     @GenericGenerator(name="uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)", name = "SERIAL_NUMBER")
     private UUID serialNumber; // 티켓 시리얼 번호

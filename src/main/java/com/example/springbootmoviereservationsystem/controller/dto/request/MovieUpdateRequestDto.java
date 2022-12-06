@@ -2,21 +2,13 @@ package com.example.springbootmoviereservationsystem.controller.dto.request;
 
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
-<<<<<<< HEAD
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-=======
->>>>>>> feature/test
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-<<<<<<< HEAD
-=======
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
->>>>>>> feature/test
 import java.time.Duration;
 
 @Getter
