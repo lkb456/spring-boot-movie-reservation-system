@@ -3,12 +3,20 @@ package com.example.springbootmoviereservationsystem.controller;
 import com.example.springbootmoviereservationsystem.controller.dto.request.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ReservationSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ReservationService;
+<<<<<<< HEAD
 import jakarta.validation.Valid;
+=======
+>>>>>>> feature/test
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
+=======
+import javax.validation.Valid;
+
+>>>>>>> feature/test
 @RestController
 @RequiredArgsConstructor
 public class ReservationController {

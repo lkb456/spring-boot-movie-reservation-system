@@ -3,11 +3,19 @@ package com.example.springbootmoviereservationsystem.controller.dto.request;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
+<<<<<<< HEAD
 import jakarta.validation.constraints.NotBlank;
+=======
+>>>>>>> feature/test
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
+=======
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+>>>>>>> feature/test
 import java.time.Duration;
 
 @Getter
@@ -22,9 +30,17 @@ public class MovieSaveRequestDto {
     private Long fee; // 영화 요금
 
     @JsonProperty("time")
+<<<<<<< HEAD
     private Duration runningTime;
 
     @JsonProperty("status")
+=======
+    @NotNull
+    private Duration runningTime;
+
+    @JsonProperty("status")
+    @NotNull
+>>>>>>> feature/test
     private ReleaseStatus releaseStatus;
 
     public Movie toEntity() {

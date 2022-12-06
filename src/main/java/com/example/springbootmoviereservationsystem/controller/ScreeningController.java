@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller;
 
+<<<<<<< HEAD
 import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import jakarta.validation.Valid;
@@ -12,6 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+=======
+import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
+import com.example.springbootmoviereservationsystem.service.ScreeningService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+>>>>>>> feature/test
 import java.time.LocalDateTime;
 
 @Valid
@@ -29,4 +44,15 @@ public class ScreeningController {
                 ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, whenScreened));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/screenings")
+    public ResponseEntity<PageMovieResponseDto> screenFind(@RequestParam(value = "title", required = false) String title,
+                                                           @RequestParam(value = "when", required = false) LocalDateTime whenScreened,
+                                                           @PageableDefault Pageable pageable) {
+        PageMovieResponseDto pageMovieResponseDto = screeningService.searchScreening(title, whenScreened, pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(pageMovieResponseDto);
+    }
+>>>>>>> feature/test
 }
