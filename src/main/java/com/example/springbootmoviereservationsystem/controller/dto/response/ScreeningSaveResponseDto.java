@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -19,6 +22,10 @@ public class ScreeningSaveResponseDto {
     @JsonProperty("movie")
     private final MovieSaveResponseDto movieSaveResponseDto; // 영화 정보
 
+    private final String line; // 좌석 열
+
+    private final List<Integer> lineNumber; // 좌석 번호
+
     @JsonProperty("when")
     private final LocalDateTime whenScreened; // 상영 시간
 
@@ -26,6 +33,12 @@ public class ScreeningSaveResponseDto {
         return ScreeningSaveResponseDto.builder()
                 .id(savedScreening.getId())
                 .movieSaveResponseDto(MovieSaveResponseDto.of(savedScreening.getMovie()))
+                .line(savedScreening.getSeat().getLine())
+                .lineNumber(savedScreening.getSeat().getSeatLine()
+                        .entrySet()
+                        .stream()
+                        .filter(entry -> entry.getValue().equals(Boolean.TRUE))
+                                .map(Map.Entry::getKey).collect(Collectors.toList()))
                 .whenScreened(savedScreening.getWhenScreened())
                 .build();
     }

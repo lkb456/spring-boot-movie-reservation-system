@@ -4,6 +4,7 @@ import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResp
 import com.example.springbootmoviereservationsystem.controller.dto.SearchMovieRequestDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
 import com.example.springbootmoviereservationsystem.domain.Screening;
+import com.example.springbootmoviereservationsystem.domain.Seat;
 import com.example.springbootmoviereservationsystem.domain.repository.ScreeningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +21,9 @@ public class ScreeningService {
     private final MovieService movieService;
 
     @Transactional
-    public Screening saveScreen(Long movieId, LocalDateTime startTime) {
+    public Screening saveScreen(Long movieId, LocalDateTime startTime, Seat seat, int seatNumber) {
         Movie movie = movieService.findMovie(movieId);
-        return screenSave(startTime, movie);
+        return screenSave(startTime, movie, seat, seatNumber);
     }
 
     public Screening findScreen(Long screenId) {
@@ -38,9 +39,10 @@ public class ScreeningService {
                         pageable));
     }
 
-    private Screening screenSave(LocalDateTime whenScreened, Movie movie) {
+    private Screening screenSave(LocalDateTime whenScreened, Movie movie, Seat seat, int seatNumber) {
         return screeningRepository.save(Screening.builder()
                 .movie(movie)
+                .seat(Seat.selectLine(seat, seatNumber))
                 .whenScreened(whenScreened)
                 .build());
     }

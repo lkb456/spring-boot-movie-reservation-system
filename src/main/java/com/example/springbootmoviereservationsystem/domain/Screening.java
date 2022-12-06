@@ -1,8 +1,5 @@
 package com.example.springbootmoviereservationsystem.domain;
 
-import com.example.springbootmoviereservationsystem.domain.Consumer;
-import com.example.springbootmoviereservationsystem.domain.Movie;
-import com.example.springbootmoviereservationsystem.domain.Reservation;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +23,9 @@ public class Screening {
 
     @Column(name = "WHEN_SCREENED")
     private LocalDateTime whenScreened;
+
+    @Enumerated(value = EnumType.STRING)
+    private Seat seat;
 
     public Reservation reserve(Consumer consumer, int audienceCount) {
         if (movie.isReleaseMovie()) {
