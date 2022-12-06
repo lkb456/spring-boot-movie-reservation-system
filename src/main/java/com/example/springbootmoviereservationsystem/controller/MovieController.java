@@ -4,9 +4,9 @@ import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResp
 import com.example.springbootmoviereservationsystem.controller.dto.request.MovieSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.request.MovieUpdateRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.MovieSaveResponseDto;
-import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.Movie;
+import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
+import com.example.springbootmoviereservationsystem.domain.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

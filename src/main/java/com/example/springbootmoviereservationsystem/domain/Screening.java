@@ -1,8 +1,8 @@
-package com.example.springbootmoviereservationsystem.domain.screening;
+package com.example.springbootmoviereservationsystem.domain;
 
-import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
-import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
+import com.example.springbootmoviereservationsystem.domain.Consumer;
+import com.example.springbootmoviereservationsystem.domain.Movie;
+import com.example.springbootmoviereservationsystem.domain.Reservation;
 import lombok.*;
 
 import javax.persistence.*;

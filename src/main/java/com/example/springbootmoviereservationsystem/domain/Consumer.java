@@ -1,6 +1,5 @@
-package com.example.springbootmoviereservationsystem.domain.consumer;
+package com.example.springbootmoviereservationsystem.domain;
 
-import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

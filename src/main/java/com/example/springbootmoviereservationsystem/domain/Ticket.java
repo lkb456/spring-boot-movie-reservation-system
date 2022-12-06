@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain.ticket;
+package com.example.springbootmoviereservationsystem.domain;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

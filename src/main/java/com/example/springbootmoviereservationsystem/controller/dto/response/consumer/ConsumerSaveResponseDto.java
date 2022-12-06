@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller.dto.response.consumer;
 
-import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
-import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
+import com.example.springbootmoviereservationsystem.domain.Consumer;
+import com.example.springbootmoviereservationsystem.domain.Ticket;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

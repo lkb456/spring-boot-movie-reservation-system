@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.dto;
 
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

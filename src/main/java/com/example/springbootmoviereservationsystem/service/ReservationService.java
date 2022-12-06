@@ -2,12 +2,12 @@ package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.dto.request.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ReservationSaveResponseDto;
-import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
-import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
-import com.example.springbootmoviereservationsystem.domain.reservation.ReservationRepository;
-import com.example.springbootmoviereservationsystem.domain.screening.Screening;
-import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
-import com.example.springbootmoviereservationsystem.domain.ticket.TicketRepository;
+import com.example.springbootmoviereservationsystem.domain.Consumer;
+import com.example.springbootmoviereservationsystem.domain.Reservation;
+import com.example.springbootmoviereservationsystem.domain.repository.ReservationRepository;
+import com.example.springbootmoviereservationsystem.domain.Screening;
+import com.example.springbootmoviereservationsystem.domain.Ticket;
+import com.example.springbootmoviereservationsystem.domain.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
 package com.example.springbootmoviereservationsystem.infra.policy;
 
-import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.domain.Screening;
 import com.example.springbootmoviereservationsystem.infra.condition.DiscountCondition;
-import com.example.springbootmoviereservationsystem.infra.policy.DefaultDiscountPolicy;
 
 import java.util.List;
 

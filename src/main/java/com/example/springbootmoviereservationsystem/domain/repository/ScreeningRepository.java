@@ -1,6 +1,7 @@
-package com.example.springbootmoviereservationsystem.domain.screening;
+package com.example.springbootmoviereservationsystem.domain.repository;
 
 import com.example.springbootmoviereservationsystem.controller.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.domain.Screening;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

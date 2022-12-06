@@ -1,5 +1,7 @@
-package com.example.springbootmoviereservationsystem.domain.movie;
+package com.example.springbootmoviereservationsystem.domain.repository;
 
+import com.example.springbootmoviereservationsystem.domain.Movie;
+import com.example.springbootmoviereservationsystem.domain.ReleaseStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.springbootmoviereservationsystem.controller.dto.MovieResponseDto;
 import org.springframework.data.domain.Page;

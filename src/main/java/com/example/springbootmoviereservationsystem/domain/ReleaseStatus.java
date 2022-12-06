@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain.movie;
+package com.example.springbootmoviereservationsystem.domain;
 
 import lombok.RequiredArgsConstructor;
 
