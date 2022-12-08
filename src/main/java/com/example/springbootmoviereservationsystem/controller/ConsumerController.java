@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerResponseDto;
 import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class ConsumerController {
     }
 
     @GetMapping("/consumers")
-    public ResponseEntity<ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
-        ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
+    public ResponseEntity<ConsumerResponseDto.ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
+        ConsumerResponseDto.ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerResponseDto.ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
         return ResponseEntity.status(HttpStatus.OK).body(consumerSaveResponseDto);
     }
 }
