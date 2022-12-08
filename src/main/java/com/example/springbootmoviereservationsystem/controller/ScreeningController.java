@@ -3,7 +3,6 @@ package com.example.springbootmoviereservationsystem.controller;
 import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.dto.SearchMovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
-import com.example.springbootmoviereservationsystem.domain.Seat;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -26,15 +25,9 @@ public class ScreeningController {
     @PostMapping("/movies/{id}/screenings")
     public ResponseEntity<ScreeningSaveResponseDto> screenSave(@PathVariable(name = "id") Long movieId,
                                                                @RequestParam("when")
-                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime startTime,
-                                                               @RequestParam("seat") Seat seat,
-                                                               @RequestParam("number") int seatNumber) {
-
+                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime startTime) {
         ScreeningSaveResponseDto screeningSaveResponseDto =
-                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, startTime, seat, seatNumber));
-
-        System.out.println(screeningSaveResponseDto.getLine());
-        System.out.println(screeningSaveResponseDto.getLineNumber());
+                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, startTime));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 

@@ -2,11 +2,8 @@ package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.dto.request.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.response.ReservationSaveResponseDto;
-import com.example.springbootmoviereservationsystem.domain.Consumer;
-import com.example.springbootmoviereservationsystem.domain.Reservation;
+import com.example.springbootmoviereservationsystem.domain.*;
 import com.example.springbootmoviereservationsystem.domain.repository.ReservationRepository;
-import com.example.springbootmoviereservationsystem.domain.Screening;
-import com.example.springbootmoviereservationsystem.domain.Ticket;
 import com.example.springbootmoviereservationsystem.domain.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +24,20 @@ public class ReservationService {
     public ReservationSaveResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getPhoneNumber());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
-        Reservation savedReservation = reservationRepository
-                .save(screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount()));
+
+        int audienceCount = reservationSaveRequestDto.getAudienceCount();
+        Reservation reservation = screening.reserve(consumer, audienceCount);
+
+        for (int count = 0; count < audienceCount; count++) {
+            Seat seat = Seat.builder()
+                    .rowNumber(reservationSaveRequestDto.getSeatSaveRequestDto().get(count).getRowSeat())
+                    .columNumber(reservationSaveRequestDto.getSeatSaveRequestDto().get(count).getColumNumber())
+                    .reservationStatus(ReservationStatus.RESERVATION)
+                    .build();
+            seat.reserve(reservation);
+        }
+
+        Reservation savedReservation = reservationRepository.save(reservation);
         return ReservationSaveResponseDto.of(savedReservation);
     }
 

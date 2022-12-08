@@ -3,6 +3,8 @@ package com.example.springbootmoviereservationsystem.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Getter
@@ -31,6 +33,10 @@ public class Reservation {
     @Column(name = "FEE")
     private Long fee; // 예매 요금
 
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Seat> seats = new ArrayList<>();
+
     public Ticket publishTicket() {
         return Ticket.builder()
                 .movieTitle(screening.getMovie().getTitle())
@@ -38,5 +44,9 @@ public class Reservation {
                 .isPublish(true)
                 .whenScreened(screening.getWhenScreened())
                 .build();
+    }
+
+    public void addSeat(Seat seat) {
+        this.seats.add(seat);
     }
 }

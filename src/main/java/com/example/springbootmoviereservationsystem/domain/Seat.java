@@ -1,47 +1,42 @@
 package com.example.springbootmoviereservationsystem.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import javax.persistence.*;
 
 @Getter
-public enum Seat {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "SEATS")
+public class Seat {
 
-    A_LINE("A열"),
-    B_LINE("B열"),
-    C_LINE("C열"),
-    D_LINE("D열"),
-    E_LINE("E열"),
-    F_LINE("F열"),
-    G_LINE("G열"),
-    PASS("Pass");
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SEATS_ID")
+    private Long id;
 
-    private final String line;
-    private final Map<Integer, Boolean> seatLine = new ConcurrentHashMap<>() {{
-        for (int index = 1; index <= 20; index++) {
-            put(index, false);
-        }
-    }};
+    private String rowNumber; // 행
 
-    Seat(String line) {
-        this.line = line;
-    }
+    private Integer columNumber; // 열 번호
 
-    public static Seat selectLine(Seat selectSeat, int index) {
-        if (selectSeat.getSeatLine().containsKey(index)) {
-            if (!isSelect(selectSeat, index)) {
-                throw new IllegalArgumentException("이미 예약된 좌석입니다.");
-            }
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus reservationStatus; // 예약 상태
 
-            selectSeat.getSeatLine().put(index, true);
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RESERVATIONS_ID")
+    private Reservation reservation;
+
+    public void reserve(Reservation reservation) {
+        if (this.reservation != null) {
+            this.reservation.getSeats().remove(this);
         }
 
-        return selectSeat;
+        this.reservation = reservation;
+        reservation.addSeat(this);
     }
-
-    private static boolean isSelect(Seat selectSeat, int index) {
-        return selectSeat.getSeatLine().get(index).equals(Boolean.FALSE);
-    }
-
 }
