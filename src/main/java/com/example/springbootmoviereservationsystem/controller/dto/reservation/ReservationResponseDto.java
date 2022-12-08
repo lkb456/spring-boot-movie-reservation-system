@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerResponseDto.ConsumerSaveResponseDto;
+
 @Builder
 @Getter
 @RequiredArgsConstructor

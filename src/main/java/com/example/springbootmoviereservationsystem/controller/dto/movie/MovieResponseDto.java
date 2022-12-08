@@ -5,6 +5,7 @@ import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 
@@ -12,6 +13,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NoArgsConstructor
 public class MovieResponseDto {
 
     @Getter
@@ -70,20 +72,5 @@ public class MovieResponseDto {
                     .createAt(movie.getCreateAt())
                     .build();
         }
-    }
-
-    @Getter
-    @RequiredArgsConstructor
-    public static class MovieDto {
-
-        private final String title;
-
-        private final Long fee;
-
-        @JsonProperty("running_time")
-        private final Duration runningTime;
-
-        private final ReleaseStatus status;
-
     }
 }
