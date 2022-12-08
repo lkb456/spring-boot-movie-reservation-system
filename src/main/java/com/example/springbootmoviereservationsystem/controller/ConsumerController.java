@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

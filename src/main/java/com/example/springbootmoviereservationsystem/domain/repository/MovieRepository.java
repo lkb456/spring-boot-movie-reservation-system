@@ -1,11 +1,11 @@
 package com.example.springbootmoviereservationsystem.domain.repository;
 
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
-import com.example.springbootmoviereservationsystem.domain.ReleaseStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.springbootmoviereservationsystem.controller.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("select new " +
-            "com.example.springbootmoviereservationsystem.controller.dto.MovieResponseDto" +
+            "com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto.MovieDto" +
             "(m.title," +
             " m.fee," +
             " m.runningTime," +
@@ -22,7 +22,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "from Movie m " +
             "where m.title like %:title% " +
             "or m.releaseStatus =:status")
-    Page<MovieResponseDto> findByTitleLikeAndReleaseMovie(@Param("title") String title,
-                                                          @Param("status") ReleaseStatus status,
-                                                          Pageable pageable);
+    Page<MovieResponseDto.MovieDto> findByTitleLikeAndReleaseMovie(@Param("title") String title,
+                                                                   @Param("status") ReleaseStatus status,
+                                                                   Pageable pageable);
 }

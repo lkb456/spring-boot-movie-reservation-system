@@ -1,6 +1,6 @@
-package com.example.springbootmoviereservationsystem.controller.dto;
+package com.example.springbootmoviereservationsystem.controller.dto.seat;
 
-import com.example.springbootmoviereservationsystem.domain.ReservationStatus;
+import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 import com.example.springbootmoviereservationsystem.domain.Seat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

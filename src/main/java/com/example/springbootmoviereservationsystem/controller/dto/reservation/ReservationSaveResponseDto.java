@@ -1,7 +1,8 @@
-package com.example.springbootmoviereservationsystem.controller.dto.response;
+package com.example.springbootmoviereservationsystem.controller.dto.reservation;
 
-import com.example.springbootmoviereservationsystem.controller.dto.SeatDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.screening.ScreeningSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Reservation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

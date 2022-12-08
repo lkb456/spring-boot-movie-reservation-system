@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.domain.type;
 
 public enum ReservationStatus {
 

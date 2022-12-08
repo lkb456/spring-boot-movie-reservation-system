@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.controller.dto.response.consumer;
+package com.example.springbootmoviereservationsystem.controller.dto.consumer;
 
 import com.example.springbootmoviereservationsystem.domain.Consumer;
 import com.example.springbootmoviereservationsystem.domain.Ticket;

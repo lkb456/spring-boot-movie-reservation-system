@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.request.consumer.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.consumer.ConsumerDetailResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerDetailResponseDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 
 

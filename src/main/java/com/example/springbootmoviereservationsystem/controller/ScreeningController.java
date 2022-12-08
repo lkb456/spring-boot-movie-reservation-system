@@ -1,8 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
-import com.example.springbootmoviereservationsystem.controller.dto.SearchMovieRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.response.ScreeningSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.screening.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+
+import static com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto.SearchMovieDto;
+import static com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto.PageMovieDto;
 
 @Valid
 @RestController
@@ -32,9 +33,9 @@ public class ScreeningController {
     }
 
     @GetMapping("/screenings")
-    public ResponseEntity<PageMovieResponseDto> screenFind(@RequestBody(required = false) SearchMovieRequestDto searchMovieRequestDto,
-                                                           @PageableDefault Pageable pageable) {
-        PageMovieResponseDto pageMovieResponseDto = screeningService.searchScreening(searchMovieRequestDto, pageable);
+    public ResponseEntity<PageMovieDto> screenFind(@RequestBody(required = false) SearchMovieDto searchMovieRequestDto,
+                                                   @PageableDefault Pageable pageable) {
+        PageMovieDto pageMovieResponseDto = screeningService.searchScreening(searchMovieRequestDto, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(pageMovieResponseDto);
     }
 }

@@ -1,10 +1,10 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.PageMovieResponseDto;
-import com.example.springbootmoviereservationsystem.controller.dto.request.MovieUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
 import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
-import com.example.springbootmoviereservationsystem.domain.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class MovieService {
     }
 
     @Transactional
-    public Long updateMovie(Long movieId, MovieUpdateRequestDto movieUpdateRequestDto) {
+    public Long updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
         Movie movie = findMovie(movieId);
         movie.update(movieUpdateRequestDto.getTitle(),
                 movieUpdateRequestDto.getFee(),
@@ -36,8 +36,8 @@ public class MovieService {
         movieRepository.delete(movie);
     }
 
-    public PageMovieResponseDto searchMovie(String title, ReleaseStatus status, Pageable pageable) {
-        return PageMovieResponseDto.of(movieRepository
+    public MovieResponseDto.PageMovieDto searchMovie(String title, ReleaseStatus status, Pageable pageable) {
+        return MovieResponseDto.PageMovieDto.of(movieRepository
                 .findByTitleLikeAndReleaseMovie(title, status, pageable));
     }
 }

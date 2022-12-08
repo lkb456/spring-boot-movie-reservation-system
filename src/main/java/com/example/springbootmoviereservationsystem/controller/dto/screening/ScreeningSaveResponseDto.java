@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.controller.dto.response;
+package com.example.springbootmoviereservationsystem.controller.dto.screening;
 
 import com.example.springbootmoviereservationsystem.domain.Screening;
 import com.fasterxml.jackson.annotation.JsonProperty;
