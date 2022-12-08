@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 @Getter
 @RequiredArgsConstructor
-public class ReservationSaveResponseDto {
+public class ReservationResponseDto {
 
     @JsonProperty("consumer")
     private final ConsumerSaveResponseDto consumerSaveResponseDto;
@@ -31,8 +31,8 @@ public class ReservationSaveResponseDto {
 
     private final List<SeatDto.ResponseDto> seats;
 
-    public static ReservationSaveResponseDto of(Reservation savedReservation) {
-        return ReservationSaveResponseDto.builder()
+    public static ReservationResponseDto of(Reservation savedReservation) {
+        return ReservationResponseDto.builder()
                 .consumerSaveResponseDto(ConsumerSaveResponseDto.of(savedReservation.getConsumer()))
                 .audienceCount(savedReservation.getAudienceCount())
                 .screeningSaveResponseDto(ScreeningSaveResponseDto.of(savedReservation.getScreening()))

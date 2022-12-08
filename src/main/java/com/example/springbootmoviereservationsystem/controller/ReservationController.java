@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
 import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,8 +20,8 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/reservation")
-    public ResponseEntity<ReservationSaveResponseDto> reserve(@RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
-        ReservationSaveResponseDto reservationSaveResponseDto = reservationService.reserveSave(reservationSaveRequestDto);
+    public ResponseEntity<ReservationResponseDto> reserve(@RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
+        ReservationResponseDto reservationSaveResponseDto = reservationService.reserveSave(reservationSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationSaveResponseDto);
     }
 

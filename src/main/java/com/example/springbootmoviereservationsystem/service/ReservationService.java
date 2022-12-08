@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.domain.*;
 import com.example.springbootmoviereservationsystem.domain.repository.ReservationRepository;
 import com.example.springbootmoviereservationsystem.domain.repository.TicketRepository;
@@ -22,7 +22,7 @@ public class ReservationService {
     private final TicketRepository ticketRepository;
 
     @Transactional
-    public ReservationSaveResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
+    public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getPhoneNumber());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
 
@@ -39,7 +39,7 @@ public class ReservationService {
         }
 
         Reservation savedReservation = reservationRepository.save(reservation);
-        return ReservationSaveResponseDto.of(savedReservation);
+        return ReservationResponseDto.of(savedReservation);
     }
 
     @Transactional
