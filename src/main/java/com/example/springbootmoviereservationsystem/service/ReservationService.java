@@ -29,6 +29,13 @@ public class ReservationService {
         int audienceCount = reservationSaveRequestDto.getAudienceCount();
         Reservation reservation = screening.reserve(consumer, audienceCount);
 
+        createSeatByAudienceCount(reservationSaveRequestDto, audienceCount, reservation);
+
+        Reservation savedReservation = reservationRepository.save(reservation);
+        return ReservationResponseDto.of(savedReservation);
+    }
+
+    private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, int audienceCount, Reservation reservation) {
         for (int count = 0; count < audienceCount; count++) {
             Seat seat = Seat.builder()
                     .rowNumber(reservationSaveRequestDto.getSeatSaveRequestDto().get(count).getRowSeat())
@@ -37,9 +44,6 @@ public class ReservationService {
                     .build();
             seat.reserve(reservation);
         }
-
-        Reservation savedReservation = reservationRepository.save(reservation);
-        return ReservationResponseDto.of(savedReservation);
     }
 
     @Transactional
