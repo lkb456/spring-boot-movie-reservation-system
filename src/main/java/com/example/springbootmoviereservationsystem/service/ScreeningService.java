@@ -35,7 +35,8 @@ public class ScreeningService {
                 .of(screeningRepository.findScreeningStartTimeAfterAndTitle(
                         searchMovieRequestDto.getTitle(),
                         searchMovieRequestDto.getStartTime(),
-                        pageable));
+                        pageable,
+                        MovieResponseDto.MovieDto.class));
     }
 
     private Screening screenSave(LocalDateTime whenScreened, Movie movie) {

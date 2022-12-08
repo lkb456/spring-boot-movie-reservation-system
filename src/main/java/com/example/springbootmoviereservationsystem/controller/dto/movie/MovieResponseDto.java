@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 public class MovieResponseDto {
@@ -71,6 +72,36 @@ public class MovieResponseDto {
                     .releaseStatus(movie.getReleaseStatus())
                     .createAt(movie.getCreateAt())
                     .build();
+        }
+    }
+
+    @Getter
+    @RequiredArgsConstructor
+    public static class MovieDto {
+
+        private final String title;
+
+        private final Long fee;
+
+        @JsonProperty("running_time")
+        private final Duration runningTime;
+
+        private final ReleaseStatus status;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            MovieDto movieDto = (MovieDto) o;
+            return Objects.equals(title, movieDto.title)
+                    && Objects.equals(fee, movieDto.fee)
+                    && Objects.equals(runningTime, movieDto.runningTime)
+                    && status == movieDto.status;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(title, fee, runningTime, status);
         }
     }
 }

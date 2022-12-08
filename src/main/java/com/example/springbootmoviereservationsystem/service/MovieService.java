@@ -38,6 +38,6 @@ public class MovieService {
 
     public MovieResponseDto.PageMovieDto searchMovie(String title, ReleaseStatus status, Pageable pageable) {
         return MovieResponseDto.PageMovieDto.of(movieRepository
-                .findByTitleLikeAndReleaseMovie(title, status, pageable));
+                .findByTitleLikeAndReleaseMovie(title, status, pageable, MovieResponseDto.MovieDto.class));
     }
 }

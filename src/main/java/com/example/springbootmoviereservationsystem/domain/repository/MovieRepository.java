@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.repository;
 
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDto;
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import org.springframework.data.domain.Page;
@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Query(value = "select new " +
-            "com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDto" +
-            "(m.title," +
+    @Query(value = "select " +
+            "m.title," +
             " m.fee," +
             " m.runningTime," +
-            " m.releaseStatus) " +
+            " m.releaseStatus " +
             "from Movie m " +
             "where m.title like %:title% " +
             "or m.releaseStatus =:status")
-    Page<MovieDto> findByTitleLikeAndReleaseMovie(@Param("title") String title,
-                                                  @Param("status") ReleaseStatus status,
-                                                  Pageable pageable);
+    Page<MovieResponseDto.MovieDto> findByTitleLikeAndReleaseMovie(@Param("title") String title,
+                                   @Param("status") ReleaseStatus status,
+                                   Pageable pageable,
+                                   Class<MovieResponseDto.MovieDto> movieDtoClass);
 }
