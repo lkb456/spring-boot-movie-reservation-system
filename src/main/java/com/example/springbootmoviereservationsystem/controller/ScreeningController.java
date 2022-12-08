@@ -32,7 +32,7 @@ public class ScreeningController {
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 
-    @GetMapping("/scre리enings")
+    @GetMapping("/screenings")
     public ResponseEntity<PageMovieDto> screenFind(@RequestBody(required = false) SearchMovieDto searchMovieRequestDto,
                                                    @PageableDefault Pageable pageable) {
         PageMovieDto pageMovieResponseDto = screeningService.searchScreening(searchMovieRequestDto, pageable);
