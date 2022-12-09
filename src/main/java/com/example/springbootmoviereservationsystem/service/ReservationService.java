@@ -1,7 +1,8 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.reservation.ReservationSaveRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.seat.SeatDto;
 import com.example.springbootmoviereservationsystem.domain.*;
 import com.example.springbootmoviereservationsystem.domain.repository.ReservationRepository;
 import com.example.springbootmoviereservationsystem.domain.repository.TicketRepository;
@@ -19,7 +20,9 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ConsumerService consumerService;
     private final ScreeningService screeningService;
+    private final SeatService seatService;
     private final TicketRepository ticketRepository;
+
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
@@ -37,11 +40,9 @@ public class ReservationService {
 
     private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, int audienceCount, Reservation reservation) {
         for (int count = 0; count < audienceCount; count++) {
-            Seat seat = Seat.builder()
-                    .rowNumber(reservationSaveRequestDto.getSeatSaveRequestDto().get(count).getRowSeat())
-                    .columNumber(reservationSaveRequestDto.getSeatSaveRequestDto().get(count).getColumNumber())
-                    .reservationStatus(ReservationStatus.RESERVATION)
-                    .build();
+            SeatDto.SaveRequestDto saveRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
+            Seat seat = seatService.findSeat(saveRequestDto.getSeatId());
+            seat.updateReservationStatus(ReservationStatus.RESERVATION);
             seat.reserve(reservation);
         }
     }

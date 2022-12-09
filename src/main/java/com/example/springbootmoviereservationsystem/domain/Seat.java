@@ -40,4 +40,8 @@ public class Seat {
         this.reservation = reservation;
         reservation.addSeat(this);
     }
+
+    public void updateReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
 }
