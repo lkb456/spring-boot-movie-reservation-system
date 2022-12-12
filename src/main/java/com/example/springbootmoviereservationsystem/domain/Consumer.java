@@ -52,4 +52,8 @@ public class Consumer {
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
     }
+
+    public void cancelTicket() {
+        this.ticket = null;
+    }
 }

@@ -54,6 +54,12 @@ public class ReservationService {
         reservation.getConsumer().receive(savedTicket);
     }
 
+    @Transactional
+    public void cancelReservation(Long reservationId) {
+        Reservation reservation = reservationFind(reservationId);
+        reservation.cancel();
+    }
+
     private Reservation reservationFind(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 예매정보입니다."));

@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain;
 
+import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,5 +49,13 @@ public class Reservation {
 
     public void addSeat(Seat seat) {
         this.seats.add(seat);
+    }
+
+    public void cancel() {
+        this.consumer.cancelTicket();
+
+        for (Seat seat : seats) {
+            seat.updateReservationStatus(ReservationStatus.CANCELLED_BY_CUSTOMER);
+        }
     }
 }
