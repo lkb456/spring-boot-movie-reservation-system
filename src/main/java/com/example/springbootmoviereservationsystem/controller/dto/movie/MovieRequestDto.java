@@ -11,22 +11,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 public class MovieRequestDto {
-
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class SearchMovieDto {
-
-        @NotBlank
-        private String title;
-
-        @JsonProperty("start")
-        @NotBlank
-        private LocalDateTime startTime;
-    }
 
     @Getter
     @NoArgsConstructor
