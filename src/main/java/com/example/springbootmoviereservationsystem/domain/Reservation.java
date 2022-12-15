@@ -54,6 +54,9 @@ public class Reservation {
     @Builder.Default
     private List<Seat> seats = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus reservationStatus;
+
     public Ticket publishTicket() {
         return Ticket.builder()
                 .movieTitle(screening.getMovie().getTitle())
@@ -68,7 +71,12 @@ public class Reservation {
     }
 
     public void cancel() {
+        if (this.consumer.hasTicket()) {
+            throw new IllegalArgumentException("티켓 발행 이후 취소는 안됩니다!");
+        }
+
         this.consumer.cancelTicket();
+        this.reservationStatus = ReservationStatus.CANCELLED_BY_CUSTOMER;
 
         for (Seat seat : seats) {
             seat.updateReservationStatus(ReservationStatus.CANCELLED_BY_CUSTOMER);

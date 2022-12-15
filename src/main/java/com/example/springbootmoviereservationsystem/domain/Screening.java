@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain;
 
+import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Screening {
                     .audienceCount(audienceCount)
                     .screening(this)
                     .fee(calculateFee(audienceCount))
+                    .reservationStatus(ReservationStatus.RESERVATION)
                     .build();
         }
 

@@ -28,7 +28,7 @@ public class Consumer {
     @Column(name = "PHONE_NUMBER", unique = true)
     private String phoneNumber; // 휴대전화 번호
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "SERIAL_NUMBER")
     private Ticket ticket; // 예매 티켓
 
@@ -51,6 +51,10 @@ public class Consumer {
     public void update(String nickname, String phoneNumber) {
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean hasTicket() {
+        return this.ticket != null;
     }
 
     public void cancelTicket() {
