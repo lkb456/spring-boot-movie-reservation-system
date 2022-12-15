@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain.repository;
+package com.example.springbootmoviereservationsystem.controller.dto.movie;
 
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 

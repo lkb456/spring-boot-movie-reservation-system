@@ -18,7 +18,7 @@ public class Screening {
     @Column(name = "SCREENS_ID")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Movie movie;
 
     @Column(name = "WHEN_SCREENED")

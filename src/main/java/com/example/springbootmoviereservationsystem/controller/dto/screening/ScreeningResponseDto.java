@@ -11,14 +11,14 @@ public class ScreeningResponseDto {
     @Getter
     public static class PageScreenResponseDto {
 
-        private final List<ScreeningSaveResponseDto> elements;
+        private final List<ScreenDtoProjection> elements;
         private final int elementsSize;
         private final int currentPage;
         private final int totalPage;
         private final int pageSize;
 
         @Builder
-        public PageScreenResponseDto(Page<ScreeningSaveResponseDto> screenPageDto) {
+        public PageScreenResponseDto(Page<ScreenDtoProjection> screenPageDto) {
             this.elements = screenPageDto.getContent();
             this.elementsSize = elements.size();
             this.currentPage = screenPageDto.getNumber();
@@ -26,7 +26,7 @@ public class ScreeningResponseDto {
             this.pageSize = screenPageDto.getSize();
         }
 
-        public static ScreeningResponseDto.PageScreenResponseDto of(Page<ScreeningSaveResponseDto> pageScreenResponseDto) {
+        public static ScreeningResponseDto.PageScreenResponseDto of(Page<ScreenDtoProjection> pageScreenResponseDto) {
             return PageScreenResponseDto.builder()
                     .screenPageDto(pageScreenResponseDto)
                     .build();

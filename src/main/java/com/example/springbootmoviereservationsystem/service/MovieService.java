@@ -3,7 +3,7 @@ package com.example.springbootmoviereservationsystem.service;
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
-import com.example.springbootmoviereservationsystem.domain.repository.MovieDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import lombok.RequiredArgsConstructor;
