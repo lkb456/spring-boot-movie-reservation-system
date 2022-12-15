@@ -7,6 +7,22 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedEntityGraph(
+        name = "reservation-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("consumer"),
+                @NamedAttributeNode(value = "screening", subgraph = "screening-entity-graph"),
+                @NamedAttributeNode("seats")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "screening-entity-graph",
+                        attributeNodes = {
+                                @NamedAttributeNode("movie")
+                        }
+                )
+        }
+)
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
