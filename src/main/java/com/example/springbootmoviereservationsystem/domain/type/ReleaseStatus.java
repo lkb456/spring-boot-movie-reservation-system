@@ -1,7 +1,9 @@
 package com.example.springbootmoviereservationsystem.domain.type;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum ReleaseStatus {
 

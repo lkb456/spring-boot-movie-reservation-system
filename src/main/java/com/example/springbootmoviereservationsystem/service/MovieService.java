@@ -3,9 +3,11 @@ package com.example.springbootmoviereservationsystem.service;
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
+import com.example.springbootmoviereservationsystem.domain.repository.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +39,7 @@ public class MovieService {
     }
 
     public MovieResponseDto.PageMovieDto searchMovie(String title, ReleaseStatus status, Pageable pageable) {
-        return MovieResponseDto.PageMovieDto.of(movieRepository
-                .findByTitleLikeAndReleaseMovie(title, status, pageable, MovieResponseDto.MovieDto.class));
+        Page<MovieDtoProjection> result = movieRepository.findByTitleLikeAndReleaseMovie(title, status, pageable);
+        return MovieResponseDto.PageMovieDto.of(result);
     }
 }

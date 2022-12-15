@@ -2,8 +2,8 @@ package com.example.springbootmoviereservationsystem.controller;
 
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
-import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
+import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

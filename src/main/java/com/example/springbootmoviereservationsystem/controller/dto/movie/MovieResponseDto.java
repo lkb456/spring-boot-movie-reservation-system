@@ -1,12 +1,10 @@
 package com.example.springbootmoviereservationsystem.controller.dto.movie;
 
 import com.example.springbootmoviereservationsystem.domain.Movie;
+import com.example.springbootmoviereservationsystem.domain.repository.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.Page;
 
 import java.time.Duration;
@@ -17,16 +15,17 @@ import java.util.List;
 public class MovieResponseDto {
 
     @Getter
+    @Setter
     public static class PageMovieDto {
 
-        private final List<MovieDto> elements;
+        private final List<MovieDtoProjection> elements;
         private final int elementsSize;
         private final int currentPage;
         private final int totalPage;
         private final int pageSize;
 
         @Builder
-        private PageMovieDto(Page<MovieDto> movieResponseDtoPage) {
+        private PageMovieDto(Page<MovieDtoProjection> movieResponseDtoPage) {
             this.elements = movieResponseDtoPage.getContent();
             this.elementsSize = elements.size();
             this.currentPage = movieResponseDtoPage.getNumber();
@@ -34,7 +33,7 @@ public class MovieResponseDto {
             this.pageSize = movieResponseDtoPage.getSize();
         }
 
-        public static PageMovieDto of(Page<MovieDto> movieResponseDtoPage) {
+        public static PageMovieDto of(Page<MovieDtoProjection> movieResponseDtoPage) {
             return PageMovieDto.builder()
                     .movieResponseDtoPage(movieResponseDtoPage)
                     .build();
