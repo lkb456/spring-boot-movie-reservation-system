@@ -54,7 +54,7 @@ public class Consumer {
     }
 
     public boolean hasTicket() {
-        return this.ticket != null;
+        return ticket.isPublish();
     }
 
     public void cancelTicket() {
