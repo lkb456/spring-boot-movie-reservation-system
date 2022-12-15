@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NamedEntityGraph(
-        name = "reservation-entity-graph",
+        name = "reservationConsumerWithScreeningWithMovieWithSeats",
         attributeNodes = {
                 @NamedAttributeNode("consumer"),
                 @NamedAttributeNode(value = "screening", subgraph = "screening-entity-graph"),
