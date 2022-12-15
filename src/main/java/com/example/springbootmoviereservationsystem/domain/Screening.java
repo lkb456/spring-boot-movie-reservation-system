@@ -6,6 +6,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NamedEntityGraph(
+        name = "screeningWithMovie",
+        attributeNodes = {
+                @NamedAttributeNode("movie")
+        }
+)
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
