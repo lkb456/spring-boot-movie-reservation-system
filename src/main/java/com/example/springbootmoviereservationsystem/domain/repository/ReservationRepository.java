@@ -10,6 +10,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    @EntityGraph(value = "reservationConsumerWithScreeningWithMovieWithSeats")
+    @EntityGraph(value = "reservationWithConsumerWithScreeningWithMovieWithSeats")
     Optional<Reservation> findById(Long reservationId);
+
 }

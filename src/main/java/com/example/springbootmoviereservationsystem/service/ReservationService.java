@@ -29,17 +29,15 @@ public class ReservationService {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getPhoneNumber());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
 
-        int audienceCount = reservationSaveRequestDto.getAudienceCount();
-        Reservation reservation = screening.reserve(consumer, audienceCount);
-
-        createSeatByAudienceCount(reservationSaveRequestDto, audienceCount, reservation);
+        Reservation reservation = screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());
+        createSeatByAudienceCount(reservationSaveRequestDto, reservation);
 
         Reservation savedReservation = reservationRepository.save(reservation);
         return ReservationResponseDto.of(savedReservation);
     }
 
-    private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, int audienceCount, Reservation reservation) {
-        for (int count = 0; count < audienceCount; count++) {
+    private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, Reservation reservation) {
+        for (int count = 0; count < reservationSaveRequestDto.getAudienceCount(); count++) {
             SeatDto.SaveRequestDto saveRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
             Seat seat = seatService.findSeat(saveRequestDto.getSeatId());
             seat.updateReservationStatus(ReservationStatus.RESERVATION);
