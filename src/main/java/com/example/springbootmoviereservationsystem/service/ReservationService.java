@@ -60,7 +60,7 @@ public class ReservationService {
         reservation.cancel();
     }
 
-    private Reservation reservationFind(Long reservationId) {
+    public Reservation reservationFind(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 예매정보입니다."));
     }

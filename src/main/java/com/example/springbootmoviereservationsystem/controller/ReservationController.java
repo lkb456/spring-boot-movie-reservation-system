@@ -33,4 +33,10 @@ public class ReservationController {
         reservationService.cancelReservation(reservationId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @GetMapping("/reservation/{id}")
+    public ResponseEntity<ReservationResponseDto> findReservation(@PathVariable("id") Long reservationId) {
+        ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reservationService.reservationFind(reservationId));
+        return ResponseEntity.status(HttpStatus.OK).body(reservationResponseDto);
+    }
 }
