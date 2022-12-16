@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static com.example.springbootmoviereservationsystem.domain.Create.createConsumer;
-import static com.example.springbootmoviereservationsystem.domain.Create.createTicket;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createConsumer;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createTicket;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

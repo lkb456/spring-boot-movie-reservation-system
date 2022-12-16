@@ -9,8 +9,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.example.springbootmoviereservationsystem.domain.Create.*;
-import static com.example.springbootmoviereservationsystem.domain.Create.createConsumer;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.*;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createConsumer;
 
 class ScreeningTest {
 

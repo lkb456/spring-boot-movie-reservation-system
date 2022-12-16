@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static com.example.springbootmoviereservationsystem.domain.Create.createMovie;
-import static com.example.springbootmoviereservationsystem.domain.Create.createScreening;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createMovie;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createScreening;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ReservationTest {
@@ -17,7 +17,7 @@ class ReservationTest {
     @DisplayName("티켓 발행하기")
     void publishTicket() {
         // given
-        Consumer consumer = Create.createConsumer("대림동 불주먹", "01012341234");
+        Consumer consumer = CreateEntity.createConsumer("대림동 불주먹", "01012341234");
         Movie movie = createMovie("아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
         Screening screening = createScreening(movie, LocalDateTime.of(2022,12,16,13,00));
         Reservation reservation = screening.reserve(consumer, 5);

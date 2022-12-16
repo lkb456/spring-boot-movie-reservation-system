@@ -6,7 +6,7 @@ import com.example.springbootmoviereservationsystem.domain.type.ReservationStatu
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class Create {
+public class CreateEntity {
 
     public static Consumer createConsumer(String nickname, String phoneNumber) {
         return Consumer.builder()

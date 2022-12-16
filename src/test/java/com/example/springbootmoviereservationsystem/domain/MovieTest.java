@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static com.example.springbootmoviereservationsystem.domain.Create.createMovie;
+import static com.example.springbootmoviereservationsystem.domain.CreateEntity.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MovieTest {
