@@ -1,11 +1,13 @@
 package com.example.springbootmoviereservationsystem.domain;
 
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Create {
+
     public static Consumer createConsumer(String nickname, String phoneNumber) {
         return Consumer.builder()
                 .nickname(nickname)
@@ -35,6 +37,15 @@ public class Create {
                 .audienceCount(audienceCount)
                 .whenScreened(when)
                 .isPublish(isPublish)
+                .build();
+    }
+
+    public static Reservation createReservation(Consumer consumer, int audienceCount, Screening screening, ReservationStatus reservationStatus) {
+        return Reservation.builder()
+                .consumer(consumer)
+                .audienceCount(audienceCount)
+                .screening(screening)
+                .reservationStatus(reservationStatus)
                 .build();
     }
 }

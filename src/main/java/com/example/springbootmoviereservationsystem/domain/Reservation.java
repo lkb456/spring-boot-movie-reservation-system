@@ -23,12 +23,10 @@ import java.util.List;
                 )
         }
 )
-@Builder
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 @Table(name = "RESERVATIONS")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
 
     @Id
@@ -51,11 +49,19 @@ public class Reservation {
     private Long fee; // 예매 요금
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Builder.Default
     private List<Seat> seats = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
+
+    @Builder
+    public Reservation(Consumer consumer, int audienceCount, Screening screening, Long fee, ReservationStatus reservationStatus) {
+        this.consumer = consumer;
+        this.audienceCount = audienceCount;
+        this.screening = screening;
+        this.fee = fee;
+        this.reservationStatus = reservationStatus;
+    }
 
     public Ticket publishTicket() {
         return Ticket.builder()
