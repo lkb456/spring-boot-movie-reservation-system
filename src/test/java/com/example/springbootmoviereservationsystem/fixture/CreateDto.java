@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem;
+package com.example.springbootmoviereservationsystem.fixture;
 
 import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
 

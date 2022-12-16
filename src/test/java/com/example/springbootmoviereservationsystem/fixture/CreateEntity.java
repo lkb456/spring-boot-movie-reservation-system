@@ -1,5 +1,6 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.fixture;
 
+import com.example.springbootmoviereservationsystem.domain.*;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 

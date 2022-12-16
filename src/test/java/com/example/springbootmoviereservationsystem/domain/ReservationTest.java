@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static com.example.springbootmoviereservationsystem.domain.CreateEntity.*;
+import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ReservationTest {
