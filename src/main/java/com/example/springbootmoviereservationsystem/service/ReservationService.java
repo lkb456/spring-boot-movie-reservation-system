@@ -8,57 +8,62 @@ import com.example.springbootmoviereservationsystem.domain.repository.Reservatio
 import com.example.springbootmoviereservationsystem.domain.repository.TicketRepository;
 import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+@Transactional(readOnly = true)
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
+    private final SeatService seatService;
     private final ConsumerService consumerService;
     private final ScreeningService screeningService;
-    private final SeatService seatService;
     private final TicketRepository ticketRepository;
+    private final ReservationRepository reservationRepository;
 
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
-        Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getConsumerId());
-        Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
-
-        Reservation reservation = screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());
+        Reservation reservation = createReservation(reservationSaveRequestDto);
         createSeatByAudienceCount(reservationSaveRequestDto, reservation);
-
         Reservation savedReservation = reservationRepository.save(reservation);
         return ReservationResponseDto.of(savedReservation);
+    }
+
+    private Reservation createReservation(ReservationSaveRequestDto reservationSaveRequestDto) {
+        Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getConsumerId());
+        Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
+        return screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());
     }
 
     private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, Reservation reservation) {
         for (int count = 0; count < reservationSaveRequestDto.getAudienceCount(); count++) {
             SeatDto.SaveRequestDto saveRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
-            Seat seat = seatService.findSeat(saveRequestDto.getSeatId());
-            seat.updateReservationStatus(ReservationStatus.RESERVATION);
-            seat.reserve(reservation);
+            updateSeat(reservation, saveRequestDto);
         }
+    }
+
+    private void updateSeat(Reservation reservation, SeatDto.SaveRequestDto saveRequestDto) {
+        Seat seat = seatService.findSeat(saveRequestDto.getSeatId());
+        seat.updateReservationStatus(ReservationStatus.RESERVATION);
+        seat.reserve(reservation);
     }
 
     @Transactional
     public void ticketPublish(Long reservationId) {
-        Reservation reservation = reservationFind(reservationId);
+        Reservation reservation = findReservation(reservationId);
         Ticket savedTicket = ticketRepository.save(reservation.publishTicket());
         reservation.getConsumer().receive(savedTicket);
     }
 
     @Transactional
     public void cancelReservation(Long reservationId) {
-        Reservation reservation = reservationFind(reservationId);
+        Reservation reservation = findReservation(reservationId);
         reservation.cancel();
     }
 
-    public Reservation reservationFind(Long reservationId) {
+    public Reservation findReservation(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 예매정보입니다."));
     }
