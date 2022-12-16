@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.domain;
 
 import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +23,9 @@ import javax.persistence.*;
         }
 )
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "SEATS")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Seat {
 
     @Id
@@ -45,6 +43,14 @@ public class Seat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RESERVATIONS_ID")
     private Reservation reservation;
+
+    @Builder
+    public Seat(String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+        this.rowNumber = rowNumber;
+        this.columNumber = columNumber;
+        this.reservationStatus = reservationStatus;
+        this.reservation = reservation;
+    }
 
     public void reserve(Reservation reservation) {
         if (this.reservation != null) {

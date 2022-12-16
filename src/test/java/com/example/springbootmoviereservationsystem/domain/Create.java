@@ -40,12 +40,13 @@ public class Create {
                 .build();
     }
 
-    public static Reservation createReservation(Consumer consumer, int audienceCount, Screening screening, ReservationStatus reservationStatus) {
-        return Reservation.builder()
-                .consumer(consumer)
-                .audienceCount(audienceCount)
-                .screening(screening)
+    public static Seat createSeat(String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+        return Seat.builder()
+                .rowNumber(rowNumber)
+                .columNumber(columNumber)
                 .reservationStatus(reservationStatus)
+                .reservation(reservation)
                 .build();
     }
+
 }
