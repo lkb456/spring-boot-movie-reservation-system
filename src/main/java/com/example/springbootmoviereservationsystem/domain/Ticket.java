@@ -8,12 +8,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Builder
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 @Table(name = "TICKETS")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ticket {
 
     @Id
@@ -38,7 +36,19 @@ public class Ticket {
     @Column(name = "PUBLISH_TIME")
     private LocalDateTime publishTime; // 발행 시간
 
+    @Builder
+    public Ticket(String movieTitle, int audienceCount, LocalDateTime whenScreened, boolean isPublish) {
+        this.movieTitle = movieTitle;
+        this.audienceCount = audienceCount;
+        this.whenScreened = whenScreened;
+        this.isPublish = isPublish;
+    }
+
     public boolean isPublish() {
         return this.isPublish;
+    }
+
+    public void cancel() {
+        this.isPublish = false;
     }
 }

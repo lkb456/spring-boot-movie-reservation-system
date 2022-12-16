@@ -1,20 +1,19 @@
 package com.example.springbootmoviereservationsystem.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "CONSUMERS", indexes = @Index(columnList = "PHONE_NUMBER"))
+@Table(name = "CONSUMERS")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Consumer {
 
     @Id
@@ -39,7 +38,13 @@ public class Consumer {
     @UpdateTimestamp
     private LocalDateTime updateAt; // 수정 시간
 
-    public void receive(Ticket ticket) {
+    @Builder
+    public Consumer(String nickname, String phoneNumber) {
+        this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void receiveTicket(Ticket ticket) {
         if (ticket.isPublish()) {
             this.ticket = ticket;
             return;
@@ -58,6 +63,7 @@ public class Consumer {
     }
 
     public void cancelTicket() {
+        this.ticket.cancel();
         this.ticket = null;
     }
 }

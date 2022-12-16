@@ -54,7 +54,7 @@ public class ReservationService {
     public void ticketPublish(Long reservationId) {
         Reservation reservation = findReservation(reservationId);
         Ticket savedTicket = ticketRepository.save(reservation.publishTicket());
-        reservation.getConsumer().receive(savedTicket);
+        reservation.getConsumer().receiveTicket(savedTicket);
     }
 
     @Transactional
