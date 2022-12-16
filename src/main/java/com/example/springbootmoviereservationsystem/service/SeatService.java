@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SeatService {
 
     private final SeatRepository seatRepository;
@@ -18,19 +19,21 @@ public class SeatService {
 
     public void initSeat() {
         List<String[]> seatInfos = seatFileReaderService.readerResult();
-
         for (String[] seatInfo : seatInfos) {
             for (String info : seatInfo) {
                 String[] seatRowAndColum = info.split(" - ");
-
-                Seat seat = Seat.builder()
-                        .rowNumber(seatRowAndColum[0])
-                        .columNumber(Integer.valueOf(seatRowAndColum[1]))
-                        .reservationStatus(ReservationStatus.UN_RESERVATION)
-                        .build();
-                seatRepository.save(seat);
+                saveSeat(seatRowAndColum);
             }
         }
+    }
+
+    private void saveSeat(String[] seatRowAndColum) {
+        Seat seat = Seat.builder()
+                .rowNumber(seatRowAndColum[0])
+                .columNumber(Integer.valueOf(seatRowAndColum[1]))
+                .reservationStatus(ReservationStatus.UN_RESERVATION)
+                .build();
+        seatRepository.save(seat);
     }
 
     @Transactional

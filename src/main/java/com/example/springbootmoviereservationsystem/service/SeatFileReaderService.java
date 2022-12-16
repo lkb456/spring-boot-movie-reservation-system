@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SeatFileReaderService {
@@ -19,11 +21,11 @@ public class SeatFileReaderService {
     private List<String[]> seatWords = new ArrayList<>();
 
     public List<String[]> readerResult() {
-        filerReader();
+        fileReader();
         return Collections.unmodifiableList(seatWords);
     }
 
-    private void filerReader() {
+    private void fileReader() {
         try (FileReader fileReader = new FileReader(POSITION_FILE_FULL_PATH, StandardCharsets.UTF_8);
              BufferedReader br = new BufferedReader(fileReader)) {
 
@@ -33,7 +35,7 @@ public class SeatFileReaderService {
                 seatWords.add(split);
             }
         } catch (IOException e) {
-            //TODO 예외 message 처리
+            log.info("Seat File Reader Exception !!! : {}", e.getMessage());
         }
     }
 }
