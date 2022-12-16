@@ -23,8 +23,8 @@ public class ReservationSaveRequestDto {
     private Long screeningId; // 상영 정보
 
     @NotBlank(message = "공백 없이 입력하세요.")
-    @JsonProperty("phone")
-    private String phoneNumber; // 고객 휴대폰 번호
+    @JsonProperty("consumer_id")
+    private Long consumerId; // 고객 식별자
 
     @Max(value = 10, message = "최대 예매 인원 수는 10명입니다.")
     @JsonProperty("audience_count")

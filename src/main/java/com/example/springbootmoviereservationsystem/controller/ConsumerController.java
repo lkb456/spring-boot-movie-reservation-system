@@ -24,9 +24,9 @@ public class ConsumerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedId);
     }
 
-    @GetMapping("/consumers")
-    public ResponseEntity<ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
-        ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
+    @GetMapping("/consumers/{id}")
+    public ResponseEntity<ConsumerSaveResponseDto> consumerFind(@PathVariable("id") Long consumerId) {
+        ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(consumerId));
         return ResponseEntity.status(HttpStatus.OK).body(consumerSaveResponseDto);
     }
 }

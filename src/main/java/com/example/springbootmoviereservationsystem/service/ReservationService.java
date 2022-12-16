@@ -26,7 +26,7 @@ public class ReservationService {
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
-        Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getPhoneNumber());
+        Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getConsumerId());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
 
         Reservation reservation = screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());

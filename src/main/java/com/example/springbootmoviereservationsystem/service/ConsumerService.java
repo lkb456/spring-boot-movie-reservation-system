@@ -30,13 +30,13 @@ public class ConsumerService {
     }
 
     @Transactional
-    public void updateConsumer(String phoneNumber, ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
-        Consumer consumer = findConsumer(phoneNumber);
+    public void updateConsumer(Long consumerId, ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
+        Consumer consumer = findConsumer(consumerId);
         consumer.update(consumerSaveAndUpdateRequestDto.getNickname(), consumerSaveAndUpdateRequestDto.getPhoneNumber());
     }
 
-    public Consumer findConsumer(String phoneNumber) {
-        return consumerRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 핸드폰 번호입니다."));
+    public Consumer findConsumer(Long consumerId) {
+        return consumerRepository.findById(consumerId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객정보입니다."));
     }
 }
