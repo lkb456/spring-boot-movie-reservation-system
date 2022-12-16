@@ -1,6 +1,5 @@
 package com.example.springbootmoviereservationsystem.controller;
 
-import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerResponseDto;
 import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
 import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerResponseDto.ConsumerSaveResponseDto;
 
 @Valid
 @RestController
@@ -19,13 +20,13 @@ public class ConsumerController {
 
     @PostMapping("/consumers")
     public ResponseEntity<Long> consumerAdd(@RequestBody ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
-        Long savedId =  consumerService.saveConsumer(consumerSaveRequestDto);
+        Long savedId = consumerService.saveConsumer(consumerSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedId);
     }
 
     @GetMapping("/consumers")
-    public ResponseEntity<ConsumerResponseDto.ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
-        ConsumerResponseDto.ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerResponseDto.ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
+    public ResponseEntity<ConsumerSaveResponseDto> consumerFind(@RequestParam(name = "phone") String phoneNumber) {
+        ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(phoneNumber));
         return ResponseEntity.status(HttpStatus.OK).body(consumerSaveResponseDto);
     }
 }

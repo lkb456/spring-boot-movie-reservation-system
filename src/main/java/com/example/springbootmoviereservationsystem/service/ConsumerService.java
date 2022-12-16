@@ -14,13 +14,13 @@ public class ConsumerService {
     private final ConsumerRepository consumerRepository;
 
     public Long saveConsumer(ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
-        duplicateCheck(consumerSaveRequestDto);
+        duplicatePhoneNumberCheck(consumerSaveRequestDto.getPhoneNumber());
         Consumer savedConsumer = consumerRepository.save(consumerSaveRequestDto.toEntity());
         return savedConsumer.getId();
     }
 
-    private void duplicateCheck(ConsumerSaveAndUpdateRequestDto consumerSaveRequestDto) {
-        if (isExists(consumerSaveRequestDto.getPhoneNumber())) {
+    private void duplicatePhoneNumberCheck(String phoneNumber) {
+        if (isExists(phoneNumber)) {
             throw new IllegalArgumentException("중복된 전화번호 입니다.");
         }
     }
@@ -29,17 +29,13 @@ public class ConsumerService {
         return consumerRepository.existsByPhoneNumber(phoneNumber);
     }
 
-    public Consumer findConsumer(String phoneNumber) {
-        return consumerFind(phoneNumber);
-    }
-
     @Transactional
     public void updateConsumer(String phoneNumber, ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
         Consumer consumer = findConsumer(phoneNumber);
         consumer.update(consumerSaveAndUpdateRequestDto.getNickname(), consumerSaveAndUpdateRequestDto.getPhoneNumber());
     }
 
-    private Consumer consumerFind(String phoneNumber) {
+    public Consumer findConsumer(String phoneNumber) {
         return consumerRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 핸드폰 번호입니다."));
     }
