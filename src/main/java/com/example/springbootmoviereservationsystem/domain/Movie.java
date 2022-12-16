@@ -53,7 +53,7 @@ public class Movie {
         return this.fee * audienceCount;
     }
 
-    public void update(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+    public void updateInfo(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
         this.title = title;
         this.fee = fee;
         this.runningTime = runningTime;

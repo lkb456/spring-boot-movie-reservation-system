@@ -22,8 +22,8 @@ import static com.example.springbootmoviereservationsystem.controller.dto.movie.
 @RequiredArgsConstructor
 public class MovieController {
 
-    private final MovieRepository movieRepository;
     private final MovieService movieService;
+    private final MovieRepository movieRepository;
 
     @PostMapping("/movies")
     public ResponseEntity<Long> movieSave(@RequestBody MovieRequestDto.MovieSaveDto movieSaveRequestDto) {

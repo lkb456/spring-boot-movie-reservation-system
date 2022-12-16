@@ -48,7 +48,7 @@ public class Consumer {
         throw new IllegalArgumentException("티켓 발행이 되지 않았습니다.");
     }
 
-    public void update(String nickname, String phoneNumber) {
+    public void updateInfo(String nickname, String phoneNumber) {
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
     }

@@ -33,7 +33,7 @@ public class ConsumerService {
     @Transactional
     public void updateConsumer(Long consumerId, ConsumerSaveAndUpdateRequestDto consumerSaveAndUpdateRequestDto) {
         Consumer consumer = findConsumer(consumerId);
-        consumer.update(consumerSaveAndUpdateRequestDto.getNickname(), consumerSaveAndUpdateRequestDto.getPhoneNumber());
+        consumer.updateInfo(consumerSaveAndUpdateRequestDto.getNickname(), consumerSaveAndUpdateRequestDto.getPhoneNumber());
     }
 
     public Consumer findConsumer(Long consumerId) {

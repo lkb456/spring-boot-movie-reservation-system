@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MovieService {
 
     public final MovieRepository movieRepository;
@@ -21,7 +22,7 @@ public class MovieService {
     @Transactional
     public void updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
         Movie movie = findMovie(movieId);
-        movie.update(movieUpdateRequestDto.getTitle(),
+        movie.updateInfo(movieUpdateRequestDto.getTitle(),
                 movieUpdateRequestDto.getFee(),
                 movieUpdateRequestDto.getRunningTime(),
                 movieUpdateRequestDto.getReleaseStatus());
