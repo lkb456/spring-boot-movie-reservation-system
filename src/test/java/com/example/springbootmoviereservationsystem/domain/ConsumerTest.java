@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConsumerTest {
 
     @Test
-    @DisplayName("고객 정보 수정히기 테스트")
+    @DisplayName("정보 업데이트")
     void updateInfo() {
         // given
         String expectedNickname = "대림동 물주먹";

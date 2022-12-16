@@ -1,10 +1,7 @@
 package com.example.springbootmoviereservationsystem.domain;
 
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,10 +9,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "MOVIES")
 public class Movie {
 
@@ -40,6 +35,14 @@ public class Movie {
     @CreationTimestamp
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
+
+    @Builder
+    public Movie(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+        this.title = title;
+        this.fee = fee;
+        this.runningTime = runningTime;
+        this.releaseStatus = releaseStatus;
+    }
 
     public boolean isReleaseMovie() {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
