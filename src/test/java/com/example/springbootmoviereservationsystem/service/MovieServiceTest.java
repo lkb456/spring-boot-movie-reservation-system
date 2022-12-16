@@ -1,6 +1,8 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
+import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.Movie;
 import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
@@ -11,10 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 
+import static com.example.springbootmoviereservationsystem.fixture.CreateDto.createMovieDtoProjection;
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -83,5 +89,18 @@ class MovieServiceTest {
 
         verify(movieRepository).findById(movie.getId());
         verify(movieRepository).delete(movie);
+    }
+
+    @Test
+    @DisplayName("영화 정보 페이지 타입으로 조회하기")
+    void searchMovies() {
+        MovieDtoProjection projection = createMovieDtoProjection();
+        given(movieRepository.findByTitleLikeAndReleaseMovie(any(), any(), any())).willReturn(new PageImpl<>(List.of(projection)));
+
+        MovieResponseDto.PageMovieDto result = movieService.searchMovies("title", ReleaseStatus.RELEASE, Pageable.unpaged());
+
+        assertThat(result).isInstanceOf(MovieResponseDto.PageMovieDto.class);
+        assertThat(projection.getTitle()).isEqualTo(result.getElements().get(0).getTitle());
+        verify(movieRepository).findByTitleLikeAndReleaseMovie(any(), any(), any());
     }
 }

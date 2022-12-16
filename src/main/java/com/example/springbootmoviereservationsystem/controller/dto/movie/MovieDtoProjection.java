@@ -10,4 +10,9 @@ public interface MovieDtoProjection {
     Long getFee(); // 요금
     Duration getRunningTime(); // 영화시간
     ReleaseStatus getReleaseStatus(); // 개봉상태
+
+    void setTitle(String title);
+    void setFee(Long fee);
+    void setRunningTime(Duration runningTime);
+    void setReleaseStatus(ReleaseStatus releaseStatus);
 }
