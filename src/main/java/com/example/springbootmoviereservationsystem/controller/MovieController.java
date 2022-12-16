@@ -41,16 +41,16 @@ public class MovieController {
     public ResponseEntity<PageMovieDto> movieSearch(@RequestParam("title") String title,
                                                     @RequestParam(value = "status", required = false) ReleaseStatus status,
                                                     @PageableDefault Pageable pageable) {
-        PageMovieDto pageMovieResponseDto = movieService.searchMovie(title, status, pageable);
+        PageMovieDto pageMovieResponseDto = movieService.searchMovies(title, status, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(pageMovieResponseDto);
     }
 
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<Long> movieUpdate(@PathVariable("id") Long movieId,
+    public ResponseEntity<Void> movieUpdate(@PathVariable("id") Long movieId,
                                             @RequestBody MovieUpdateDto movieUpdateRequestDto) {
-        Long updatedMovieId = movieService.updateMovie(movieId, movieUpdateRequestDto);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedMovieId);
+        movieService.updateMovie(movieId, movieUpdateRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/movies/{id}")

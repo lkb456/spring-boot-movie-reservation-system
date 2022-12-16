@@ -18,19 +18,13 @@ public class MovieService {
 
     public final MovieRepository movieRepository;
 
-    public Movie findMovie(Long movieId) {
-        return movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
-    }
-
     @Transactional
-    public Long updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
+    public void updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
         Movie movie = findMovie(movieId);
         movie.update(movieUpdateRequestDto.getTitle(),
                 movieUpdateRequestDto.getFee(),
                 movieUpdateRequestDto.getRunningTime(),
                 movieUpdateRequestDto.getReleaseStatus());
-        return movieId;
     }
 
     public void deleteMovie(Long movieId) {
@@ -38,7 +32,12 @@ public class MovieService {
         movieRepository.delete(movie);
     }
 
-    public MovieResponseDto.PageMovieDto searchMovie(String title, ReleaseStatus status, Pageable pageable) {
+    public Movie findMovie(Long movieId) {
+        return movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
+    }
+
+    public MovieResponseDto.PageMovieDto searchMovies(String title, ReleaseStatus status, Pageable pageable) {
         Page<MovieDtoProjection> result = movieRepository.findByTitleLikeAndReleaseMovie(title, status, pageable);
         return MovieResponseDto.PageMovieDto.of(result);
     }
