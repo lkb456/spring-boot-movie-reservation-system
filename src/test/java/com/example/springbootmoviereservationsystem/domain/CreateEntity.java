@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 
 public class CreateEntity {
 
-    public static Consumer createConsumer(String nickname, String phoneNumber) {
+    public static Consumer createConsumer(Long id, String nickname, String phoneNumber) {
         return Consumer.builder()
+                .id(id)
                 .nickname(nickname)
                 .phoneNumber(phoneNumber)
                 .build();

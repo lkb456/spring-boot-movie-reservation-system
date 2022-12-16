@@ -39,7 +39,8 @@ public class Consumer {
     private LocalDateTime updateAt; // 수정 시간
 
     @Builder
-    public Consumer(String nickname, String phoneNumber) {
+    public Consumer(Long id, String nickname, String phoneNumber) {
+        this.id = id;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
     }

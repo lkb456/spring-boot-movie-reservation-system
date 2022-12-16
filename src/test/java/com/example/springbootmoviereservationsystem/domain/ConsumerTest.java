@@ -19,7 +19,7 @@ class ConsumerTest {
         String expectedNickname = "대림동 물주먹";
         String expectedPhoneNumber = "01011111234";
 
-        Consumer consumer = createConsumer("대림동 불주먹", "01012341234");
+        Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
 
         // when
         consumer.updateInfo(expectedNickname, expectedPhoneNumber);
@@ -33,7 +33,7 @@ class ConsumerTest {
     @DisplayName("티켓 발행 및 취소 테스트")
     void receiveTicket() {
         // given
-        Consumer consumer = createConsumer("대림동 불주먹", "01012341234");
+        Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
         Ticket ticket = createTicket("싸움의 기술", 2, LocalDateTime.of(2022, 12, 17, 13, 00), true);
 
         // when
