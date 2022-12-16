@@ -17,7 +17,7 @@ public class CreateEntity {
                 .build();
     }
 
-    public static Movie createMovie(String title, Long fee, Duration runningTime, ReleaseStatus status) {
+    public static Movie createMovie(Long id, String title, Long fee, Duration runningTime, ReleaseStatus status) {
         return Movie.builder()
                 .title(title)
                 .fee(fee)

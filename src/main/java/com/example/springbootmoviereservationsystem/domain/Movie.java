@@ -37,7 +37,8 @@ public class Movie {
     private LocalDateTime createAt; // 생성 시간
 
     @Builder
-    public Movie(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+    public Movie(Long id, String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+        this.id = id;
         this.title = title;
         this.fee = fee;
         this.runningTime = runningTime;

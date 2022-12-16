@@ -18,7 +18,7 @@ class SeatTest {
     void seat_reserve() {
         // given
         Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
-        Movie movie = createMovie("싸움의 기술", 1000L, Duration.ofMinutes(120000), ReleaseStatus.RELEASE);
+        Movie movie = createMovie(1L, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
         Screening screening = createScreening(movie, LocalDateTime.of(2022,12,16,13,00));
         Reservation reservation = screening.reserve(consumer, 5);
         Seat seat = createSeat("A열", 13, ReservationStatus.RESERVATION, reservation);

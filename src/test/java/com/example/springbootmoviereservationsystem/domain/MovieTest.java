@@ -16,7 +16,7 @@ class MovieTest {
     void updateInfo() {
         // given
         String expectedTitle = "싸움의 기술2";
-        Movie movie = createMovie("아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
+        Movie movie = createMovie(1L, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
 
         // when
         movie.updateInfo(expectedTitle, movie.getFee(), movie.getRunningTime(), movie.getReleaseStatus());
