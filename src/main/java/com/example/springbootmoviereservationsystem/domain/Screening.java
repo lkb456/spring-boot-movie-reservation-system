@@ -13,9 +13,7 @@ import java.time.LocalDateTime;
         }
 )
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 @Table(name = "SCREENS")
 public class Screening {
@@ -30,6 +28,12 @@ public class Screening {
 
     @Column(name = "WHEN_SCREENED")
     private LocalDateTime whenScreened;
+
+    @Builder
+    public Screening(Movie movie, LocalDateTime whenScreened) {
+        this.movie = movie;
+        this.whenScreened = whenScreened;
+    }
 
     public Reservation reserve(Consumer consumer, int audienceCount) {
         if (movie.isReleaseMovie()) {

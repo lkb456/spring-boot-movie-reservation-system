@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
+import static com.example.springbootmoviereservationsystem.domain.Create.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MovieTest {
@@ -15,21 +16,12 @@ class MovieTest {
     void updateInfo() {
         // given
         String expectedTitle = "싸움의 기술2";
-        Movie movie = createMovie();
+        Movie movie = createMovie("아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
 
         // when
         movie.updateInfo(expectedTitle, movie.getFee(), movie.getRunningTime(), movie.getReleaseStatus());
 
         // then
         assertThat(expectedTitle).isEqualTo(movie.getTitle());
-    }
-
-    private Movie createMovie() {
-        return Movie.builder()
-                .title("싸움의 기술")
-                .fee(10000L)
-                .runningTime(Duration.ofMinutes(20000))
-                .releaseStatus(ReleaseStatus.RELEASE)
-                .build();
     }
 }
