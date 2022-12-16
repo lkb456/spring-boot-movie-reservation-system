@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller;
 
 import com.example.springbootmoviereservationsystem.controller.dto.screening.ScreeningResponseDto;
+import com.example.springbootmoviereservationsystem.controller.dto.screening.ScreeningSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.dto.screening.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,10 @@ public class ScreeningController {
 
     private final ScreeningService screeningService;
 
-    @PostMapping("/movies/{id}/screenings")
-    public ResponseEntity<ScreeningSaveResponseDto> screenSave(@PathVariable(name = "id") Long movieId,
-                                                               @RequestParam("when")
-                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime startTime) {
+    @PostMapping("/screenings")
+    public ResponseEntity<ScreeningSaveResponseDto> screenSave(@RequestBody ScreeningSaveRequestDto screeningSaveRequestDto) {
         ScreeningSaveResponseDto screeningSaveResponseDto =
-                ScreeningSaveResponseDto.of(screeningService.saveScreen(movieId, startTime));
+                ScreeningSaveResponseDto.of(screeningService.saveScreen(screeningSaveRequestDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 
