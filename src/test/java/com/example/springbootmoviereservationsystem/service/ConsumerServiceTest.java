@@ -18,6 +18,7 @@ import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(value = MockitoExtension.class)
 class ConsumerServiceTest {
@@ -42,6 +43,9 @@ class ConsumerServiceTest {
 
         Consumer findConsumer = consumerService.findConsumer(savedId);
         assertThat(findConsumer.getId()).isEqualTo(consumer.getId());
+
+        verify(consumerRepository).save(any());
+        verify(consumerRepository).findById(consumer.getId());
     }
 
     @Test
@@ -53,6 +57,8 @@ class ConsumerServiceTest {
         assertThatThrownBy(() -> consumerService.saveConsumer(dto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 전화번호 입니다.");
+
+        verify(consumerRepository).existsByPhoneNumber(any());
     }
 
     @Test
@@ -67,6 +73,8 @@ class ConsumerServiceTest {
 
         assertThat(dto.getNickname()).isEqualTo(consumer.getNickname());
         assertThat(dto.getPhoneNumber()).isEqualTo(consumer.getPhoneNumber());
+
+        verify(consumerRepository).findById(consumerId);
     }
 
     @Test
@@ -78,5 +86,7 @@ class ConsumerServiceTest {
         assertThatThrownBy(() -> consumerService.findConsumer(1L))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("존재하지 않는 고객정보입니다.");
+
+        verify(consumerRepository).findById(1L);
     }
 }
