@@ -29,8 +29,7 @@ public class MovieService {
     }
 
     public void deleteMovie(Long movieId) {
-        Movie movie = findMovie(movieId);
-        movieRepository.delete(movie);
+        movieRepository.deleteById(movieId);
     }
 
     public Movie findMovie(Long movieId) {

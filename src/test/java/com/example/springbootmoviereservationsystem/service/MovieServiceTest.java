@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.example.springbootmoviereservationsystem.fixture.CreateDto.createMovieDtoProjection;
@@ -26,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(value = MockitoExtension.class)
@@ -83,12 +85,14 @@ class MovieServiceTest {
     void deleteMovie() {
         Long id = 1L;
         Movie movie = createMovie(id, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
-        given(movieRepository.findById(any())).willReturn(Optional.of(movie));
+        willDoNothing().given(movieRepository).deleteById(any());
 
         movieService.deleteMovie(movie.getId());
+        assertThatThrownBy(() -> movieRepository.findById(movie.getId()).get())
+                .isInstanceOf(NoSuchElementException.class)
+                        .hasMessage("No value present");
 
-        verify(movieRepository).findById(movie.getId());
-        verify(movieRepository).delete(movie);
+        verify(movieRepository).deleteById(movie.getId());
     }
 
     @Test
