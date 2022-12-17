@@ -1,11 +1,12 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDtoProjection;
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieResponseDto;
-import com.example.springbootmoviereservationsystem.domain.Movie;
-import com.example.springbootmoviereservationsystem.domain.repository.MovieRepository;
-import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.domain.movie.Movie;
+import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
+import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.service.MovieService;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,13 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
-import com.example.springbootmoviereservationsystem.domain.*;
-import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
-import com.example.springbootmoviereservationsystem.domain.type.ReservationStatus;
+import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
+import com.example.springbootmoviereservationsystem.domain.movie.Movie;
+import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
+import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.domain.seat.Seat;
+import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
+import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

@@ -1,9 +1,10 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.domain.service.ConsumerService;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
-import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.domain.Consumer;
-import com.example.springbootmoviereservationsystem.domain.repository.ConsumerRepository;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
+import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,9 +1,9 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
-import com.example.springbootmoviereservationsystem.controller.dto.consumer.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieDtoProjection;
-import com.example.springbootmoviereservationsystem.controller.dto.movie.MovieRequestDto;
-import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
+import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 

@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.infra.condition;
 
-import com.example.springbootmoviereservationsystem.domain.Screening;
+import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 
 public interface DiscountCondition {
 

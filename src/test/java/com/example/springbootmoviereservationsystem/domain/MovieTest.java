@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.domain;
 
-import com.example.springbootmoviereservationsystem.domain.type.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.domain.movie.Movie;
+import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

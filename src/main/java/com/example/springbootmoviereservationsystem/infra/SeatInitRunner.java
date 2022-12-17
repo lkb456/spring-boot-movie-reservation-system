@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.infra;
 
-import com.example.springbootmoviereservationsystem.service.SeatService;
+import com.example.springbootmoviereservationsystem.domain.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
