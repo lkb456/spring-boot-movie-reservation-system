@@ -44,7 +44,7 @@ class MovieServiceTest {
     @DisplayName("영화 조회하기")
     void findMovie() {
         Long id = 1L;
-        Movie movie = createMovie(id, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
+        Movie movie = createMovie();
         given(movieRepository.findById(any())).willReturn(Optional.of(movie));
 
         Movie findMovie = movieService.findMovie(id);
@@ -69,7 +69,7 @@ class MovieServiceTest {
     @DisplayName("영화 정보 업데이트 하기")
     void updateMovie() {
         Long id = 1L;
-        Movie movie = createMovie(id, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
+        Movie movie = createMovie();
         given(movieRepository.findById(any())).willReturn(Optional.of(movie));
 
         MovieRequestDto.MovieUpdateDto dto = CreateDto.createMovieUpdateDto("싸움의 기술", 20000L, Duration.ofMinutes(200000L), ReleaseStatus.RELEASE);
@@ -85,7 +85,7 @@ class MovieServiceTest {
     @DisplayName("영화 정보 삭제하기")
     void deleteMovie() {
         Long id = 1L;
-        Movie movie = createMovie(id, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
+        Movie movie = createMovie();
         willDoNothing().given(movieRepository).deleteById(any());
 
         movieService.deleteMovie(movie.getId());

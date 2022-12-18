@@ -1,11 +1,8 @@
 package com.example.springbootmoviereservationsystem.domain;
 
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.time.Duration;
 
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +14,7 @@ class MovieTest {
     void updateInfo() {
         // given
         String expectedTitle = "싸움의 기술2";
-        Movie movie = createMovie(1L, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
+        Movie movie = createMovie();
 
         // when
         movie.updateInfo(expectedTitle, movie.getFee(), movie.getRunningTime(), movie.getReleaseStatus());

@@ -5,12 +5,8 @@ import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,9 +17,9 @@ class ReservationTest {
     @DisplayName("티켓 발행하기")
     void publishTicket() {
         // given
-        Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
-        Movie movie = createMovie(1L, "아바타", 10000L, Duration.ofMinutes(12000L), ReleaseStatus.RELEASE);
-        Screening screening = createScreening(movie, LocalDateTime.of(2022,12,16,13,00));
+        Consumer consumer = createConsumer();
+        Movie movie = createMovie();
+        Screening screening = createScreening(movie);
         Reservation reservation = screening.reserve(consumer, 5);
 
         // when

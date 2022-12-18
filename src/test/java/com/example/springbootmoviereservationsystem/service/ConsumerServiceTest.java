@@ -33,7 +33,7 @@ class ConsumerServiceTest {
     @Test
     @DisplayName("고객 정보 저장 및 조회")
     void saveConsumer() {
-        Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
+        Consumer consumer = createConsumer();
         given(consumerRepository.save(any())).willReturn(consumer);
 
         ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto("대림동 불주먹", "01012341234");
@@ -65,7 +65,7 @@ class ConsumerServiceTest {
     @Test
     @DisplayName("고객정보 업데이트")
     void updateConsumer() {
-        Consumer consumer = createConsumer(1L, "대림동 불주먹", "01012341234");
+        Consumer consumer = createConsumer();
         given(consumerRepository.findById(any())).willReturn(Optional.of(consumer));
 
         Long consumerId = 1L;

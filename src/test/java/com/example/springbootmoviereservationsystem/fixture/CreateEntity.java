@@ -1,6 +1,7 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
@@ -14,44 +15,45 @@ import java.time.LocalDateTime;
 
 public class CreateEntity {
 
-    public static Consumer createConsumer(Long id, String nickname, String phoneNumber) {
+    public static Consumer createConsumer() {
         return Consumer.builder()
-                .id(id)
-                .nickname(nickname)
-                .phoneNumber(phoneNumber)
+                .id(1L)
+                .nickname("대림동 불주먹")
+                .phoneNumber("01012341234")
                 .build();
     }
 
-    public static Movie createMovie(Long id, String title, Long fee, Duration runningTime, ReleaseStatus status) {
+    public static Movie createMovie() {
         return Movie.builder()
-                .title(title)
-                .fee(fee)
-                .runningTime(runningTime)
-                .releaseStatus(status)
+                .id(1L)
+                .title("아바타")
+                .amount(Money.wons(10000))
+                .runningTime(Duration.ofMinutes(240))
+                .releaseStatus(ReleaseStatus.RELEASE)
                 .build();
     }
 
-    public static Screening createScreening(Movie movie, LocalDateTime when) {
+    public static Screening createScreening(Movie movie) {
         return Screening.builder()
                 .movie(movie)
-                .whenScreened(when)
+                .whenScreened(LocalDateTime.of(2022, 12, 01, 8, 00))
                 .build();
     }
 
-    public static Ticket createTicket(String title, int audienceCount, LocalDateTime when, boolean isPublish) {
+    public static Ticket createPublishTicket() {
         return Ticket.builder()
-                .movieTitle(title)
-                .audienceCount(audienceCount)
-                .whenScreened(when)
-                .isPublish(isPublish)
+                .movieTitle("아바타")
+                .audienceCount(5)
+                .whenScreened(LocalDateTime.of(2022, 12, 01, 8, 00))
+                .isPublish(true)
                 .build();
     }
 
-    public static Seat createSeat(String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+    public static Seat createSeatForReservation(Reservation reservation) {
         return Seat.builder()
-                .rowNumber(rowNumber)
-                .columNumber(columNumber)
-                .reservationStatus(reservationStatus)
+                .rowNumber("A열")
+                .columNumber(1)
+                .reservationStatus(ReservationStatus.RESERVATION)
                 .reservation(reservation)
                 .build();
     }
