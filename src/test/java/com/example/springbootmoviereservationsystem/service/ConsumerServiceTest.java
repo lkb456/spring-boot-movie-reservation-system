@@ -36,10 +36,10 @@ class ConsumerServiceTest {
         Consumer consumer = createConsumer();
         given(consumerRepository.save(any())).willReturn(consumer);
 
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto("대림동 불주먹", "01012341234");
+        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
         Long savedId = consumerService.saveConsumer(dto);
-
         given(consumerRepository.findById(savedId)).willReturn(Optional.of(consumer));
+
         assertThat(savedId).isEqualTo(consumer.getId());
 
         Consumer findConsumer = consumerService.findConsumer(savedId);
@@ -54,7 +54,7 @@ class ConsumerServiceTest {
     void duplicateExceptionTest() {
         given(consumerRepository.existsByPhoneNumber(any())).willReturn(true);
 
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto("대림동 불주먹", "01012341234");
+        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
         assertThatThrownBy(() -> consumerService.saveConsumer(dto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 전화번호 입니다.");
@@ -69,7 +69,7 @@ class ConsumerServiceTest {
         given(consumerRepository.findById(any())).willReturn(Optional.of(consumer));
 
         Long consumerId = 1L;
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto("대림동 물주먹", "01012341111");
+        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
         consumerService.updateConsumer(consumerId, dto);
 
         assertThat(dto.getNickname()).isEqualTo(consumer.getNickname());

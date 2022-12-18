@@ -11,19 +11,19 @@ import java.time.Duration;
 
 public class CreateDto {
 
-    public static ConsumerSaveAndUpdateRequestDto createConsumerSaveDto(String nickname, String phoneNumber) {
+    public static ConsumerSaveAndUpdateRequestDto createConsumerSaveDto() {
         return ConsumerSaveAndUpdateRequestDto.builder()
-                .nickname(nickname)
-                .phoneNumber(phoneNumber)
+                .nickname("대림동 불주먹")
+                .phoneNumber("01012341234")
                 .build();
     }
 
-    public static MovieRequestDto.MovieUpdateDto createMovieUpdateDto(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+    public static MovieRequestDto.MovieUpdateDto createMovieUpdateDto() {
         return MovieRequestDto.MovieUpdateDto.builder()
-                .title(title)
-                .fee(fee)
-                .runningTime(runningTime)
-                .releaseStatus(releaseStatus)
+                .title("아바타2")
+                .fee(15000L)
+                .runningTime(Duration.ofMinutes(240))
+                .releaseStatus(ReleaseStatus.RELEASE)
                 .build();
     }
 
