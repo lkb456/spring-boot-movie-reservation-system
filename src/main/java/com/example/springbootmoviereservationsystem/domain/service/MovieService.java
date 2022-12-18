@@ -2,6 +2,7 @@ package com.example.springbootmoviereservationsystem.domain.service;
 
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
@@ -23,7 +24,7 @@ public class MovieService {
     public void updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
         Movie movie = findMovie(movieId);
         movie.updateInfo(movieUpdateRequestDto.getTitle(),
-                movieUpdateRequestDto.getFee(),
+                Money.wons(movieUpdateRequestDto.getFee()),
                 movieUpdateRequestDto.getRunningTime(),
                 movieUpdateRequestDto.getReleaseStatus());
     }

@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.movie.dto;
 
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +37,7 @@ public class MovieRequestDto {
         public Movie toEntity() {
             return Movie.builder()
                     .title(this.title)
-                    .fee(this.fee)
+                    .amount(Money.wons(this.fee))
                     .runningTime(this.runningTime)
                     .releaseStatus(this.releaseStatus)
                     .build();

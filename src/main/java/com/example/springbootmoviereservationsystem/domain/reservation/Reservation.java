@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.reservation;
 
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
@@ -48,8 +49,8 @@ public class Reservation {
     @JoinColumn(name = "SCREENS_ID")
     private Screening screening; // 상영 정보
 
-    @Column(name = "FEE")
-    private Long fee; // 예매 요금
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Money fee; // 예매 요금
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Seat> seats = new ArrayList<>();
@@ -58,7 +59,7 @@ public class Reservation {
     private ReservationStatus reservationStatus;
 
     @Builder
-    public Reservation(Consumer consumer, int audienceCount, Screening screening, Long fee, ReservationStatus reservationStatus) {
+    public Reservation(Consumer consumer, int audienceCount, Screening screening, Money fee, ReservationStatus reservationStatus) {
         this.consumer = consumer;
         this.audienceCount = audienceCount;
         this.screening = screening;

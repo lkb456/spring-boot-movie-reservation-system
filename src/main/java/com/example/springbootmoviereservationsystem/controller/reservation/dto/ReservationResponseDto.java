@@ -37,7 +37,7 @@ public class ReservationResponseDto {
                 .consumerSaveResponseDto(ConsumerSaveResponseDto.of(savedReservation.getConsumer()))
                 .audienceCount(savedReservation.getAudienceCount())
                 .screeningSaveResponseDto(ScreeningSaveResponseDto.of(savedReservation.getScreening()))
-                .fee(savedReservation.getFee())
+                .fee(savedReservation.getFee().getAmount().longValue())
                 .seats(savedReservation.getSeats()
                         .stream()
                         .map(SeatDto.ResponseDto::of)

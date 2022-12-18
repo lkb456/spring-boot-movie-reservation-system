@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,8 +22,8 @@ public class Movie {
     @Column(name = "TITLE")
     private String title; // 제목
 
-    @Column(name = "FEE")
-    private Long fee; // 요금
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Money fee; // 요금 (수정)
 
     @Column(name = "RUNNING_TIME")
     private Duration runningTime; // 상영 시간
@@ -36,10 +37,10 @@ public class Movie {
     private LocalDateTime createAt; // 생성 시간
 
     @Builder
-    public Movie(Long id, String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+    public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.id = id;
         this.title = title;
-        this.fee = fee;
+        this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
     }
@@ -48,17 +49,13 @@ public class Movie {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
     }
 
-    public Long calculateMovieFee(int audienceCount) {
-        return multiply(audienceCount);
+    public Money calculateFee(int audienceCount) {
+        return this.fee.times(audienceCount);
     }
 
-    private Long multiply(int audienceCount) {
-        return this.fee * audienceCount;
-    }
-
-    public void updateInfo(String title, Long fee, Duration runningTime, ReleaseStatus releaseStatus) {
+    public void updateInfo(String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.title = title;
-        this.fee = fee;
+        this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
     }

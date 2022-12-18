@@ -65,7 +65,7 @@ public class MovieResponseDto {
             return MovieSaveDto.builder()
                     .id(movie.getId())
                     .title(movie.getTitle())
-                    .fee(movie.getFee())
+                    .fee(movie.getFee().getAmount().longValue())
                     .runningTime(movie.getRunningTime())
                     .releaseStatus(movie.getReleaseStatus())
                     .createAt(movie.getCreateAt())
@@ -90,7 +90,7 @@ public class MovieResponseDto {
         public static MovieDto of(Movie movie) {
             return MovieDto.builder()
                     .title(movie.getTitle())
-                    .fee(movie.getFee())
+                    .fee(movie.getFee().getAmount().longValue())
                     .runningTime(movie.getRunningTime())
                     .status(movie.getReleaseStatus())
                     .build();
