@@ -11,6 +11,8 @@ import java.time.Duration;
 
 public class CreateDto {
 
+    private static ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
+
     public static ConsumerSaveAndUpdateRequestDto createConsumerSaveDto() {
         return ConsumerSaveAndUpdateRequestDto.builder()
                 .nickname("대림동 불주먹")
@@ -28,7 +30,6 @@ public class CreateDto {
     }
 
     public static MovieDtoProjection createMovieDtoProjection() {
-        ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
         MovieDtoProjection projection = factory.createProjection(MovieDtoProjection.class);
         projection.setTitle("아바타");
         projection.setFee(100000L);
