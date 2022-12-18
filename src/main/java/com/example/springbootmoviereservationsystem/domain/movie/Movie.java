@@ -1,7 +1,10 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
 import com.example.springbootmoviereservationsystem.domain.money.Money;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +12,12 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Getter
+@NamedEntityGraph(
+        name = "movieWithMoney",
+        attributeNodes = {
+                @NamedAttributeNode("fee")
+        }
+)
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "MOVIES")

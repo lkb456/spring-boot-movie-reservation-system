@@ -13,7 +13,15 @@ import java.time.LocalDateTime;
 @NamedEntityGraph(
         name = "screeningWithMovie",
         attributeNodes = {
-                @NamedAttributeNode("movie")
+                @NamedAttributeNode(value = "movie", subgraph = "movieWithMoney")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "movieWithMoney",
+                        attributeNodes = {
+                                @NamedAttributeNode("fee")
+                        }
+                )
         }
 )
 @Getter

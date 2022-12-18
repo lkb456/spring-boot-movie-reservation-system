@@ -3,10 +3,13 @@ package com.example.springbootmoviereservationsystem.domain.movie;
 import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface MovieRepository extends JpaRepository<Movie, Long> {
@@ -22,4 +25,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Page<MovieDtoProjection> findByTitleLikeAndReleaseMovie(@Param("title") String title,
                                                             @Param("status") ReleaseStatus status,
                                                             Pageable pageable);
+
+    @EntityGraph(value = "movieWithMoney")
+    Optional<Movie> findById(Long movieId);
 }

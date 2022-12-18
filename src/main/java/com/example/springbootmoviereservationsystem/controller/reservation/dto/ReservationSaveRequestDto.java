@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ReservationSaveRequestDto {
     @JsonProperty("screening_id")
     private Long screeningId; // 상영 정보
 
-    @NotBlank(message = "공백 없이 입력하세요.")
+    @NotNull
     @JsonProperty("consumer_id")
     private Long consumerId; // 고객 식별자
 
