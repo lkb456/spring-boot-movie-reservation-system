@@ -1,34 +1,32 @@
-package com.example.springbootmoviereservationsystem.domain;
+package com.example.springbootmoviereservationsystem.domain.screening;
 
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
-import com.example.springbootmoviereservationsystem.domain.screening.Screening;
-import com.example.springbootmoviereservationsystem.domain.seat.Seat;
+import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SeatTest {
+class ScreeningTest {
 
     @Test
-    @DisplayName("좌석 예매 하기")
-    void seat_reserve() {
+    @DisplayName("예매 정보 생성 하기")
+    void reserve() {
         // given
         Consumer consumer = createConsumer();
         Movie movie = createMovie();
         Screening screening = createScreening(movie);
-        Reservation reservation = screening.reserve(consumer, 5);
-        Seat seat = createSeatForReservation(reservation);
 
         // when
-        seat.reserve(reservation);
+        int audienceCount = 5;
+        Reservation reservation = screening.reserve(consumer, audienceCount);
 
         // then
-        assertThat(seat.getColumNumber()).isEqualTo(reservation.getSeats().get(0).getColumNumber());
-        assertThat(seat.getRowNumber()).isEqualTo(reservation.getSeats().get(0).getRowNumber());
-
+        assertThat(reservation.getReservationStatus()).isEqualTo(ReservationStatus.RESERVATION);
+        assertThat(reservation.getScreening().getMovie().getTitle()).isEqualTo(movie.getTitle());
+        assertThat(reservation.getAudienceCount()).isEqualTo(audienceCount);
     }
 }
