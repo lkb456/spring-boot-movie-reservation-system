@@ -47,12 +47,11 @@ public class Consumer {
     }
 
     public void receiveTicket(Ticket ticket) {
-        if (ticket.isPublish()) {
-            this.ticket = ticket;
-            return;
+        if (!ticket.isPublish()) {
+            throw new IllegalArgumentException("티켓 발행이 되지 않았습니다.");
         }
 
-        throw new IllegalArgumentException("티켓 발행이 되지 않았습니다.");
+        this.ticket = ticket;
     }
 
     public void updateInfo(String nickname, String phoneNumber) {
