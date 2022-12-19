@@ -4,7 +4,6 @@ import com.example.springbootmoviereservationsystem.controller.consumer.dto.Cons
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
-import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,16 +49,16 @@ class ConsumerServiceTest {
     }
 
     @Test
-    @DisplayName("중복된 전화번호 예외 테스트")
+    @DisplayName("중복된 정보 예외 테스트")
     void duplicateExceptionTest() {
-        given(consumerRepository.existsByPhoneNumber(any())).willReturn(true);
+        given(consumerRepository.existsByNicknameOrPhoneNumber(any(), any())).willReturn(true);
 
         ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
         assertThatThrownBy(() -> consumerService.saveConsumer(dto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복된 전화번호 입니다.");
+                .hasMessage("중복된 고객 정보 입니다.");
 
-        verify(consumerRepository).existsByPhoneNumber(any());
+        verify(consumerRepository).existsByNicknameOrPhoneNumber(any(), any());
     }
 
     @Test
