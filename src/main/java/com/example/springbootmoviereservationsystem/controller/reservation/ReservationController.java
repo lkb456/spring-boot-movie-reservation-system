@@ -2,7 +2,7 @@ package com.example.springbootmoviereservationsystem.controller.reservation;
 
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.domain.service.ReservationService;
+import com.example.springbootmoviereservationsystem.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

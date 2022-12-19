@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain.service;
+package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;

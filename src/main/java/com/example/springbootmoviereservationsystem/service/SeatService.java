@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.domain.service;
+package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.seat.SeatRepository;

@@ -3,7 +3,7 @@ package com.example.springbootmoviereservationsystem.controller.screening;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
-import com.example.springbootmoviereservationsystem.domain.service.ScreeningService;
+import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

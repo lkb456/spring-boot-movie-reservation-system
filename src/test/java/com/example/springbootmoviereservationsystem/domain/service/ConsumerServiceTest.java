@@ -1,10 +1,10 @@
-package com.example.springbootmoviereservationsystem.service;
+package com.example.springbootmoviereservationsystem.domain.service;
 
-import com.example.springbootmoviereservationsystem.domain.service.ConsumerService;
-import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
+import com.example.springbootmoviereservationsystem.fixture.CreateDto;
+import com.example.springbootmoviereservationsystem.service.ConsumerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.createConsumer;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
