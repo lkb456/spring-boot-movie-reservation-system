@@ -51,8 +51,8 @@ class ScreeningServiceTest {
         Screening result = screeningService.saveScreen(CreateDto.createScreeningSaveRequestDto());
 
         // then
-        assertThat(screening.getWhenScreened()).isEqualTo(screening.getWhenScreened());
-        assertThat(screening.getMovie()).isEqualTo(movie);
+        assertThat(screening.getWhenScreened()).isEqualTo(result.getWhenScreened());
+        assertThat(movie).isEqualTo(result.getMovie());
     }
 
     @Test
