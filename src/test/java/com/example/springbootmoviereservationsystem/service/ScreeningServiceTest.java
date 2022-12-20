@@ -53,6 +53,9 @@ class ScreeningServiceTest {
         // then
         assertThat(screening.getWhenScreened()).isEqualTo(result.getWhenScreened());
         assertThat(movie).isEqualTo(result.getMovie());
+
+        verify(movieService).findMovie(any());
+        verify(screeningRepository).save(any());
     }
 
     @Test
@@ -68,6 +71,8 @@ class ScreeningServiceTest {
         // then
         assertThat(screening).isEqualTo(findScreening);
         assertThat(screening.getMovie()).isEqualTo(findScreening.getMovie());
+
+        verify(screeningRepository).findById(any());
     }
 
     @Test
