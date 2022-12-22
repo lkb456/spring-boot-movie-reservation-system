@@ -60,11 +60,16 @@ public class Consumer {
     }
 
     public boolean hasTicket() {
+        if (this.ticket == null) {
+            return false;
+        }
+
         return ticket.isPublish();
     }
 
     public void cancelTicket() {
-        this.ticket.cancel();
-        this.ticket = null;
+        if (this.ticket != null) {
+            this.ticket.cancel();
+        }
     }
 }

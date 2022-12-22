@@ -5,6 +5,7 @@ import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationRepository;
+import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
@@ -21,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -104,4 +106,50 @@ class ReservationServiceTest {
         verify(reservationRepository, atLeastOnce()).findById(any());
         verify(ticketRepository, atLeastOnce()).save(any());
     }
+
+    @Test
+    @DisplayName("예매 취소하기 테스트")
+    void cancelReservation() {
+        // given
+        Consumer consumer = CreateEntity.createConsumer();
+        Movie movie = CreateEntity.createMovie();
+        Screening screening = CreateEntity.createScreening(movie);
+        Reservation reservation = screening.reserve(consumer, 5);
+
+        given(reservationRepository.findById(any())).willReturn(Optional.of(reservation));
+
+        // when
+        reservationService.cancelReservation(1L);
+
+        // then
+        assertThat(reservation.getReservationStatus()).isEqualTo(ReservationStatus.CANCELLED_BY_CUSTOMER);
+
+        verify(reservationRepository).findById(any());
+    }
+
+    @Test
+    @DisplayName("예매 취소하기 예외 테스트 (티켓이 이미 발행 된 경우")
+    void cancelReservation_Exception() {
+        // given
+        Consumer consumer = CreateEntity.createConsumer();
+        Movie movie = CreateEntity.createMovie();
+        Screening screening = CreateEntity.createScreening(movie);
+        Reservation reservation = screening.reserve(consumer, 5);
+        Ticket ticket = reservation.publishTicket();
+
+        given(ticketRepository.save(any())).willReturn(ticket);
+        given(reservationRepository.findById(any())).willReturn(Optional.of(reservation));
+
+        reservationService.ticketPublish(1L);
+
+        // when && then
+        assertThatThrownBy(() -> reservationService.cancelReservation(1L))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("티켓 발행 이후 취소는 안됩니다!");
+
+        verify(ticketRepository).save(any());
+        verify(reservationRepository, atMost(2)).findById(any());
+    }
+
+
 }
