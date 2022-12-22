@@ -68,7 +68,6 @@ public class CreateEntity {
 
     public static Seat createSingleSeat() {
         return Seat.builder()
-                .id(1L)
                 .rowNumber("A열")
                 .columNumber(1)
                 .reservationStatus(ReservationStatus.UN_RESERVATION)
