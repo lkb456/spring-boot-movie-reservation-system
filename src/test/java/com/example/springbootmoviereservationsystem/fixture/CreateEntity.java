@@ -58,4 +58,20 @@ public class CreateEntity {
                 .build();
     }
 
+    public static Seat createInitSeat(String[] seatRowAndColum) {
+        return Seat.builder()
+                .rowNumber(seatRowAndColum[0])
+                .columNumber(Integer.valueOf(seatRowAndColum[1]))
+                .reservationStatus(ReservationStatus.UN_RESERVATION)
+                .build();
+    }
+
+    public static Seat createSingleSeat() {
+        return Seat.builder()
+                .id(1L)
+                .rowNumber("A열")
+                .columNumber(1)
+                .reservationStatus(ReservationStatus.UN_RESERVATION)
+                .build();
+    }
 }

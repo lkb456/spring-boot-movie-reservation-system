@@ -46,7 +46,8 @@ public class Seat {
     private Reservation reservation;
 
     @Builder
-    public Seat(String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+    public Seat(Long id, String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+        this.id = id;
         this.rowNumber = rowNumber;
         this.columNumber = columNumber;
         this.reservationStatus = reservationStatus;

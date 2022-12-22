@@ -36,10 +36,8 @@ public class SeatService {
         seatRepository.save(seat);
     }
 
-    @Transactional
     public Seat findSeat(Long seatId) {
         return seatRepository.findById(seatId)
                 .orElseThrow(() -> new IllegalArgumentException("좌석 정보가 없습니다."));
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -55,10 +55,7 @@ class SeatFileReaderServiceTest {
     void readerResult() throws IOException {
         // given
         Path path = Paths.get(resource.getURI());
-        List<String> contents = Files.readAllLines(path);
-        List<String[]> list = contents.stream()
-                .map(data -> data.split(", "))
-                .collect(Collectors.toList());
+        List<String[]> list = CreateDto.createFileContent(path);
 
         given(fileReaderService.readerResult()).willReturn(list);
 
@@ -70,4 +67,5 @@ class SeatFileReaderServiceTest {
 
         verify(fileReaderService).readerResult();
     }
+
 }
