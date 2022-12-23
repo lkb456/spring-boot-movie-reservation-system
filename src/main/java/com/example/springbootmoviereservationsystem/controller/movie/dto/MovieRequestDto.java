@@ -16,6 +16,7 @@ import java.time.Duration;
 public class MovieRequestDto {
 
     @Getter
+    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MovieSaveDto {
