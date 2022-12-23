@@ -104,6 +104,8 @@ class MovieControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(pageMovieDto)));
+
+        verify(movieService).searchMovies(any(), any(), any());
     }
 
     @Test
