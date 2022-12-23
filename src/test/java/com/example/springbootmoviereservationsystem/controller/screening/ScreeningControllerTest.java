@@ -1,9 +1,12 @@
 package com.example.springbootmoviereservationsystem.controller.screening;
 
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
 import com.example.springbootmoviereservationsystem.service.ScreeningService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,12 +15,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -60,5 +68,24 @@ class ScreeningControllerTest {
         verify(screeningService).saveScreen(any());
     }
 
+    @Test
+    @DisplayName("상영 정보 검색 페이징 조회 테스트")
+    void screensSearch() throws Exception {
+        // given
+        ScreenDtoProjection screeningDtoProjection = CreateDto.createScreeningDtoProjection();
+        Page<ScreenDtoProjection> screenDtoProjections = new PageImpl<>(List.of(screeningDtoProjection));
+        ScreeningResponseDto.PageScreenResponseDto result = ScreeningResponseDto.PageScreenResponseDto.of(screenDtoProjections);
+
+        given(screeningService.searchScreens(any(), any(), any())).willReturn(result);
+
+        // when && then
+        mockMvc.perform(get("/screenings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .queryParam("title", "아")
+                        .queryParam("when", ""))
+                .andDo(print());
+
+        verify(screeningService).searchScreens(any(), any(), any());
+    }
 
 }
