@@ -11,11 +11,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@NoArgsConstructor
 public class MovieResponseDto {
 
     @Getter
-    @Setter
     public static class PageMovieDto {
 
         private final List<MovieDtoProjection> elements;

@@ -8,9 +8,11 @@ import java.time.LocalDateTime;
 public interface ScreenDtoProjection {
 
     MovieDtoProjection getMovie();
+
     LocalDateTime getWhenScreened();
 
-    MovieDtoProjection setMovie(Movie movie);
-    LocalDateTime setWhenScreened(LocalDateTime when);
+    void setMovie(Movie movie);
+
+    void setWhenScreened(LocalDateTime when);
 
 }

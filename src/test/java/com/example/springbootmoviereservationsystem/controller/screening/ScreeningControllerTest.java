@@ -80,10 +80,11 @@ class ScreeningControllerTest {
 
         // when && then
         mockMvc.perform(get("/screenings")
-                        .contentType(MediaType.APPLICATION_JSON)
                         .queryParam("title", "아")
                         .queryParam("when", ""))
-                .andDo(print());
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(result)));
 
         verify(screeningService).searchScreens(any(), any(), any());
     }
