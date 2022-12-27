@@ -4,13 +4,14 @@ import com.example.springbootmoviereservationsystem.controller.reservation.dto.R
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
-import com.example.springbootmoviereservationsystem.domain.reservation.ReservationRepository;
-import com.example.springbootmoviereservationsystem.domain.ticket.TicketRepository;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
+import com.example.springbootmoviereservationsystem.domain.reservation.ReservationRepository;
+import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
-import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
+import com.example.springbootmoviereservationsystem.domain.ticket.TicketRepository;
+import com.example.springbootmoviereservationsystem.infra.policy.AmountDiscountPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class ReservationService {
     private final ScreeningService screeningService;
     private final TicketRepository ticketRepository;
     private final ReservationRepository reservationRepository;
+    private final AmountDiscountPolicy discountPolicy;
 
 
     @Transactional
@@ -38,6 +40,7 @@ public class ReservationService {
     private Reservation createReservation(ReservationSaveRequestDto reservationSaveRequestDto) {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getConsumerId());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
+        screening.getMovie().changeDiscountPolicy(discountPolicy);
         return screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());
     }
 
