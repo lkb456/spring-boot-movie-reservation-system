@@ -6,6 +6,7 @@ import com.example.springbootmoviereservationsystem.controller.screening.dto.Scr
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.screening.ScreeningRepository;
+import com.example.springbootmoviereservationsystem.infra.policy.AmountDiscountPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +22,12 @@ public class ScreeningService {
 
     private final MovieService movieService;
     private final ScreeningRepository screeningRepository;
+    private final AmountDiscountPolicy discountPolicy;
 
+    @Transactional
     public Screening saveScreen(ScreeningSaveRequestDto screeningSaveRequestDto) {
         Movie movie = movieService.findMovie(screeningSaveRequestDto.getMovieId());
+        movie.changeDiscountPolicy(discountPolicy);
         return screeningRepository.save(Screening.builder()
                 .movie(movie)
                 .whenScreened(screeningSaveRequestDto.getWhen())
