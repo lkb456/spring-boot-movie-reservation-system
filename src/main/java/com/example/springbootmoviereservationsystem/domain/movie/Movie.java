@@ -1,6 +1,8 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
 import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,21 +47,25 @@ public class Movie {
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
+    @Transient
+    private DiscountPolicy discountPolicy;
+
     @Builder
-    public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
+    public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus, DiscountPolicy discountPolicy) {
         this.id = id;
         this.title = title;
         this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
+        this.discountPolicy = discountPolicy;
     }
 
     public boolean isReleaseMovie() {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
     }
 
-    public Money calculateFee(int audienceCount) {
-        return this.fee.times(audienceCount);
+    public Money calculateMovieFee(Screening screening) {
+        return this.fee.minus(discountPolicy.calculateDiscountAmount(screening));
     }
 
     public void updateInfo(String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
@@ -67,5 +73,9 @@ public class Movie {
         this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
+    }
+
+    public void changeDiscountPolicy(DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
     }
 }

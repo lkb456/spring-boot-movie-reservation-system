@@ -5,7 +5,10 @@ import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -62,6 +65,6 @@ public class Screening {
     }
 
     private Money calculateFee(int audienceCount) {
-        return movie.calculateFee(audienceCount);
+        return movie.calculateMovieFee(this).times(audienceCount);
     }
 }

@@ -1,8 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.movie;
 
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
-import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +21,11 @@ import static com.example.springbootmoviereservationsystem.controller.movie.dto.
 public class MovieController {
 
     private final MovieService movieService;
-    private final MovieRepository movieRepository;
 
     @PostMapping("/movies")
     public ResponseEntity<Long> movieSave(@RequestBody MovieRequestDto.MovieSaveDto movieSaveRequestDto) {
-        Movie savedMovie = movieRepository.save(movieSaveRequestDto.toEntity());
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie.getId());
+        Long savedMovieId = movieService.saveMovie(movieSaveRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovieId);
     }
 
     @GetMapping("/movies/{id}")

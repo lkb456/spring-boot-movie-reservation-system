@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.infra.policy;
 
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.infra.condition.DiscountCondition;
 
@@ -15,7 +16,7 @@ public class PercentDiscountPolicy extends DefaultDiscountPolicy {
     }
 
     @Override
-    protected Long getDiscountAmount(Screening screening) {
+    protected Money getDiscountAmount(Screening screening) {
         return null;
     }
 }

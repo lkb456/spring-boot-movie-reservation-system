@@ -1,12 +1,13 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
-import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.infra.policy.AmountDiscountPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MovieService {
 
-    public final MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
+    private final AmountDiscountPolicy discountPolicy;
+
+    public Long saveMovie(MovieRequestDto.MovieSaveDto movieSaveRequestDto) {
+        Movie movie = movieSaveRequestDto.toEntity();
+        movie.changeDiscountPolicy(discountPolicy);
+        return movieRepository.save(movie).getId();
+    }
 
     @Transactional
     public void updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {

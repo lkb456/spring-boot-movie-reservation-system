@@ -41,10 +41,15 @@ public class Money {
                 .build();
     }
 
-    public Money times(int audienceCount) {
+    public Money times(double percent) {
         return Money.builder()
-                .amount(this.amount.multiply(BigDecimal.valueOf(audienceCount)))
+                .amount(this.amount.multiply(BigDecimal.valueOf(percent)))
                 .build();
+    }
 
+    public Money minus(Money amount) {
+        return Money.builder()
+                .amount(this.amount.subtract(amount.amount))
+                .build();
     }
 }

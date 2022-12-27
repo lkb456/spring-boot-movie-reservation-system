@@ -22,7 +22,6 @@ public class ScreeningService {
     private final MovieService movieService;
     private final ScreeningRepository screeningRepository;
 
-    @Transactional
     public Screening saveScreen(ScreeningSaveRequestDto screeningSaveRequestDto) {
         Movie movie = movieService.findMovie(screeningSaveRequestDto.getMovieId());
         return screeningRepository.save(Screening.builder()
