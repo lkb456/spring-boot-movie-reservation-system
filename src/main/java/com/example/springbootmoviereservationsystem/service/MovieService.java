@@ -22,6 +22,9 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final AmountDiscountPolicy discountPolicy;
 
+    // 할인 금액 반영 안됨
+    // TODO money 엔티티를 value 타입으로 변경
+    // money 는 value 타입이 적절하다
     public Long saveMovie(MovieRequestDto.MovieSaveDto movieSaveRequestDto) {
         Movie movie = movieSaveRequestDto.toEntity();
         movie.changeDiscountPolicy(discountPolicy);
