@@ -39,6 +39,12 @@ public class ConsumerService {
         consumer.updateInfo(consumerRequestDto.getNickname(), consumerRequestDto.getPhoneNumber());
     }
 
+    @Transactional
+    public void leaveConsumer(Long consumerId) {
+        Consumer consumer = findConsumer(consumerId);
+        consumerRepository.delete(consumer);;
+    }
+
     public Consumer findConsumer(Long consumerId) {
         return consumerRepository.findById(consumerId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객정보입니다."));
