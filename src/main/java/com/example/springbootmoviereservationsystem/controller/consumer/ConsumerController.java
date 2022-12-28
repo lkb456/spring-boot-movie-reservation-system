@@ -29,4 +29,10 @@ public class ConsumerController {
         ConsumerSaveResponseDto consumerSaveResponseDto = ConsumerSaveResponseDto.of(consumerService.findConsumer(consumerId));
         return ResponseEntity.status(HttpStatus.OK).body(consumerSaveResponseDto);
     }
+
+    @DeleteMapping("/consumers/{id}")
+    public ResponseEntity<Void> consumerLeave(@PathVariable("id") Long consumerId) {
+        consumerService.leaveConsumer(consumerId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
