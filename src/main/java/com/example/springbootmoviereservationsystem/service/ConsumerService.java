@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,19 +14,19 @@ public class ConsumerService {
 
     private final ConsumerRepository consumerRepository;
 
-    public Long saveConsumer(ConsumerSaveAndUpdateRequestDto consumerRequestDto) {
+    public Long saveConsumer(ConsumerRequestDto consumerRequestDto) {
         duplicatedNicknameOrPhoneNumberCheck(consumerRequestDto);
         Consumer savedConsumer = consumerRepository.save(consumerRequestDto.toEntity());
         return savedConsumer.getId();
     }
 
-    private void duplicatedNicknameOrPhoneNumberCheck(ConsumerSaveAndUpdateRequestDto consumerRequestDto) {
+    private void duplicatedNicknameOrPhoneNumberCheck(ConsumerRequestDto consumerRequestDto) {
         if (isExists(consumerRequestDto)) {
             throw new IllegalArgumentException("중복된 고객 정보 입니다.");
         }
     }
 
-    private boolean isExists(ConsumerSaveAndUpdateRequestDto consumerRequestDto) {
+    private boolean isExists(ConsumerRequestDto consumerRequestDto) {
         return consumerRepository.existsByNicknameOrPhoneNumber(
                 consumerRequestDto.getNickname(),
                 consumerRequestDto.getPhoneNumber()
@@ -34,7 +34,7 @@ public class ConsumerService {
     }
 
     @Transactional
-    public void updateConsumer(Long consumerId, ConsumerSaveAndUpdateRequestDto consumerRequestDto) {
+    public void updateConsumer(Long consumerId, ConsumerRequestDto consumerRequestDto) {
         Consumer consumer = findConsumer(consumerId);
         consumer.updateInfo(consumerRequestDto.getNickname(), consumerRequestDto.getPhoneNumber());
     }

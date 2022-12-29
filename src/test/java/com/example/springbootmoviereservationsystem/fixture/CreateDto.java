@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
-import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
@@ -23,8 +23,8 @@ public class CreateDto {
 
     private static ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
 
-    public static ConsumerSaveAndUpdateRequestDto createConsumerSaveDto() {
-        return ConsumerSaveAndUpdateRequestDto.builder()
+    public static ConsumerRequestDto createConsumerSaveDto() {
+        return ConsumerRequestDto.builder()
                 .nickname("대림동 불주먹")
                 .phoneNumber("01012341234")
                 .build();

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConsumerSaveAndUpdateRequestDto {
+public class ConsumerRequestDto {
 
     @NotBlank(message = "빈칸은 안됩니다,")
     @JsonProperty("nickname")
