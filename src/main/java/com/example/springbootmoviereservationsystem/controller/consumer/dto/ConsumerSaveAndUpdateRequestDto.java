@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -16,13 +16,13 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class ConsumerSaveAndUpdateRequestDto {
 
+    @NotBlank(message = "빈칸은 안됩니다,")
     @JsonProperty("nickname")
-    @NotBlank(message = "공백 없이 입력하세요.")
     private String nickname; // 고객 닉네임
 
+    @Length(max = 11)
+    @NotBlank(message = "빈칸은 안됩니다,")
     @JsonProperty("phone_number")
-    @NotBlank(message = "공백 없이 입력하세요.")
-    @Max(value = 11)
     private String phoneNumber; // 고객 핸드폰 번호
 
     public Consumer toEntity() {
