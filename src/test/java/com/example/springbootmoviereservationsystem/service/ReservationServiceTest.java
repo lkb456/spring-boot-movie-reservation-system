@@ -73,7 +73,7 @@ class ReservationServiceTest {
 
         // then
         assertThat(result.getAudienceCount()).isEqualTo(reservation.getAudienceCount());
-        assertThat(result.getConsumerSaveResponseDto().getNickname()).isEqualTo(consumer.getNickname());
+        assertThat(result.getConsumerResponseDto().getNickname()).isEqualTo(consumer.getNickname());
         assertThat(result.getScreeningSaveResponseDto().getMovieDto().getTitle()).isEqualTo(movie.getTitle());
         assertThat(result.getSeats().size()).isEqualTo(reservation.getAudienceCount());
 

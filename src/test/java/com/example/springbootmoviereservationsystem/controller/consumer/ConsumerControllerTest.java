@@ -61,8 +61,7 @@ class ConsumerControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         given(consumerService.findConsumer(any())).willReturn(consumer);
 
-        ConsumerResponseDto.ConsumerSaveResponseDto dto =
-                ConsumerResponseDto.ConsumerSaveResponseDto.of(consumer);
+        ConsumerResponseDto dto = ConsumerResponseDto.of(consumer);
 
         // when && then
         mockMvc.perform(get("/consumers/" + consumer.getId()))
