@@ -1,27 +1,25 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
-import com.example.springbootmoviereservationsystem.service.MovieService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static com.example.springbootmoviereservationsystem.fixture.CreateDto.createMovieDtoProjection;
 import static com.example.springbootmoviereservationsystem.fixture.CreateEntity.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -71,7 +69,7 @@ class MovieServiceTest {
         Movie movie = createMovie();
         given(movieRepository.findById(any())).willReturn(Optional.of(movie));
 
-        MovieRequestDto.MovieUpdateDto dto = CreateDto.createMovieUpdateDto();
+        MovieRequestDto dto = CreateDto.createMovieUpdateDto();
         movieService.updateMovie(id, dto);
 
         assertThat(dto.getTitle()).isEqualTo(movie.getTitle());
@@ -95,15 +93,21 @@ class MovieServiceTest {
     }
 
     @Test
-    @DisplayName("영화 정보 페이지 타입으로 조회하기")
+    @DisplayName("영화 정보 페이징 처리하여 조회하기")
     void searchMovies() {
-        MovieDtoProjection projection = createMovieDtoProjection();
-        given(movieRepository.findByTitleLikeAndReleaseMovie(any(), any(), any())).willReturn(new PageImpl<>(List.of(projection)));
+        // given
+        Page<MovieResponseDto> movieResponseDtoPage = new PageImpl<>(CreateDto.createMovieResponseDtos());
+        given(movieRepository.findByTitleLikeOrReleaseStatusEqualsOrderByTitle(any(), any(), any()))
+                .willReturn(movieResponseDtoPage);
 
-        MovieResponseDto.PageMovieDto result = movieService.searchMovies("title", ReleaseStatus.RELEASE, Pageable.unpaged());
+        // when
+        MovieResponsePageDto result = movieService.searchMovies("아", ReleaseStatus.RELEASE, Pageable.unpaged());
 
-        assertThat(result).isInstanceOf(MovieResponseDto.PageMovieDto.class);
-        assertThat(projection.getTitle()).isEqualTo(result.getElements().get(0).getTitle());
-        verify(movieRepository).findByTitleLikeAndReleaseMovie(any(), any(), any());
+        // then
+        assertThat(movieResponseDtoPage.getTotalElements()).isEqualTo(result.getElementsSize());
+        assertThat(movieResponseDtoPage.getContent()).isEqualTo(result.getElements());
+        assertThat(1).isEqualTo(result.getTotalPage());
+
+        verify(movieRepository).findByTitleLikeOrReleaseStatusEqualsOrderByTitle(any(), any(), any());
     }
 }

@@ -2,9 +2,11 @@ package com.example.springbootmoviereservationsystem.controller.movie;
 
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
 import com.example.springbootmoviereservationsystem.service.MovieService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,17 +15,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Duration;
-import java.util.List;
 
-import static com.example.springbootmoviereservationsystem.fixture.CreateDto.createMovieDtoProjection;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -49,25 +49,19 @@ class MovieControllerTest {
     @DisplayName("영화 정보 저장하기 테스트")
     void movieSave() throws Exception {
         // given
-        MovieRequestDto.MovieSaveDto dto = MovieRequestDto.MovieSaveDto.builder()
-                .title("아바타")
-                .fee(2000L)
-                .runningTime(Duration.ofMinutes(120000))
-                .releaseStatus(ReleaseStatus.UN_RELEASE)
-                .build();
-
-        Movie movie = CreateEntity.createMovie();
-        given(movieRepository.save(any())).willReturn(movie);
+        Long expectedId = 1L;
+        given(movieService.saveMovie(any())).willReturn(expectedId);
 
         // when && then
         mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(dto)))
+                        .content(mapper.writeValueAsString(MovieRequestDto.builder()
+                                .build())))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(content().json(String.valueOf(movie.getId())));
+                .andExpect(content().json(mapper.writeValueAsString(expectedId)));
 
-        verify(movieRepository).save(any());
+        verify(movieService).saveMovie(any());
     }
 
     @Test
@@ -81,7 +75,7 @@ class MovieControllerTest {
         mockMvc.perform(get("/movies/" + movie.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(MovieResponseDto.MovieSaveDto.of(movie))));
+                .andExpect(content().json(mapper.writeValueAsString(MovieResponseDto.of(movie))));
 
         verify(movieService).findMovie(any());
     }
@@ -90,20 +84,17 @@ class MovieControllerTest {
     @DisplayName("영화 검색 페이징 처리하기 테스트")
     void movieSearch() throws Exception {
         // given
-        MovieDtoProjection projection = createMovieDtoProjection();
-        Page<MovieDtoProjection> page = new PageImpl<>(List.of(projection));
-        MovieResponseDto.PageMovieDto pageMovieDto = MovieResponseDto.PageMovieDto.of(page);
-
-        given(movieService.searchMovies(any(), any(), any())).willReturn(pageMovieDto);
+        MovieResponsePageDto result = MovieResponsePageDto
+                .of(new PageImpl<>(CreateDto.createMovieResponseDtos()));
+        given(movieService.searchMovies(any(), any(), any())).willReturn(result);
 
         // when && then
         mockMvc.perform(get("/movies")
-                        .contentType(MediaType.APPLICATION_JSON)
                         .queryParam("title", "아")
-                        .queryParam("status", "RELEASE"))
+                        .queryParam("status", ReleaseStatus.RELEASE.toString()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(pageMovieDto)));
+                .andExpect(content().json(mapper.writeValueAsString(result)));
 
         verify(movieService).searchMovies(any(), any(), any());
     }
@@ -111,7 +102,7 @@ class MovieControllerTest {
     @Test
     @DisplayName("영화 정보 업데이트 하기 테스트")
     void movieUpdate() throws Exception {
-        MovieRequestDto.MovieUpdateDto updateDto = MovieRequestDto.MovieUpdateDto.builder()
+        MovieRequestDto updateDto = MovieRequestDto.builder()
                 .title("싸움의 기술")
                 .fee(2000L)
                 .runningTime(Duration.ofMinutes(12000))

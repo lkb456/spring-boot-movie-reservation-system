@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.controller.consumer;
 
 import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerResponseDto;
-import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
@@ -39,7 +39,7 @@ class ConsumerControllerTest {
     @DisplayName("고객 정보 저장하기 테스트")
     void consumerAdd() throws Exception {
         // given
-        ConsumerSaveAndUpdateRequestDto consumerSaveDto = CreateDto.createConsumerSaveDto();
+        ConsumerRequestDto consumerSaveDto = CreateDto.createConsumerSaveDto();
         given(consumerService.saveConsumer(any())).willReturn(1L);
 
         // when && then
@@ -61,8 +61,7 @@ class ConsumerControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         given(consumerService.findConsumer(any())).willReturn(consumer);
 
-        ConsumerResponseDto.ConsumerSaveResponseDto dto =
-                ConsumerResponseDto.ConsumerSaveResponseDto.of(consumer);
+        ConsumerResponseDto dto = ConsumerResponseDto.of(consumer);
 
         // when && then
         mockMvc.perform(get("/consumers/" + consumer.getId()))

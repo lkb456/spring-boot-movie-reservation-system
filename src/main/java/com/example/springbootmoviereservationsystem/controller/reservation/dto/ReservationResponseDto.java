@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.reservation.dto;
 
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
@@ -11,15 +12,13 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerResponseDto.ConsumerSaveResponseDto;
-
 @Builder
 @Getter
 @RequiredArgsConstructor
 public class ReservationResponseDto {
 
     @JsonProperty("consumer")
-    private final ConsumerSaveResponseDto consumerSaveResponseDto;
+    private final ConsumerResponseDto consumerResponseDto;
 
     @JsonProperty("audience_count")
     private final int audienceCount;
@@ -34,7 +33,7 @@ public class ReservationResponseDto {
 
     public static ReservationResponseDto of(Reservation savedReservation) {
         return ReservationResponseDto.builder()
-                .consumerSaveResponseDto(ConsumerSaveResponseDto.of(savedReservation.getConsumer()))
+                .consumerResponseDto(ConsumerResponseDto.of(savedReservation.getConsumer()))
                 .audienceCount(savedReservation.getAudienceCount())
                 .screeningSaveResponseDto(ScreeningSaveResponseDto.of(savedReservation.getScreening()))
                 .fee(savedReservation.getFee().getAmount().longValue())

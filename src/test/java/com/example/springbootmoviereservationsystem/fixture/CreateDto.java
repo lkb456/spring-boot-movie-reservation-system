@@ -1,8 +1,8 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
-import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
-import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,15 +24,15 @@ public class CreateDto {
 
     private static ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
 
-    public static ConsumerSaveAndUpdateRequestDto createConsumerSaveDto() {
-        return ConsumerSaveAndUpdateRequestDto.builder()
+    public static ConsumerRequestDto createConsumerSaveDto() {
+        return ConsumerRequestDto.builder()
                 .nickname("대림동 불주먹")
                 .phoneNumber("01012341234")
                 .build();
     }
 
-    public static MovieRequestDto.MovieUpdateDto createMovieUpdateDto() {
-        return MovieRequestDto.MovieUpdateDto.builder()
+    public static MovieRequestDto createMovieUpdateDto() {
+        return MovieRequestDto.builder()
                 .title("아바타2")
                 .fee(15000L)
                 .runningTime(Duration.ofMinutes(240))
@@ -39,13 +40,13 @@ public class CreateDto {
                 .build();
     }
 
-    public static MovieDtoProjection createMovieDtoProjection() {
-        MovieDtoProjection projection = factory.createProjection(MovieDtoProjection.class);
-        projection.setTitle("아바타");
-        projection.setFee(100000L);
-        projection.setRunningTime(Duration.ofMinutes(120000L));
-        projection.setReleaseStatus(ReleaseStatus.RELEASE);
-        return projection;
+    public static List<MovieResponseDto> createMovieResponseDtos() {
+        List<MovieResponseDto> list = new ArrayList<>();
+        for (int count = 1; count <= 10; count++) {
+            list.add(MovieResponseDto.of(CreateEntity.createMovie()));
+        }
+
+        return list;
     }
 
     public static ScreeningSaveRequestDto createScreeningSaveRequestDto() {

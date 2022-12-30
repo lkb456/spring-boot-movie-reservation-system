@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerSaveAndUpdateRequestDto;
+import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.consumer.ConsumerRepository;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
@@ -35,7 +35,7 @@ class ConsumerServiceTest {
         Consumer consumer = createConsumer();
         given(consumerRepository.save(any())).willReturn(consumer);
 
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
+        ConsumerRequestDto dto = CreateDto.createConsumerSaveDto();
         Long savedId = consumerService.saveConsumer(dto);
         given(consumerRepository.findById(savedId)).willReturn(Optional.of(consumer));
 
@@ -53,7 +53,7 @@ class ConsumerServiceTest {
     void duplicateExceptionTest() {
         given(consumerRepository.existsByNicknameOrPhoneNumber(any(), any())).willReturn(true);
 
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
+        ConsumerRequestDto dto = CreateDto.createConsumerSaveDto();
         assertThatThrownBy(() -> consumerService.saveConsumer(dto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 고객 정보 입니다.");
@@ -68,7 +68,7 @@ class ConsumerServiceTest {
         given(consumerRepository.findById(any())).willReturn(Optional.of(consumer));
 
         Long consumerId = 1L;
-        ConsumerSaveAndUpdateRequestDto dto = CreateDto.createConsumerSaveDto();
+        ConsumerRequestDto dto = CreateDto.createConsumerSaveDto();
         consumerService.updateConsumer(consumerId, dto);
 
         assertThat(dto.getNickname()).isEqualTo(consumer.getNickname());
