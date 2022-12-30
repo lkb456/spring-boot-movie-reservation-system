@@ -1,8 +1,8 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.movie.MovieDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
+import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
 import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
@@ -20,18 +20,20 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
-    public Long saveMovie(MovieRequestDto.MovieSaveDto movieSaveRequestDto) {
-        Movie movie = movieSaveRequestDto.toEntity();
-        return movieRepository.save(movie).getId();
+    public Long saveMovie(MovieRequestDto movieSaveRequestDto) {
+        Movie savedMovie = movieRepository.save(movieSaveRequestDto.toEntity());
+        return savedMovie.getId();
     }
 
     @Transactional
-    public void updateMovie(Long movieId, MovieRequestDto.MovieUpdateDto movieUpdateRequestDto) {
+    public void updateMovie(Long movieId, MovieRequestDto movieRequestDto) {
         Movie movie = findMovie(movieId);
-        movie.updateInfo(movieUpdateRequestDto.getTitle(),
-                Money.wons(movieUpdateRequestDto.getFee()),
-                movieUpdateRequestDto.getRunningTime(),
-                movieUpdateRequestDto.getReleaseStatus());
+        movie.updateInfo(
+                movieRequestDto.getTitle(),
+                Money.wons(movieRequestDto.getFee()),
+                movieRequestDto.getRunningTime(),
+                movieRequestDto.getReleaseStatus()
+        );
     }
 
     public void deleteMovie(Long movieId) {
@@ -43,8 +45,12 @@ public class MovieService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
     }
 
-    public MovieResponseDto.PageMovieDto searchMovies(String title, ReleaseStatus status, Pageable pageable) {
-        Page<MovieDtoProjection> result = movieRepository.findByTitleLikeAndReleaseMovie(title, status, pageable);
-        return MovieResponseDto.PageMovieDto.of(result);
+    public MovieResponsePageDto searchMovies(String title, ReleaseStatus status, Pageable pageable) {
+        Page<MovieResponseDto> result = movieRepository.findByTitleLikeOrReleaseStatusEqualsOrderByTitle(
+                title,
+                status,
+                pageable
+        );
+        return MovieResponsePageDto.of(result);
     }
 }
