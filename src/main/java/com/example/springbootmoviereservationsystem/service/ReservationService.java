@@ -52,6 +52,10 @@ public class ReservationService {
 
     private void updateSeat(Reservation reservation, Long seatId) {
         Seat seat = seatService.findSeat(seatId);
+        if (seat.isAvailable()) {
+            throw new IllegalArgumentException("이미 예약한 좌석입니다.");
+        }
+
         seat.reserve(reservation);
         seat.updateReserveStatus(ReservationStatus.RESERVATION);
     }

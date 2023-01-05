@@ -66,4 +66,12 @@ public class Seat {
     public void updateReserveStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
+
+    public boolean isAvailable() {
+        if (!this.reservationStatus.equals(ReservationStatus.RESERVATION)) {
+            return false;
+        }
+
+        return true;
+    }
 }
