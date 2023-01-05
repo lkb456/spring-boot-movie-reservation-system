@@ -51,17 +51,21 @@ public class Screening {
     }
 
     public Reservation reserve(Consumer consumer, int audienceCount) {
-        if (movie.isReleaseMovie()) {
-            return Reservation.builder()
-                    .consumer(consumer)
-                    .audienceCount(audienceCount)
-                    .screening(this)
-                    .fee(calculateFee(audienceCount))
-                    .reservationStatus(ReservationStatus.RESERVATION)
-                    .build();
+        if (!movie.isReleaseMovie()) {
+            throw new IllegalArgumentException("Movie is UnRelease Exception !!");
         }
 
-        throw new IllegalArgumentException("Movie is UnRelease Exception !!");
+        return Reservation.builder()
+                .consumer(consumer)
+                .audienceCount(audienceCount)
+                .screening(this)
+                .fee(calculateFee(audienceCount))
+                .reservationStatus(ReservationStatus.RESERVATION)
+                .build();
+    }
+
+    public Money getMovieFee() {
+        return movie.getFee();
     }
 
     private Money calculateFee(int audienceCount) {
