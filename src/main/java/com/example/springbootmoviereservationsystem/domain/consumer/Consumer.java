@@ -29,7 +29,7 @@ public class Consumer {
     private String phoneNumber; // 휴대전화 번호
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "SERIAL_NUMBER")
+    @JoinColumn(name = "TICKET")
     private Ticket ticket; // 예매 티켓
 
     @CreationTimestamp
