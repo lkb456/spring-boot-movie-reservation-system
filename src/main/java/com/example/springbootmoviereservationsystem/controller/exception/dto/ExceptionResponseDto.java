@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.exception.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,8 @@ public class ExceptionResponseDto {
     private final LocalDateTime timeStamp = LocalDateTime.now();
     private final int statusCode;
     private final HttpStatus status;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FieldError> fieldErrors = new ArrayList<>();
     private final String message;
 
