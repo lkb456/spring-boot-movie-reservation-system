@@ -22,7 +22,7 @@ public class MovieRequestDto {
     @NotBlank(message = "공백 없이 입력하세요.")
     private String title; // 제목
 
-    @NotBlank(message = "공백 없이 입력하세요.")
+    @NotNull(message = "공백 없이 입력하세요.")
     private Long fee; // 요금
 
     @NotNull

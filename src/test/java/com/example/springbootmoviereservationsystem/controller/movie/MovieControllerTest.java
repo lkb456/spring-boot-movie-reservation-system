@@ -18,9 +18,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -65,6 +69,19 @@ class MovieControllerTest {
     }
 
     @Test
+    @DisplayName("영화 정보 저장하기 테스트 -> 유효성 검사에 맞지 않는 데이터를 넘길 경우")
+    void movieSave_param_not_valid() throws Exception {
+        mockMvc.perform(post("/movies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(MovieRequestDto.builder()
+                                .build())))
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException())
+                        .isInstanceOf(MethodArgumentNotValidException.class));
+    }
+
+
+    @Test
     @DisplayName("영화 정보 단건 조회하기")
     void movieFind() throws Exception {
         // given
@@ -78,6 +95,16 @@ class MovieControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(MovieResponseDto.of(movie))));
 
         verify(movieService).findMovie(any());
+    }
+
+    @Test
+    @DisplayName("영화 정보 단건 조회하기 -> pathVariable 이 null 인 경우")
+    void movieFind_path_param_not_valid() throws Exception {
+        mockMvc.perform(get("/movies/" + null))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException())
+                        .isInstanceOf(MethodArgumentTypeMismatchException.class));
     }
 
     @Test
@@ -97,6 +124,22 @@ class MovieControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(result)));
 
         verify(movieService).searchMovies(any(), any(), any());
+    }
+
+    @Test
+    @DisplayName("영화 검색 페이징 처리하기 테스트 -> 유효성 검사에 맞지 않는 경우")
+    void movieSearch_param_not_valid() throws Exception {
+        // given
+        String titleParam = null;
+
+        // when && then
+        mockMvc.perform(get("/movies")
+                        .queryParam("title", titleParam)
+                        .queryParam("status", ReleaseStatus.RELEASE.toString()))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(result -> assertThat(result.getResolvedException())
+                        .isInstanceOf(MissingServletRequestParameterException.class));
     }
 
     @Test
