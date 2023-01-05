@@ -24,16 +24,16 @@ public class ScreeningController {
     private final ScreeningService screeningService;
 
     @PostMapping("/screenings")
-    public ResponseEntity<ScreeningSaveResponseDto> screenSave(@Valid @RequestBody ScreeningSaveRequestDto screeningSaveRequestDto) {
+    public ResponseEntity<ScreeningSaveResponseDto> screenSave(@Valid @RequestBody final ScreeningSaveRequestDto screeningSaveRequestDto) {
         ScreeningSaveResponseDto screeningSaveResponseDto =
                 ScreeningSaveResponseDto.of(screeningService.saveScreen(screeningSaveRequestDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(screeningSaveResponseDto);
     }
 
     @GetMapping("/screenings")
-    public ResponseEntity<PageScreenResponseDto> screensSearch(@RequestParam(value = "title") String title,
+    public ResponseEntity<PageScreenResponseDto> screensSearch(@RequestParam(value = "title") final String title,
                                                                @RequestParam(value = "when", required = false)
-                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") LocalDateTime whenScreened,
+                                                               @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") final LocalDateTime whenScreened,
                                                                @PageableDefault Pageable pageable) {
         PageScreenResponseDto pageScreenResponseDto = screeningService.searchScreens(title, whenScreened, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(pageScreenResponseDto);

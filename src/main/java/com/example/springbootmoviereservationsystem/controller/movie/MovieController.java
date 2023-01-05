@@ -23,20 +23,20 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping("/movies")
-    public ResponseEntity<Long> movieSave(@Valid @RequestBody MovieRequestDto movieRequestDto) {
+    public ResponseEntity<Long> movieSave(@Valid @RequestBody final MovieRequestDto movieRequestDto) {
         Long savedMovieId = movieService.saveMovie(movieRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMovieId);
     }
 
     @GetMapping("/movies/{id}")
-    public ResponseEntity<MovieResponseDto> movieFind(@PathVariable("id") Long movieId) {
+    public ResponseEntity<MovieResponseDto> movieFind(@PathVariable("id") final Long movieId) {
         MovieResponseDto movieResponseDto = MovieResponseDto.of(movieService.findMovie(movieId));
         return ResponseEntity.status(HttpStatus.OK).body(movieResponseDto);
     }
 
     @GetMapping("/movies")
-    public ResponseEntity<MovieResponsePageDto> movieSearch(@RequestParam("title") String title,
-                                                            @RequestParam(value = "status", required = false) ReleaseStatus status,
+    public ResponseEntity<MovieResponsePageDto> movieSearch(@RequestParam("title") final String title,
+                                                            @RequestParam(value = "status", required = false) final ReleaseStatus status,
                                                             @PageableDefault Pageable pageable) {
         MovieResponsePageDto movieResponsePageDto = movieService.searchMovies(title, status, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(movieResponsePageDto);
@@ -44,14 +44,14 @@ public class MovieController {
 
 
     @PutMapping("/movies/{id}")
-    public ResponseEntity<Void> movieUpdate(@PathVariable("id") Long movieId,
-                                            @Valid @RequestBody MovieRequestDto movieRequestDto) {
+    public ResponseEntity<Void> movieUpdate(@PathVariable("id") final Long movieId,
+                                            @Valid @RequestBody final MovieRequestDto movieRequestDto) {
         movieService.updateMovie(movieId, movieRequestDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Void> movieDelete(@PathVariable("id") Long movieId) {
+    public ResponseEntity<Void> movieDelete(@PathVariable("id") final Long movieId) {
         movieService.deleteMovie(movieId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
