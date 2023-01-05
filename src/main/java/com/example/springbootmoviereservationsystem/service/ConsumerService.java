@@ -42,7 +42,7 @@ public class ConsumerService {
     @Transactional
     public void leaveConsumer(Long consumerId) {
         Consumer consumer = findConsumer(consumerId);
-        consumerRepository.delete(consumer);;
+        consumerRepository.delete(consumer);
     }
 
     public Consumer findConsumer(Long consumerId) {
