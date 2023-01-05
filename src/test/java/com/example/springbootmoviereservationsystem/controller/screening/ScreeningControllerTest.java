@@ -1,7 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.screening;
 
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningResponseDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.PageScreenResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
@@ -72,9 +71,9 @@ class ScreeningControllerTest {
     @DisplayName("상영 정보 검색 페이징 조회 테스트")
     void screensSearch() throws Exception {
         // given
-        ScreenDtoProjection screeningDtoProjection = CreateDto.createScreeningDtoProjection();
-        Page<ScreenDtoProjection> screenDtoProjections = new PageImpl<>(List.of(screeningDtoProjection));
-        ScreeningResponseDto.PageScreenResponseDto result = ScreeningResponseDto.PageScreenResponseDto.of(screenDtoProjections);
+        ScreeningSaveResponseDto screeningDtoProjection = CreateDto.createScreeningDtoProjection();
+        Page<ScreeningSaveResponseDto> screenDtoProjections = new PageImpl<>(List.of(screeningDtoProjection));
+        PageScreenResponseDto result = PageScreenResponseDto.of(screenDtoProjections);
 
         given(screeningService.searchScreens(any(), any(), any())).willReturn(result);
 

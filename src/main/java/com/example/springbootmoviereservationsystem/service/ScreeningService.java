@@ -1,8 +1,8 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningResponseDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.PageScreenResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.screening.ScreeningRepository;
@@ -28,15 +28,21 @@ public class ScreeningService {
     public Screening saveScreen(ScreeningSaveRequestDto screeningSaveRequestDto) {
         Movie movie = movieService.findMovie(screeningSaveRequestDto.getMovieId());
         movie.changeDiscountPolicy(discountPolicy);
-        return screeningRepository.save(Screening.builder()
-                .movie(movie)
-                .whenScreened(screeningSaveRequestDto.getWhen())
-                .build());
+        return getSavedScreening(screeningSaveRequestDto, movie);
     }
 
-    public ScreeningResponseDto.PageScreenResponseDto searchScreens(String title, LocalDateTime whenScreened, Pageable pageable) {
-        Page<ScreenDtoProjection> projectionPage = screeningRepository.findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(title, whenScreened, pageable);
-        return ScreeningResponseDto.PageScreenResponseDto.of(projectionPage);
+    private Screening getSavedScreening(ScreeningSaveRequestDto screeningSaveRequestDto, Movie movie) {
+        Screening screening = Screening.builder()
+                .movie(movie)
+                .whenScreened(screeningSaveRequestDto.getWhen())
+                .build();
+        return screeningRepository.save(screening);
+    }
+
+    public PageScreenResponseDto searchScreens(String title, LocalDateTime whenScreened, Pageable pageable) {
+        Page<ScreeningSaveResponseDto> projectionPage = screeningRepository
+                .findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(title, whenScreened, pageable);
+        return PageScreenResponseDto.of(projectionPage);
     }
 
     public Screening findScreen(Long screenId) {

@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.controller.screening;
+package com.example.springbootmoviereservationsystem.controller.screening.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchScreenMovieDto {
+public class SearchScreenMovieRequestDto {
 
     @NotBlank
     private String title;

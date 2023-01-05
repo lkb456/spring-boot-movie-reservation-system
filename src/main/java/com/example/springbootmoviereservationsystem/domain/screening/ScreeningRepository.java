@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.screening;
 
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -13,10 +13,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface ScreeningRepository extends JpaRepository<Screening, Long> {
 
-    Page<ScreenDtoProjection> findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(String title,
-                                                                                          LocalDateTime whenScreened,
-                                                                                          Pageable pageable);
-
-    @EntityGraph(value = "screeningWithMovie", type = EntityGraph.EntityGraphType.FETCH)
+    Page<ScreeningSaveResponseDto> findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(String title,
+                                                                                               LocalDateTime whenScreened,
+                                                                                               Pageable pageable);
+    @EntityGraph(value = "screeningWithMovieWithMoney", type = EntityGraph.EntityGraphType.FETCH)
     Optional<Screening> findById(Long screenId);
 }

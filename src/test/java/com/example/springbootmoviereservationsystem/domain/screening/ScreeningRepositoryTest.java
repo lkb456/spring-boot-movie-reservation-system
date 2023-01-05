@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.screening;
 
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
@@ -44,12 +44,28 @@ class ScreeningRepositoryTest {
         Screening screening = screeningRepository.findById(1L).get();
 
         // when
-        Page<ScreenDtoProjection> result = screeningRepository.findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(title, when, pageable);
+        Page<ScreeningSaveResponseDto> result = screeningRepository.findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(title, when, pageable);
 
         // then
-        List<ScreenDtoProjection> content = result.getContent();
+        List<ScreeningSaveResponseDto> content = result.getContent();
         assertNotNull(result);
-        assertThat(screening.getMovie().getTitle()).isEqualTo(content.get(0).getMovie().getTitle());
         assertThat(screening.getWhenScreened()).isEqualTo(content.get(0).getWhenScreened());
+    }
+
+    @Test
+    @DisplayName("")
+    void findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual() {
+        String title = "아";
+        LocalDateTime when = LocalDateTime.of(2022, 12, 01, 8, 00);
+        Pageable pageable = Pageable.unpaged();
+
+        Page<ScreeningSaveResponseDto> result = screeningRepository
+                .findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(
+                        title,
+                        when,
+                        pageable
+                );
+
+        System.out.println(result);
     }
 }

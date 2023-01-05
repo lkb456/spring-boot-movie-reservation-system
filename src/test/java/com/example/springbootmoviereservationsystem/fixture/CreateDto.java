@@ -4,8 +4,8 @@ import com.example.springbootmoviereservationsystem.controller.consumer.dto.Cons
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.springframework.data.projection.ProjectionFactory;
@@ -56,11 +56,8 @@ public class CreateDto {
                 .build();
     }
 
-    public static ScreenDtoProjection createScreeningDtoProjection() {
-        ScreenDtoProjection projection = factory.createProjection(ScreenDtoProjection.class);
-        projection.setMovie(CreateEntity.createMovie());
-        projection.setWhenScreened(LocalDateTime.of(2022, 12, 12, 8, 00));
-        return projection;
+    public static ScreeningSaveResponseDto createScreeningDtoProjection() {
+        return ScreeningSaveResponseDto.of(CreateEntity.createScreening(CreateEntity.createMovie()));
     }
 
     public static List<String[]> createFileContent(Path path) throws IOException {

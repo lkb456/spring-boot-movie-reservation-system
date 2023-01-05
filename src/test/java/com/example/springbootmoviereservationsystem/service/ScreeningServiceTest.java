@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.service;
 
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreenDtoProjection;
-import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningResponseDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.PageScreenResponseDto;
+import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.screening.ScreeningRepository;
@@ -79,18 +79,17 @@ class ScreeningServiceTest {
     @DisplayName("상영 정보 검색 페이징 처리 테스트")
     void searchScreens() {
         // given
-        ScreenDtoProjection projection = CreateDto.createScreeningDtoProjection();
+        ScreeningSaveResponseDto projection = CreateDto.createScreeningDtoProjection();
         given(screeningRepository
                 .findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(any(), any(), any()))
                 .willReturn(new PageImpl<>(List.of(projection)));
 
         // when
-        ScreeningResponseDto.PageScreenResponseDto result = screeningService
+        PageScreenResponseDto result = screeningService
                 .searchScreens("d", LocalDateTime.of(2022, 12, 12, 2, 00), Pageable.unpaged());
 
         // then
-        assertThat(result).isInstanceOf(ScreeningResponseDto.PageScreenResponseDto.class);
-        assertThat(projection.getMovie().getTitle()).isEqualTo(result.getElements().get(0).getMovie().getTitle());
+        assertThat(result).isInstanceOf(PageScreenResponseDto.class);
 
         verify(screeningRepository).findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(any(), any(), any());
     }
