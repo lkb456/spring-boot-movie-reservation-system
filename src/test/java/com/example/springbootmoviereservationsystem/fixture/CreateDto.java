@@ -6,7 +6,7 @@ import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRe
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
-import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
@@ -74,11 +74,11 @@ public class CreateDto {
                 .consumerId(1L)
                 .audienceCount(5)
                 .seatSaveRequestDto(List.of(
-                        SeatDto.SaveRequestDto.builder().seatId(1L).build(),
-                        SeatDto.SaveRequestDto.builder().seatId(2L).build(),
-                        SeatDto.SaveRequestDto.builder().seatId(3L).build(),
-                        SeatDto.SaveRequestDto.builder().seatId(4L).build(),
-                        SeatDto.SaveRequestDto.builder().seatId(5L).build()))
+                        SeatRequestDto.builder().seatId(1L).build(),
+                        SeatRequestDto.builder().seatId(2L).build(),
+                        SeatRequestDto.builder().seatId(3L).build(),
+                        SeatRequestDto.builder().seatId(4L).build(),
+                        SeatRequestDto.builder().seatId(5L).build()))
                 .build();
     }
 }

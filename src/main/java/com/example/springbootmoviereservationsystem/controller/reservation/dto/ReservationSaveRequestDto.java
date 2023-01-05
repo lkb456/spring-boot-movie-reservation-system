@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.reservation.dto;
 
-import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +30,6 @@ public class ReservationSaveRequestDto {
     private int audienceCount; // 예매 인원 수
 
     @JsonProperty("seat")
-    private List<SeatDto.SaveRequestDto> seatSaveRequestDto; // 좌석 예메 정보
+    private List<SeatRequestDto> seatSaveRequestDto; // 좌석 예메 정보
 
 }

@@ -63,7 +63,7 @@ public class Seat {
         reservation.addSeat(this);
     }
 
-    public void updateReservationStatus(ReservationStatus reservationStatus) {
+    public void updateReserveStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
 }

@@ -2,7 +2,7 @@ package com.example.springbootmoviereservationsystem.service;
 
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationRepository;
@@ -28,7 +28,6 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final AmountDiscountPolicy discountPolicy;
 
-
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
         Reservation reservation = createReservation(reservationSaveRequestDto);
@@ -46,15 +45,15 @@ public class ReservationService {
 
     private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, Reservation reservation) {
         for (int count = 0; count < reservationSaveRequestDto.getAudienceCount(); count++) {
-            SeatDto.SaveRequestDto saveRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
-            updateSeat(reservation, saveRequestDto);
+            SeatRequestDto seatRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
+            updateSeat(reservation, seatRequestDto.getSeatId());
         }
     }
 
-    private void updateSeat(Reservation reservation, SeatDto.SaveRequestDto saveRequestDto) {
-        Seat seat = seatService.findSeat(saveRequestDto.getSeatId());
-        seat.updateReservationStatus(ReservationStatus.RESERVATION);
+    private void updateSeat(Reservation reservation, Long seatId) {
+        Seat seat = seatService.findSeat(seatId);
         seat.reserve(reservation);
+        seat.updateReserveStatus(ReservationStatus.RESERVATION);
     }
 
     @Transactional

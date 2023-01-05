@@ -16,7 +16,8 @@ import java.util.List;
         attributeNodes = {
                 @NamedAttributeNode("consumer"),
                 @NamedAttributeNode(value = "screening", subgraph = "screening-entity-graph"),
-                @NamedAttributeNode("seats")
+                @NamedAttributeNode("seats"),
+                @NamedAttributeNode("fee")
         },
         subgraphs = {
                 @NamedSubgraph(
@@ -89,7 +90,7 @@ public class Reservation {
         this.reservationStatus = ReservationStatus.CANCELLED_BY_CUSTOMER;
 
         for (Seat seat : seats) {
-            seat.updateReservationStatus(ReservationStatus.CANCELLED_BY_CUSTOMER);
+            seat.updateReserveStatus(ReservationStatus.CANCELLED_BY_CUSTOMER);
         }
     }
 }

@@ -2,7 +2,7 @@ package com.example.springbootmoviereservationsystem.controller.reservation.dto;
 
 import com.example.springbootmoviereservationsystem.controller.consumer.dto.ConsumerResponseDto;
 import com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto;
-import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatResponseDto;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -29,7 +29,7 @@ public class ReservationResponseDto {
     @JsonProperty("total_fee")
     private final Long fee;
 
-    private final List<SeatDto.ResponseDto> seats;
+    private final List<SeatResponseDto> seats;
 
     public static ReservationResponseDto of(Reservation savedReservation) {
         return ReservationResponseDto.builder()
@@ -37,9 +37,8 @@ public class ReservationResponseDto {
                 .audienceCount(savedReservation.getAudienceCount())
                 .screeningSaveResponseDto(ScreeningSaveResponseDto.of(savedReservation.getScreening()))
                 .fee(savedReservation.getFee().getAmount().longValue())
-                .seats(savedReservation.getSeats()
-                        .stream()
-                        .map(SeatDto.ResponseDto::of)
+                .seats(savedReservation.getSeats().stream()
+                        .map(SeatResponseDto::of)
                         .collect(Collectors.toList()))
                 .build();
     }

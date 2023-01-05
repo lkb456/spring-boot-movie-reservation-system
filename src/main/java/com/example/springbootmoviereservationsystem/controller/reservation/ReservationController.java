@@ -6,10 +6,12 @@ import com.example.springbootmoviereservationsystem.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 public class ReservationController {
@@ -17,7 +19,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/reservation")
-    public ResponseEntity<ReservationResponseDto> reserve(@RequestBody @Valid ReservationSaveRequestDto reservationSaveRequestDto) {
+    public ResponseEntity<ReservationResponseDto> reserve(@Valid @RequestBody ReservationSaveRequestDto reservationSaveRequestDto) {
         ReservationResponseDto reservationSaveResponseDto = reservationService.reserveSave(reservationSaveRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationSaveResponseDto);
     }
@@ -29,7 +31,7 @@ public class ReservationController {
     }
 
     @PutMapping("/reservation/{id}/cancel")
-    public ResponseEntity<Void> cancel(@PathVariable("id") Long reservationId) {
+    public ResponseEntity<Void> cancelReserve(@PathVariable("id") Long reservationId) {
         reservationService.cancelReservation(reservationId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

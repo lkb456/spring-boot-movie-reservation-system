@@ -2,7 +2,7 @@ package com.example.springbootmoviereservationsystem.controller.reservation;
 
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.springbootmoviereservationsystem.controller.seat.SeatDto;
+import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
@@ -61,7 +61,7 @@ class ReservationControllerTest {
                         .screeningId(1L)
                         .consumerId(1L)
                         .audienceCount(5)
-                        .seatSaveRequestDto(List.of(SeatDto.SaveRequestDto.builder()
+                        .seatSaveRequestDto(List.of(SeatRequestDto.builder()
                                 .seatId(1L)
                                 .build()))
                         .build())))
