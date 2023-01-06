@@ -1,8 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
 import com.example.springbootmoviereservationsystem.domain.money.Money;
-import com.example.springbootmoviereservationsystem.domain.screening.Screening;
-import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -60,8 +58,8 @@ public class Movie {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
     }
 
-    public Money calculateMovieFee(Screening screening, DiscountPolicy discountPolicy) {
-        return this.fee.minus(discountPolicy.calculateDiscountAmount(screening));
+    public Money calculateMovieFee(Money discountMoney) {
+        return this.fee.minus(discountMoney);
     }
 
     public void updateInfo(String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {

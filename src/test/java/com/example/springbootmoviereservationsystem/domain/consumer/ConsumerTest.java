@@ -41,6 +41,6 @@ class ConsumerTest {
         assertThat(consumer.hasTicket()).isTrue();
 
         consumer.cancelTicket();
-        assertThat(consumer.getTicket()).isNull();
+        assertThat(consumer.getTicket().isPublish()).isFalse();
     }
 }

@@ -31,7 +31,7 @@ public class CreateDto {
                 .build();
     }
 
-    public static MovieRequestDto createMovieUpdateDto() {
+    public static MovieRequestDto createMovieRequestDto() {
         return MovieRequestDto.builder()
                 .title("아바타2")
                 .fee(15000L)

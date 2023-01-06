@@ -4,11 +4,11 @@ import com.example.springbootmoviereservationsystem.controller.reservation.dto.R
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
+import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
-import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import com.example.springbootmoviereservationsystem.service.ReservationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -40,9 +40,6 @@ class ReservationControllerTest {
     private ReservationService reservationService;
 
     @Autowired
-    private DiscountPolicy discountPolicy;
-
-    @Autowired
     private ObjectMapper mapper;
 
     @Test
@@ -52,10 +49,8 @@ class ReservationControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reserve = screening.reserve(consumer, 5, discountPolicy);
-
+        Reservation reserve = screening.reserve(consumer, 5, Money.ZERO);
         ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reserve);
-
         given(reservationService.reserveSave(any())).willReturn(reservationResponseDto);
 
         // when && then
@@ -106,7 +101,7 @@ class ReservationControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reserve = screening.reserve(consumer, 5, discountPolicy);
+        Reservation reserve = screening.reserve(consumer, 5, Money.ZERO);
 
         ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reserve);
 

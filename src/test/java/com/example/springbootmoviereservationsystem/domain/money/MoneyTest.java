@@ -24,7 +24,7 @@ class MoneyTest {
     @Test
     @DisplayName("인원수에 따른 돈 계산")
     void MoneyTest() {
-        BigDecimal expectedAmount = BigDecimal.valueOf(10000);
+        BigDecimal expectedAmount = BigDecimal.valueOf(10000.0);
         int audienceCount = 10;
         Money money = Money.wons(1000);
 

@@ -62,7 +62,7 @@ class ReservationServiceTest {
         Screening screening = CreateEntity.createScreening(movie);
         Seat seat = CreateEntity.createSingleSeat(1);
         given(discountPolicy.calculateDiscountAmount(any())).willReturn(Money.ZERO);
-        Reservation reservation = screening.reserve(consumer, 1, discountPolicy);
+        Reservation reservation = screening.reserve(consumer, 1, Money.ZERO);
         seat.reserve(reservation);
 
         given(consumerService.findConsumer(any())).willReturn(consumer);
@@ -92,7 +92,7 @@ class ReservationServiceTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reservation = screening.reserve(consumer, 5, discountPolicy);
+        Reservation reservation = screening.reserve(consumer, 5, Money.ZERO);
         Ticket ticket = reservation.publishTicket();
 
         given(reservationRepository.findById(any())).willReturn(Optional.of(reservation));
@@ -116,7 +116,7 @@ class ReservationServiceTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reservation = screening.reserve(consumer, 5, discountPolicy);
+        Reservation reservation = screening.reserve(consumer, 5, Money.ZERO);
 
         given(reservationRepository.findById(any())).willReturn(Optional.of(reservation));
 
@@ -136,7 +136,7 @@ class ReservationServiceTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reservation = screening.reserve(consumer, 5, discountPolicy);
+        Reservation reservation = screening.reserve(consumer, 5, Money.ZERO);
         Ticket ticket = reservation.publishTicket();
 
         given(ticketRepository.save(any())).willReturn(ticket);

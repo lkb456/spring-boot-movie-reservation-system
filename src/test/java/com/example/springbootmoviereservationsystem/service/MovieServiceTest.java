@@ -69,7 +69,7 @@ class MovieServiceTest {
         Movie movie = createMovie();
         given(movieRepository.findById(any())).willReturn(Optional.of(movie));
 
-        MovieRequestDto dto = CreateDto.createMovieUpdateDto();
+        MovieRequestDto dto = CreateDto.createMovieRequestDto();
         movieService.updateMovie(id, dto);
 
         assertThat(dto.getTitle()).isEqualTo(movie.getTitle());
