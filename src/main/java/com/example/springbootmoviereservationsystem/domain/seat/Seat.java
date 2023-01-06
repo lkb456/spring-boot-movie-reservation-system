@@ -2,10 +2,7 @@ package com.example.springbootmoviereservationsystem.domain.seat;
 
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -26,6 +23,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "SEATS")
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Seat {
 
@@ -55,10 +53,6 @@ public class Seat {
     }
 
     public void reserve(Reservation reservation) {
-        if (this.reservation != null) {
-            this.reservation.getSeats().remove(this);
-        }
-
         this.reservation = reservation;
         reservation.addSeat(this);
     }
