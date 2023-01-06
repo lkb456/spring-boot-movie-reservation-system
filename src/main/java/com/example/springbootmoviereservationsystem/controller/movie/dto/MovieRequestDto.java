@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.movie.dto;
 
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;

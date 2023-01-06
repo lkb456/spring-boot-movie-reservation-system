@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.domain.screening;
 
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
@@ -64,11 +64,11 @@ public class Screening {
                 .build();
     }
 
-    public Money getMovieFee() {
-        return movie.getFee();
-    }
-
     private Money calculateFee(int audienceCount, Money disCountMoney) {
         return movie.calculateMovieFee(disCountMoney).times(audienceCount);
+    }
+
+    public Money getMovieFee() {
+        return Money.builder().amount(movie.getFee()).build();
     }
 }

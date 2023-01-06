@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
+import com.example.springbootmoviereservationsystem.util.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class MovieTest {
         Movie movie = createMovie();
 
         // when
-        movie.updateInfo(expectedTitle, movie.getFee(), movie.getRunningTime(), movie.getReleaseStatus());
+        movie.updateInfo(expectedTitle, Money.ZERO, movie.getRunningTime(), movie.getReleaseStatus());
 
         // then
         assertThat(expectedTitle).isEqualTo(movie.getTitle());

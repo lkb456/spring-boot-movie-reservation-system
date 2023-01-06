@@ -3,7 +3,7 @@ package com.example.springbootmoviereservationsystem.service;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
 import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;

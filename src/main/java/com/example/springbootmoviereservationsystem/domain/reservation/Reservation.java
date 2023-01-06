@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.reservation;
 
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
@@ -8,6 +8,7 @@ import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,7 @@ import java.util.List;
         attributeNodes = {
                 @NamedAttributeNode("consumer"),
                 @NamedAttributeNode(value = "screening", subgraph = "screening-entity-graph"),
-                @NamedAttributeNode("seats"),
-                @NamedAttributeNode("fee")
+                @NamedAttributeNode("seats")
         },
         subgraphs = {
                 @NamedSubgraph(
@@ -50,8 +50,8 @@ public class Reservation {
     @JoinColumn(name = "SCREENS_ID")
     private Screening screening; // 상영 정보
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Money fee; // 예매 요금
+    @Column(name = "FEE")
+    private BigDecimal fee; // 예매 요금
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Seat> seats = new ArrayList<>();

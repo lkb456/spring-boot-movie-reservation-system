@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.infra.policy;
 
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.infra.condition.DiscountCondition;
 

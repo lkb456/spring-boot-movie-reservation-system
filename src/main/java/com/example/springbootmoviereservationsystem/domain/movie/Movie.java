@@ -1,6 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
-import com.example.springbootmoviereservationsystem.domain.money.Money;
+import com.example.springbootmoviereservationsystem.util.Money;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,16 +8,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Getter
-@NamedEntityGraph(
-        name = "movieWithMoney",
-        attributeNodes = {
-                @NamedAttributeNode("fee")
-        }
-)
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "MOVIES")
@@ -31,8 +26,8 @@ public class Movie {
     @Column(name = "TITLE")
     private String title; // 제목
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Money fee; // 요금 (수정)
+    @Column(name = "FEE")
+    private BigDecimal fee; // 요금
 
     @Column(name = "RUNNING_TIME")
     private Duration runningTime; // 상영 시간
@@ -49,7 +44,7 @@ public class Movie {
     public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.id = id;
         this.title = title;
-        this.fee = amount;
+        this.fee = amount.getAmount();
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
     }
@@ -59,12 +54,12 @@ public class Movie {
     }
 
     public Money calculateMovieFee(Money discountMoney) {
-        return this.fee.minus(discountMoney);
+        return Money.builder().amount(this.fee.subtract(discountMoney.getAmount())).build();
     }
 
     public void updateInfo(String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.title = title;
-        this.fee = amount;
+        this.fee = amount.getAmount();
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
     }

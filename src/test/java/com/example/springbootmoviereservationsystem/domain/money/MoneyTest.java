@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.domain.money;
 
+import com.example.springbootmoviereservationsystem.util.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
