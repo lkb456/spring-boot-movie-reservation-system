@@ -5,6 +5,7 @@ import com.example.springbootmoviereservationsystem.domain.money.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
+import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,7 +51,7 @@ public class Screening {
         this.whenScreened = whenScreened;
     }
 
-    public Reservation reserve(Consumer consumer, int audienceCount) {
+    public Reservation reserve(Consumer consumer, int audienceCount, DiscountPolicy discountPolicy) {
         if (!movie.isReleaseMovie()) {
             throw new IllegalArgumentException("Movie is UnRelease Exception !!");
         }
@@ -59,7 +60,7 @@ public class Screening {
                 .consumer(consumer)
                 .audienceCount(audienceCount)
                 .screening(this)
-                .fee(calculateFee(audienceCount))
+                .fee(calculateFee(audienceCount, discountPolicy))
                 .reservationStatus(ReservationStatus.RESERVATION)
                 .build();
     }
@@ -68,7 +69,7 @@ public class Screening {
         return movie.getFee();
     }
 
-    private Money calculateFee(int audienceCount) {
-        return movie.calculateMovieFee(this).times(audienceCount);
+    private Money calculateFee(int audienceCount, DiscountPolicy discountPolicy) {
+        return movie.calculateMovieFee(this, discountPolicy).times(audienceCount);
     }
 }

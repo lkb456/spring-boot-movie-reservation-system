@@ -8,6 +8,7 @@ import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.fixture.CreateEntity;
+import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import com.example.springbootmoviereservationsystem.service.ReservationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -39,6 +40,9 @@ class ReservationControllerTest {
     private ReservationService reservationService;
 
     @Autowired
+    private DiscountPolicy discountPolicy;
+
+    @Autowired
     private ObjectMapper mapper;
 
     @Test
@@ -48,7 +52,7 @@ class ReservationControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reserve = screening.reserve(consumer, 5);
+        Reservation reserve = screening.reserve(consumer, 5, discountPolicy);
 
         ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reserve);
 
@@ -102,7 +106,7 @@ class ReservationControllerTest {
         Consumer consumer = CreateEntity.createConsumer();
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
-        Reservation reserve = screening.reserve(consumer, 5);
+        Reservation reserve = screening.reserve(consumer, 5, discountPolicy);
 
         ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reserve);
 

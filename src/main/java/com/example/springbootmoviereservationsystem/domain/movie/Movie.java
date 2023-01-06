@@ -47,24 +47,20 @@ public class Movie {
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
-    @Transient
-    private DiscountPolicy discountPolicy;
-
     @Builder
-    public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus, DiscountPolicy discountPolicy) {
+    public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.id = id;
         this.title = title;
         this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
-        this.discountPolicy = discountPolicy;
     }
 
     public boolean isReleaseMovie() {
         return this.releaseStatus.isRelease(ReleaseStatus.RELEASE);
     }
 
-    public Money calculateMovieFee(Screening screening) {
+    public Money calculateMovieFee(Screening screening, DiscountPolicy discountPolicy) {
         return this.fee.minus(discountPolicy.calculateDiscountAmount(screening));
     }
 
@@ -73,9 +69,5 @@ public class Movie {
         this.fee = amount;
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
-    }
-
-    public void changeDiscountPolicy(DiscountPolicy discountPolicy) {
-        this.discountPolicy = discountPolicy;
     }
 }

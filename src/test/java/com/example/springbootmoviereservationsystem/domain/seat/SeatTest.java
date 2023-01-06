@@ -4,6 +4,7 @@ import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.reservation.Reservation;
 import com.example.springbootmoviereservationsystem.domain.screening.Screening;
+import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SeatTest {
 
+    private DiscountPolicy discountPolicy;
+
     @Test
     @DisplayName("좌석 예매 하기")
     void seat_reserve() {
@@ -19,7 +22,7 @@ class SeatTest {
         Consumer consumer = createConsumer();
         Movie movie = createMovie();
         Screening screening = createScreening(movie);
-        Reservation reservation = screening.reserve(consumer, 5);
+        Reservation reservation = screening.reserve(consumer, 5, discountPolicy);
         Seat seat = createSeatForReservation(reservation);
 
         // when

@@ -66,10 +66,10 @@ public class CreateEntity {
                 .build();
     }
 
-    public static Seat createSingleSeat() {
+    public static Seat createSingleSeat(int number) {
         return Seat.builder()
                 .rowNumber("A열")
-                .columNumber(1)
+                .columNumber(number)
                 .reservationStatus(ReservationStatus.UN_RESERVATION)
                 .build();
     }

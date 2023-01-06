@@ -11,10 +11,12 @@ import com.example.springbootmoviereservationsystem.domain.screening.Screening;
 import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
 import com.example.springbootmoviereservationsystem.domain.ticket.TicketRepository;
-import com.example.springbootmoviereservationsystem.infra.policy.AmountDiscountPolicy;
+import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class ReservationService {
     private final ScreeningService screeningService;
     private final TicketRepository ticketRepository;
     private final ReservationRepository reservationRepository;
-    private final AmountDiscountPolicy discountPolicy;
+    private final DiscountPolicy discountPolicy;
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
@@ -39,13 +41,13 @@ public class ReservationService {
     private Reservation createReservation(ReservationSaveRequestDto reservationSaveRequestDto) {
         Consumer consumer = consumerService.findConsumer(reservationSaveRequestDto.getConsumerId());
         Screening screening = screeningService.findScreen(reservationSaveRequestDto.getScreeningId());
-        screening.getMovie().changeDiscountPolicy(discountPolicy);
-        return screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount());
+        return screening.reserve(consumer, reservationSaveRequestDto.getAudienceCount(), discountPolicy);
     }
 
     private void createSeatByAudienceCount(ReservationSaveRequestDto reservationSaveRequestDto, Reservation reservation) {
         for (int count = 0; count < reservationSaveRequestDto.getAudienceCount(); count++) {
-            SeatRequestDto seatRequestDto = reservationSaveRequestDto.getSeatSaveRequestDto().get(count);
+            List<SeatRequestDto> seats = reservationSaveRequestDto.getSeatSaveRequestDto();
+            SeatRequestDto seatRequestDto = seats.get(count);
             updateSeat(reservation, seatRequestDto.getSeatId());
         }
     }

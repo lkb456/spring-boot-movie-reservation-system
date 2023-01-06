@@ -67,7 +67,7 @@ class SeatServiceTest {
     @DisplayName("좌석 정보 조회하기 테스트")
     void findSeat() {
         // given
-        Seat seat = CreateEntity.createSingleSeat();
+        Seat seat = CreateEntity.createSingleSeat(1);
         given(seatRepository.findById(any())).willReturn(Optional.of(seat));
 
         // when

@@ -72,13 +72,9 @@ public class CreateDto {
         return ReservationSaveRequestDto.builder()
                 .screeningId(1L)
                 .consumerId(1L)
-                .audienceCount(5)
+                .audienceCount(1)
                 .seatSaveRequestDto(List.of(
-                        SeatRequestDto.builder().seatId(1L).build(),
-                        SeatRequestDto.builder().seatId(2L).build(),
-                        SeatRequestDto.builder().seatId(3L).build(),
-                        SeatRequestDto.builder().seatId(4L).build(),
-                        SeatRequestDto.builder().seatId(5L).build()))
+                        SeatRequestDto.builder().seatId(1L).build()))
                 .build();
     }
 }
