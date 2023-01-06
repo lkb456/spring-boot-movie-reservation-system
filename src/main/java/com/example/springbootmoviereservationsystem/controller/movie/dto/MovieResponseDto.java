@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -19,7 +20,7 @@ public class MovieResponseDto {
 
     private final String title; // 제목
 
-    private final Long fee; // 요금
+    private final BigDecimal fee; // 요금
 
     @JsonProperty("running_time")
     private final Duration runningTime; // 상영 시간
@@ -34,7 +35,7 @@ public class MovieResponseDto {
     public MovieResponseDto(Movie movie) {
         this.id = movie.getId();
         this.title = movie.getTitle();
-        this.fee = movie.getFee().getAmount().longValue();
+        this.fee = movie.getFee();
         this.runningTime = movie.getRunningTime();
         this.releaseStatus = movie.getReleaseStatus();
         this.createAt = movie.getCreateAt();
