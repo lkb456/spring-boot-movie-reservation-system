@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NamedEntityGraph(
-        name = "reservationWithConsumerWithScreeningWithMovieWithMoneyWithSeats",
+        name = "reservationWithConsumerWithScreeningWithMovieWithSeats",
         attributeNodes = {
                 @NamedAttributeNode("consumer"),
-                @NamedAttributeNode(value = "screening", subgraph = "screening-entity-graph"),
+                @NamedAttributeNode(value = "screening", subgraph = "screeningWithMovie"),
                 @NamedAttributeNode("seats")
         },
         subgraphs = {
                 @NamedSubgraph(
-                        name = "screening-entity-graph",
+                        name = "screeningWithMovie",
                         attributeNodes = {
                                 @NamedAttributeNode("movie")
                         }
@@ -64,7 +64,7 @@ public class Reservation {
         this.consumer = consumer;
         this.audienceCount = audienceCount;
         this.screening = screening;
-        this.fee = fee;
+        this.fee = fee.getAmount();
         this.reservationStatus = reservationStatus;
     }
 

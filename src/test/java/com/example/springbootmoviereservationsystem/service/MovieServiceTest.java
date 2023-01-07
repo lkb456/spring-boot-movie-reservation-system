@@ -73,7 +73,7 @@ class MovieServiceTest {
         movieService.updateMovie(id, dto);
 
         assertThat(dto.getTitle()).isEqualTo(movie.getTitle());
-        assertThat(dto.getFee()).isEqualTo(movie.getFee().getAmount().longValue());
+        assertThat(dto.getFee()).isEqualTo(movie.getFee().longValue());
 
         verify(movieRepository).findById(id);
     }

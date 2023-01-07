@@ -14,17 +14,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NamedEntityGraph(
-        name = "screeningWithMovieWithMoney",
+        name = "screeningWithMovie",
         attributeNodes = {
-                @NamedAttributeNode(value = "movie", subgraph = "movieWithMoney")
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "movieWithMoney",
-                        attributeNodes = {
-                                @NamedAttributeNode("fee")
-                        }
-                )
+                @NamedAttributeNode(value = "movie")
         }
 )
 @Getter
