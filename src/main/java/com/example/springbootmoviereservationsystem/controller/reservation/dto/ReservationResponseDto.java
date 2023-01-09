@@ -23,7 +23,7 @@ public class ReservationResponseDto {
     @JsonProperty("audience_count")
     private final int audienceCount;
 
-    @JsonProperty("screening")
+    @JsonProperty("screen")
     private final ScreeningSaveResponseDto screeningSaveResponseDto;
 
     @JsonProperty("total_fee")

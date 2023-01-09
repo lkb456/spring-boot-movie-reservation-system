@@ -16,12 +16,12 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class ConsumerRequestDto {
 
-    @NotBlank(message = "빈칸은 안됩니다,")
+    @NotBlank(message = "공백 또는 빈칸을 입력하면 안됩니다.")
     @JsonProperty("nickname")
     private String nickname; // 고객 닉네임
 
-    @Length(max = 11)
-    @NotBlank(message = "빈칸은 안됩니다,")
+    @Length(max = 11, message = "번호는 11자리 이하여야 합니다.")
+    @NotBlank(message = "공백 또는 빈칸을 입력하면 안됩니다.")
     @JsonProperty("phone_number")
     private String phoneNumber; // 고객 핸드폰 번호
 

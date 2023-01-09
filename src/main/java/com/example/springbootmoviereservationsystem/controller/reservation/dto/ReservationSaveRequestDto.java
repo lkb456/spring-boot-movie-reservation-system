@@ -18,7 +18,7 @@ import java.util.List;
 public class ReservationSaveRequestDto {
 
     @NotNull
-    @JsonProperty("screening_id")
+    @JsonProperty("screen_id")
     private Long screeningId; // 상영 정보
 
     @NotNull

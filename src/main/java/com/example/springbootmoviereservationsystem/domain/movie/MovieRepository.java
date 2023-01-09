@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Page<MovieResponseDto> findByTitleLikeOrReleaseStatusEqualsOrderByTitle(String title,
-                                                                ReleaseStatus status,
-                                                                Pageable pageable);
+                                                                            ReleaseStatus status,
+                                                                            Pageable pageable);
 
     Optional<Movie> findById(Long movieId);
 }

@@ -19,10 +19,10 @@ import java.time.Duration;
 @AllArgsConstructor
 public class MovieRequestDto {
 
-    @NotBlank(message = "공백 없이 입력하세요.")
+    @NotBlank(message = "공백 또는 빈칸을 입력하면 안됩니다.")
     private String title; // 제목
 
-    @NotNull(message = "공백 없이 입력하세요.")
+    @NotNull
     private Long fee; // 요금
 
     @NotNull
@@ -30,7 +30,7 @@ public class MovieRequestDto {
     private Duration runningTime; // 상영 시간
 
     @JsonProperty("status")
-    @NotNull
+    @NotNull(message = "공백 또는 빈칸을 입력하면 안됩니다.")
     private ReleaseStatus releaseStatus; // 개봉 상태
 
     public Movie toEntity() {
