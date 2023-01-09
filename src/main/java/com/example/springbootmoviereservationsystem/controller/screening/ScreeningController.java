@@ -31,7 +31,7 @@ public class ScreeningController {
     }
 
     @GetMapping("/screenings")
-    public ResponseEntity<PageScreenResponseDto> screensSearch(@RequestParam(value = "title") final String title,
+    public ResponseEntity<PageScreenResponseDto> screensSearch(@RequestParam(value = "title", required = false) final String title,
                                                                @RequestParam(value = "when", required = false)
                                                                @DateTimeFormat(pattern = "yyyy-MM-dd-HH:mm") final LocalDateTime whenScreened,
                                                                @PageableDefault Pageable pageable) {
