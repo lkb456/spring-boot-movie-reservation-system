@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
-// TODO Money 엔티티를 보면 util 과 같은 역할을 하는 것처럼 보이는데 util 클래소로 고려해봐야 할 것 같은데여?
 @Getter
 public class Money {
 
