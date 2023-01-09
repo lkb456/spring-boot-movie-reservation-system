@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MovieResponseDto {
 
-    @JsonProperty("movie_id")
+    @JsonProperty("id")
     private final Long id; // 저장 순번
 
     private final String title; // 제목

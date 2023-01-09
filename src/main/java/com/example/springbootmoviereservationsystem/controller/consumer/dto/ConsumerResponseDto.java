@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ConsumerResponseDto {
 
-    @JsonProperty("consumer_id")
+    @JsonProperty("id")
     private final Long id; // pk값
 
     private final String nickname; // 닉네임

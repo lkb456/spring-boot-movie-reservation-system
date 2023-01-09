@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 public class ScreeningSaveResponseDto {
 
-    @JsonProperty("screen_id")
+    @JsonProperty("id")
     private final Long id; // 상영 순번
 
     @JsonProperty("movie")

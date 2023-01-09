@@ -12,13 +12,13 @@ import lombok.RequiredArgsConstructor;
 public class SeatResponseDto {
 
     private final String row;
-    private final Integer columNumber;
+    private final Integer colum;
     private final ReservationStatus reservationStatus;
 
     public static SeatResponseDto of(Seat seat) {
         return SeatResponseDto.builder()
                 .row(seat.getRowNumber())
-                .columNumber(seat.getColumNumber())
+                .colum(seat.getColumNumber())
                 .reservationStatus(seat.getReservationStatus())
                 .build();
     }
