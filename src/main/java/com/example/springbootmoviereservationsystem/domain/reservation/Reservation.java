@@ -6,9 +6,12 @@ import com.example.springbootmoviereservationsystem.domain.seat.Seat;
 import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +61,14 @@ public class Reservation {
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
+
+    @CreationTimestamp
+    @Column(name = "RESERVE_TIME")
+    private LocalDateTime reserveTime;
+
+    @UpdateTimestamp
+    @Column(name = "UPDATE_TIME")
+    private LocalDateTime updateTime;
 
     @Builder
     public Reservation(Consumer consumer, int audienceCount, Screening screening, Money fee, ReservationStatus reservationStatus) {
