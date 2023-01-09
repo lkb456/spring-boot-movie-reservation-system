@@ -32,11 +32,14 @@ public class Seat {
     @Column(name = "SEATS_ID")
     private Long id;
 
+    @Column(name = "ROW")
     private String rowNumber; // 행
 
+    @Column(name = "COLUM")
     private Integer columNumber; // 열 번호
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "RESERVE_STATUS")
     private ReservationStatus reservationStatus; // 예약 상태
 
     @ManyToOne(fetch = FetchType.LAZY)

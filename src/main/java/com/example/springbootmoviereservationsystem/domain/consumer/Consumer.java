@@ -37,6 +37,7 @@ public class Consumer {
     private LocalDateTime createAt; // 생성 시간
 
     @UpdateTimestamp
+    @Column(name = "UPDATE_AT")
     private LocalDateTime updateAt; // 수정 시간
 
     @Builder
