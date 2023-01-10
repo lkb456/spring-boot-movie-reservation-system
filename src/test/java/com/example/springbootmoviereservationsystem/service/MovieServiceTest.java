@@ -5,7 +5,6 @@ import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRe
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.fixture.CreateDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -97,17 +96,17 @@ class MovieServiceTest {
     void searchMovies() {
         // given
         Page<MovieResponseDto> movieResponseDtoPage = new PageImpl<>(CreateDto.createMovieResponseDtos());
-        given(movieRepository.findByTitleLikeOrReleaseStatusEqualsOrderByTitle(any(), any(), any()))
+        given(movieRepository.findByTitleContainingOrderByTitle(any(), any()))
                 .willReturn(movieResponseDtoPage);
 
         // when
-        MovieResponsePageDto result = movieService.searchMovies("아", ReleaseStatus.RELEASE, Pageable.unpaged());
+        MovieResponsePageDto result = movieService.searchMovies("아", Pageable.unpaged());
 
         // then
         assertThat(movieResponseDtoPage.getTotalElements()).isEqualTo(result.getElementsSize());
         assertThat(movieResponseDtoPage.getContent()).isEqualTo(result.getElements());
         assertThat(1).isEqualTo(result.getTotalPage());
 
-        verify(movieRepository).findByTitleLikeOrReleaseStatusEqualsOrderByTitle(any(), any(), any());
+        verify(movieRepository).findByTitleContainingOrderByTitle(any(), any());
     }
 }

@@ -113,7 +113,7 @@ class MovieControllerTest {
         // given
         MovieResponsePageDto result = MovieResponsePageDto
                 .of(new PageImpl<>(CreateDto.createMovieResponseDtos()));
-        given(movieService.searchMovies(any(), any(), any())).willReturn(result);
+        given(movieService.searchMovies(any(), any())).willReturn(result);
 
         // when && then
         mockMvc.perform(get("/movies")
@@ -123,7 +123,7 @@ class MovieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(result)));
 
-        verify(movieService).searchMovies(any(), any(), any());
+        verify(movieService).searchMovies(any(), any());
     }
 
     @Test
