@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.controller.reservation.dto.PopularMovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.controller.seat.dto.SeatRequestDto;
@@ -14,6 +15,7 @@ import com.example.springbootmoviereservationsystem.domain.ticket.Ticket;
 import com.example.springbootmoviereservationsystem.domain.ticket.TicketRepository;
 import com.example.springbootmoviereservationsystem.infra.policy.DiscountPolicy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,5 +82,9 @@ public class ReservationService {
     public Reservation findReservation(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 예매정보입니다."));
+    }
+
+    public List<PopularMovieResponseDto> bestMovieFind() {
+        return reservationRepository.findBestMovie(PageRequest.of(0, 1));
     }
 }

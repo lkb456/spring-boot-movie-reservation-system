@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.controller.reservation;
 
+import com.example.springbootmoviereservationsystem.controller.reservation.dto.PopularMovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.springbootmoviereservationsystem.service.ReservationService;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 @RestController
@@ -40,5 +42,12 @@ public class ReservationController {
     public ResponseEntity<ReservationResponseDto> findReservation(@PathVariable("id") Long reservationId) {
         ReservationResponseDto reservationResponseDto = ReservationResponseDto.of(reservationService.findReservation(reservationId));
         return ResponseEntity.status(HttpStatus.OK).body(reservationResponseDto);
+    }
+
+    // 제일 많이 예매하는 영화 찾아보기
+    @GetMapping("/reservation/popular")
+    public ResponseEntity<List<PopularMovieResponseDto>> findPopularMovie() {
+        List<PopularMovieResponseDto> popularMovieResponseDto = reservationService.bestMovieFind();
+        return ResponseEntity.status(HttpStatus.OK).body(popularMovieResponseDto);
     }
 }
