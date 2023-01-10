@@ -3,7 +3,6 @@ package com.example.springbootmoviereservationsystem.controller.movie;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -35,13 +34,11 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    public ResponseEntity<MovieResponsePageDto> movieSearch(@RequestParam("title") final String title,
-                                                            @RequestParam(value = "status", required = false) final ReleaseStatus status,
+    public ResponseEntity<MovieResponsePageDto> movieSearch(@RequestParam(value = "title", required = false) final String title,
                                                             @PageableDefault Pageable pageable) {
-        MovieResponsePageDto movieResponsePageDto = movieService.searchMovies(title, status, pageable);
+        MovieResponsePageDto movieResponsePageDto = movieService.searchMovies(title, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(movieResponsePageDto);
     }
-
 
     @PutMapping("/movies/{id}")
     public ResponseEntity<Void> movieUpdate(@PathVariable("id") final Long movieId,

@@ -3,10 +3,9 @@ package com.example.springbootmoviereservationsystem.service;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieRequestDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.movie.dto.MovieResponsePageDto;
-import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import com.example.springbootmoviereservationsystem.domain.movie.MovieRepository;
-import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
+import com.example.springbootmoviereservationsystem.util.Money;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,12 +44,8 @@ public class MovieService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
     }
 
-    public MovieResponsePageDto searchMovies(String title, ReleaseStatus status, Pageable pageable) {
-        Page<MovieResponseDto> result = movieRepository.findByTitleLikeOrReleaseStatusEqualsOrderByTitle(
-                title,
-                status,
-                pageable
-        );
+    public MovieResponsePageDto searchMovies(String title, Pageable pageable) {
+        Page<MovieResponseDto> result = movieRepository.findByTitleContainingOrderByTitle(title, pageable);
         return MovieResponsePageDto.of(result);
     }
 }
