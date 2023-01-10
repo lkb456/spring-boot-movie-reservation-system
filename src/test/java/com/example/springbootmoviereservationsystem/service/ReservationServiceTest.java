@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.service;
 
+import com.example.springbootmoviereservationsystem.controller.reservation.dto.PopularMovieResponseDto;
 import com.example.springbootmoviereservationsystem.controller.reservation.dto.ReservationResponseDto;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.util.Money;
@@ -21,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -153,5 +155,29 @@ class ReservationServiceTest {
         verify(reservationRepository, atMost(2)).findById(any());
     }
 
+    @Test
+    @DisplayName("예매 수가 가장 높은 상영 영화 정보 가져오기")
+    void ReservationServiceTest() {
+        // given
+        Consumer consumer = CreateEntity.createConsumer();
+        Movie movie = CreateEntity.createMovie();
+        Screening screening = CreateEntity.createScreening(movie);
+        Reservation reserve = screening.reserve(consumer, 5, Money.ZERO);
+
+        Long count = 10L;
+        given(reservationRepository.findBestMovie(any())).willReturn(List.of(PopularMovieResponseDto.builder()
+                .movie(reserve.getScreening().getMovie())
+                .reserveCount(count)
+                .build()));
+
+        // when
+        List<PopularMovieResponseDto> result = reservationService.bestMovieFind();
+
+        // then
+        assertThat(screening.getMovie().getTitle()).isEqualTo(result.get(0).getMovie().getTitle());
+        assertThat(count).isEqualTo(result.get(0).getReserveCount());
+
+        verify(reservationRepository).findBestMovie(any());
+    }
 
 }
