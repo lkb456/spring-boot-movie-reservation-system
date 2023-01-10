@@ -19,7 +19,7 @@ public interface ScreeningRepository extends JpaRepository<Screening, Long> {
             "new com.example.springbootmoviereservationsystem.controller.screening.dto.ScreeningSaveResponseDto(s.id, m, s.whenScreened) " +
             "from Screening s " +
             "join s.movie m " +
-            "where m.title like %:title " +
+            "where m.title like :title% " +
             "or s.whenScreened >=:when")
     Page<ScreeningSaveResponseDto> findByMovieTitleStartingWithAndWhenScreenedGreaterThanEqual(@Param("title") String title,
                                                                                                @Param("when") LocalDateTime whenScreened,
