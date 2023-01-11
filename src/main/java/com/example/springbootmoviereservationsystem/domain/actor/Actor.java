@@ -1,6 +1,5 @@
 package com.example.springbootmoviereservationsystem.domain.actor;
 
-import com.example.springbootmoviereservationsystem.domain.movie.Movie;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,8 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Entity
@@ -39,9 +36,6 @@ public class Actor {
     @Lob
     private String content; // 배우 이력 내용
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "actors")
-    private Set<Movie> movies = new HashSet<>();
-
     @CreationTimestamp
     private LocalDateTime createAt; // 생성 시간
 
@@ -57,7 +51,4 @@ public class Actor {
         this.content = content;
     }
 
-    public void addMovie(Set<Movie> movies) {
-        this.movies.addAll(movies);
-    }
 }

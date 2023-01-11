@@ -74,8 +74,5 @@ public class Movie {
 
     public void addActor(Set<Actor> actors) {
         this.actors.addAll(actors);
-        for (Actor actor : actors) {
-            actor.addMovie(Set.of(this));
-        }
     }
 }
