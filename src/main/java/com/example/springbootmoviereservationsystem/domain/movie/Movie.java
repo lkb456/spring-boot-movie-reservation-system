@@ -1,21 +1,22 @@
 package com.example.springbootmoviereservationsystem.domain.movie;
 
+import com.example.springbootmoviereservationsystem.domain.actor.Actor;
 import com.example.springbootmoviereservationsystem.util.Money;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "MOVIES")
+@EqualsAndHashCode(of = "id")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Movie {
 
     @Id
@@ -40,6 +41,13 @@ public class Movie {
     @Column(name = "CREATE_AT")
     private LocalDateTime createAt; // 생성 시간
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "MOVIES_ACTORS",
+            joinColumns = @JoinColumn(name = "MOVIES_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ACTORS_ID"))
+    private Set<Actor> actors = new HashSet<>();
+
     @Builder
     public Movie(Long id, String title, Money amount, Duration runningTime, ReleaseStatus releaseStatus) {
         this.id = id;
@@ -62,5 +70,12 @@ public class Movie {
         this.fee = amount.getAmount();
         this.runningTime = runningTime;
         this.releaseStatus = releaseStatus;
+    }
+
+    public void addActor(Set<Actor> actors) {
+        this.actors.addAll(actors);
+        for (Actor actor : actors) {
+            actor.addMovie(Set.of(this));
+        }
     }
 }
