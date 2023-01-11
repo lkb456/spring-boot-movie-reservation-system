@@ -52,4 +52,10 @@ public class MovieController {
         movieService.deleteMovie(movieId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PutMapping("/actor/{actor-id}/add")
+    public ResponseEntity<Void> addActor(@RequestParam Long movieId, @PathVariable("actor-id") Long actorId) {
+        movieService.actorAdd(movieId, actorId);
+        return ResponseEntity.ok().build();
+    }
 }
