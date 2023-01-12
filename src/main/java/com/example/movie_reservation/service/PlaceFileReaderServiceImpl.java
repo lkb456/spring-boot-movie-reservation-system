@@ -21,6 +21,10 @@ public class PlaceFileReaderServiceImpl implements FileReaderService<Place> {
 
     private List<String> placeData = new ArrayList<>();
 
+    // TODO 좌석 정보를 어떻게 해야할지???
+    //  - 엔티티로 만들어 관리할 것인가??
+    //  - 내장객체로 만들어 관리할 것인가??
+    //  - 좌석 번호만 내장객체로 만들고 좌석 엔티티로 관리할 것인가??
     @Override
     public void fileReader() {
         try (FileReader fileReader = new FileReader(FilePath.PLACE_FILE_FULL_PATH, StandardCharsets.UTF_8);
