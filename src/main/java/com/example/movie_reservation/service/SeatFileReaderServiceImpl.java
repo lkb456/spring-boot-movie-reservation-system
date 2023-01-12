@@ -1,5 +1,7 @@
 package com.example.movie_reservation.service;
 
+import com.example.movie_reservation.domain.seat.Seat;
+import com.example.movie_reservation.infra.FilePath;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,27 +17,28 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SeatFileReaderService {
+public class SeatFileReaderServiceImpl implements FileReaderService<Seat> {
 
-    private static final String POSITION_FILE_FULL_PATH = "src/main/resources/static/seat/position.txt";
-    private List<String[]> seatWords = new ArrayList<>();
+    private List<String> seatData = new ArrayList<>();
 
-    public List<String[]> readerResult() {
-        fileReader();
-        return Collections.unmodifiableList(seatWords);
-    }
-
-    private void fileReader() {
-        try (FileReader fileReader = new FileReader(POSITION_FILE_FULL_PATH, StandardCharsets.UTF_8);
+    @Override
+    public void fileReader() {
+        try (FileReader fileReader = new FileReader(FilePath.SEAT_FILE_FULL_PATH, StandardCharsets.UTF_8);
              BufferedReader br = new BufferedReader(fileReader)) {
-
             String line = "";
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(", ");
-                seatWords.add(split);
+                for (String data : split) {
+                    seatData.add(data);
+                }
             }
         } catch (IOException e) {
             log.info("Seat File Reader Exception !!! : {}", e.getMessage());
         }
+    }
+
+    @Override
+    public List<String> getData() {
+        return Collections.unmodifiableList(seatData);
     }
 }
