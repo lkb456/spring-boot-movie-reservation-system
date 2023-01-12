@@ -55,9 +55,9 @@ public class MovieService {
     }
 
     @Transactional
-    public void actorAdd(Long movieId, Long actorId) {
-        Movie movie = findMovie(movieId);
+    public void MovieActorAdd(Long actorId, Long movieId) {
         Actor actor = actorService.findActor(actorId);
+        Movie movie = findMovie(movieId);
         movie.addActor(Set.of(actor));
     }
 }
