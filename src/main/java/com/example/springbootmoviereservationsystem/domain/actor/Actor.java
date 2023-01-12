@@ -26,7 +26,7 @@ public class Actor {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName; // 이름
 
-    @Column(name = "BIRTH_DATA")
+    @Column(name = "BIRTH_DATE")
     private LocalDate birthDate; // 생년월일
 
     @Column
