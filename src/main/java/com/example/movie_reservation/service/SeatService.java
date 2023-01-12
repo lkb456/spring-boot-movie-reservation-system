@@ -1,8 +1,8 @@
 package com.example.movie_reservation.service;
 
+import com.example.movie_reservation.domain.reservation.ReservationStatus;
 import com.example.movie_reservation.domain.seat.Seat;
 import com.example.movie_reservation.domain.seat.SeatRepository;
-import com.example.movie_reservation.domain.reservation.ReservationStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,15 +15,15 @@ import java.util.List;
 public class SeatService {
 
     private final SeatRepository seatRepository;
-    private final SeatFileReaderService seatFileReaderService;
+    private final FileReaderService<Seat> fileReaderService;
 
     public void initSeat() {
-        List<String[]> seatInfos = seatFileReaderService.readerResult();
-        for (String[] seatInfo : seatInfos) {
-            for (String info : seatInfo) {
-                String[] seatRowAndColum = info.split(" - ");
-                saveSeat(seatRowAndColum);
-            }
+        fileReaderService.fileReader();
+
+        List<String> seatInfo = fileReaderService.getData();
+        for (String info : seatInfo) {
+            String[] seatRowAndColum = info.split(" - ");
+            saveSeat(seatRowAndColum);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.movie_reservation.infra;
 
+import com.example.movie_reservation.service.PlaceService;
 import com.example.movie_reservation.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,13 +11,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SeatInitRunner implements ApplicationRunner {
+public class SeatAndPlaceInitRunner implements ApplicationRunner {
 
     private final SeatService seatService;
+    private final PlaceService placeService;
 
     @Override
     public void run(ApplicationArguments args) {
-        log.info("Seat Init Start.....");
+        log.info("Seat and Place Init Start.....");
         seatService.initSeat();
+        placeService.initPlace();
     }
 }
