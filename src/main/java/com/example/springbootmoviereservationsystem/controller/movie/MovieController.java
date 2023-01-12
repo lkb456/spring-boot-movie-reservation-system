@@ -55,7 +55,7 @@ public class MovieController {
 
     @PutMapping("/movies/actors-add")
     public ResponseEntity<Void> addMovieActor(@RequestParam Long actorId, @RequestParam Long movieId) {
-        movieService.MovieActorAdd(actorId, movieId);
+        movieService.movieActorAdd(actorId, movieId);
         return ResponseEntity.ok().build();
     }
 }
