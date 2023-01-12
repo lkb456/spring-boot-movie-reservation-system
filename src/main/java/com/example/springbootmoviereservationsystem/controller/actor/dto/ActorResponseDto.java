@@ -3,21 +3,30 @@ package com.example.springbootmoviereservationsystem.controller.actor.dto;
 import com.example.springbootmoviereservationsystem.domain.actor.Actor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Getter
-@Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class ActorResponseDto {
 
-    private final Long id;
-    private final String firstName;
-    private final String lastName;
-    private final LocalDate birthDate;
-    private final String image;
-    private final String content;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private String image;
+    private String content;
+
+    @Builder
+    public ActorResponseDto(Long id, String firstName, String lastName, LocalDate birthDate, String image, String content) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.image = image;
+        this.content = content;
+    }
 
     public static ActorResponseDto of(Actor actor) {
         return ActorResponseDto.builder()
