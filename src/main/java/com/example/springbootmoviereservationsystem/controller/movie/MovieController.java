@@ -53,7 +53,7 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PutMapping("/movie/actor-add")
+    @PutMapping("/movies/actors-add")
     public ResponseEntity<Void> addMovieActor(@RequestParam Long actorId, @RequestParam Long movieId) {
         movieService.MovieActorAdd(actorId, movieId);
         return ResponseEntity.ok().build();
