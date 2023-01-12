@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -17,4 +18,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Page<MovieResponseDto> findByTitleContainingOrderByTitle(@Param("keyword") String keyword, Pageable pageable);
 
     Optional<Movie> findById(Long movieId);
+    List<Movie> findByTitleContainingOrderByTitle(String keyword);
 }
