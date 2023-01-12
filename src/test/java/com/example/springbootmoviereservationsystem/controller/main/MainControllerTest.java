@@ -13,13 +13,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,13 +39,7 @@ class MainControllerTest {
     @DisplayName("검색 기능(영화, 배우) 테스트")
     void searchMovieOrActor() throws Exception {
         // when
-        List<Actor> actors = List.of(Actor.builder()
-                .firstName("서")
-                .lastName("인국")
-                .image("이미지")
-                .birthDate(LocalDate.MIN)
-                .content("내용")
-                .build());
+        List<Actor> actors = List.of(CreateEntity.createActor());
         List<Movie> movies = List.of(CreateEntity.createMovie());
 
         SearchMovieOrActorResponseDto searchMovieOrActorResponseDto = SearchMovieOrActorResponseDto.of(movies, actors);

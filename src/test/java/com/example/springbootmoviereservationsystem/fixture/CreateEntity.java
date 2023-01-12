@@ -1,5 +1,6 @@
 package com.example.springbootmoviereservationsystem.fixture;
 
+import com.example.springbootmoviereservationsystem.domain.actor.Actor;
 import com.example.springbootmoviereservationsystem.domain.consumer.Consumer;
 import com.example.springbootmoviereservationsystem.util.Money;
 import com.example.springbootmoviereservationsystem.domain.movie.Movie;
@@ -11,9 +12,20 @@ import com.example.springbootmoviereservationsystem.domain.movie.ReleaseStatus;
 import com.example.springbootmoviereservationsystem.domain.reservation.ReservationStatus;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CreateEntity {
+
+    public static Actor createActor() {
+        return Actor.builder()
+                .firstName("서")
+                .lastName("인국")
+                .image("이미지")
+                .birthDate(LocalDate.MIN)
+                .content("내용")
+                .build();
+    }
 
     public static Consumer createConsumer() {
         return Consumer.builder()
