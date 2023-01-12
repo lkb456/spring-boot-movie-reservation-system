@@ -1,4 +1,4 @@
-package com.example.springbootmoviereservationsystem.controller.actor;
+package com.example.springbootmoviereservationsystem.controller.actor.dto;
 
 import com.example.springbootmoviereservationsystem.domain.actor.Actor;
 import com.fasterxml.jackson.annotation.JsonFormat;

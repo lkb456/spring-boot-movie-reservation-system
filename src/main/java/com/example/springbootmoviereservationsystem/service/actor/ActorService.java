@@ -1,7 +1,7 @@
 package com.example.springbootmoviereservationsystem.service.actor;
 
-import com.example.springbootmoviereservationsystem.controller.actor.ActorRequestDto;
-import com.example.springbootmoviereservationsystem.controller.actor.ActorResponseDto;
+import com.example.springbootmoviereservationsystem.controller.actor.dto.ActorRequestDto;
+import com.example.springbootmoviereservationsystem.controller.actor.dto.ActorResponseDto;
 import com.example.springbootmoviereservationsystem.domain.actor.Actor;
 import com.example.springbootmoviereservationsystem.domain.actor.ActorRepository;
 import lombok.RequiredArgsConstructor;
