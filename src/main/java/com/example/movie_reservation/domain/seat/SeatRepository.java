@@ -11,4 +11,8 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 
     @EntityGraph(value = "seatWithReservation")
     Optional<Seat> findById(Long seatId);
+
+    Optional<Seat> findBySeatNumber(Integer seatNumber);
+
+    boolean existsBySeatNumber(Integer seatNumber);
 }

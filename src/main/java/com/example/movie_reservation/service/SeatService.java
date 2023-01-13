@@ -1,5 +1,7 @@
 package com.example.movie_reservation.service;
 
+import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
+import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.reservation.ReservationStatus;
 import com.example.movie_reservation.domain.seat.Seat;
 import com.example.movie_reservation.domain.seat.SeatRepository;
@@ -7,37 +9,28 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SeatService {
 
     private final SeatRepository seatRepository;
-    private final FileReaderService<Seat> fileReaderService;
 
-    public void initSeat() {
-        fileReaderService.fileReader();
-
-        List<String> seatInfo = fileReaderService.getData();
-        for (String info : seatInfo) {
-            String[] seatRowAndColum = info.split(" - ");
-            saveSeat(seatRowAndColum);
+    public Seat saveSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
+        if (seatRepository.existsBySeatNumber(seatRequestDto.getSeatNumber())) {
+            throw new IllegalArgumentException("이미 예약된 좌석입니다.");
         }
-    }
 
-    private void saveSeat(String[] seatRowAndColum) {
         Seat seat = Seat.builder()
-                .rowNumber(seatRowAndColum[0])
-                .columNumber(Integer.valueOf(seatRowAndColum[1]))
-                .reservationStatus(ReservationStatus.UN_RESERVATION)
+                .seatNumber(seatRequestDto.getSeatNumber())
+                .reservationStatus(ReservationStatus.RESERVATION)
                 .build();
-        seatRepository.save(seat);
+        seat.reserve(reservation);
+        return seatRepository.save(seat);
     }
 
-    public Seat findSeat(Long seatId) {
-        return seatRepository.findById(seatId)
-                .orElseThrow(() -> new IllegalArgumentException("좌석 정보가 없습니다."));
+    public Seat findSeat(Integer seatNumber) {
+        return seatRepository.findBySeatNumber(seatNumber)
+                .orElseThrow(() -> new IllegalArgumentException("좌석 정보가 존재하지 않습니다."));
     }
 }

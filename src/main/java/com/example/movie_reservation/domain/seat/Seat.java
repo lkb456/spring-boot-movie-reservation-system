@@ -32,25 +32,21 @@ public class Seat {
     @Column(name = "SEATS_ID")
     private Long id;
 
-    @Column(name = "ROW_NUMBER")
-    private String rowNumber; // 행
-
-    @Column(name = "COLUM_NUMBER")
-    private Integer columNumber; // 열 번호
+    @Column(name = "SEAT_NUMBER")
+    private Integer seatNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     private ReservationStatus reservationStatus; // 예약 상태
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "RESERVATIONS_ID")
     private Reservation reservation;
 
     @Builder
-    public Seat(Long id, String rowNumber, Integer columNumber, ReservationStatus reservationStatus, Reservation reservation) {
+    public Seat(Long id, Integer seatNumber, ReservationStatus reservationStatus, Reservation reservation) {
         this.id = id;
-        this.rowNumber = rowNumber;
-        this.columNumber = columNumber;
+        this.seatNumber = seatNumber;
         this.reservationStatus = reservationStatus;
         this.reservation = reservation;
     }
@@ -65,7 +61,7 @@ public class Seat {
     }
 
     public boolean isAvailable() {
-        if (!this.reservationStatus.equals(ReservationStatus.RESERVATION)) {
+        if (this.reservationStatus.equals(ReservationStatus.RESERVATION)) {
             return false;
         }
 

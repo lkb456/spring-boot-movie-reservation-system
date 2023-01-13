@@ -5,15 +5,14 @@ import com.example.movie_reservation.controller.reservation.dto.ReservationRespo
 import com.example.movie_reservation.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.reservation.ReservationRepository;
-import com.example.movie_reservation.domain.reservation.ReservationStatus;
 import com.example.movie_reservation.domain.screening.Screening;
-import com.example.movie_reservation.domain.seat.Seat;
+import com.example.movie_reservation.domain.seat.SeatRepository;
 import com.example.movie_reservation.domain.ticket.Ticket;
 import com.example.movie_reservation.domain.ticket.TicketRepository;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
+import com.example.movie_reservation.util.Money;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -32,6 +31,7 @@ public class ReservationService {
     private final TicketRepository ticketRepository;
     private final ReservationRepository reservationRepository;
     private final DiscountPolicy discountPolicy;
+    private final SeatRepository seatRepository;
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {
@@ -52,18 +52,13 @@ public class ReservationService {
         for (int count = 0; count < reservationSaveRequestDto.getAudienceCount(); count++) {
             List<SeatRequestDto> seats = reservationSaveRequestDto.getSeatSaveRequestDto();
             SeatRequestDto seatRequestDto = seats.get(count);
-            updateSeat(reservation, seatRequestDto.getSeatId());
+            createSeat(reservation, seatRequestDto.getSeatNumber());
         }
     }
 
-    private void updateSeat(Reservation reservation, Long seatId) {
-        Seat seat = seatService.findSeat(seatId);
-        if (seat.isAvailable()) {
-            throw new IllegalArgumentException("이미 예약한 좌석입니다.");
-        }
-
-        seat.reserve(reservation);
-        seat.updateReserveStatus(ReservationStatus.RESERVATION);
+    private void createSeat(Reservation reservation, Integer seatNumber) {
+        SeatRequestDto seatRequestDto = SeatRequestDto.builder().seatNumber(seatNumber).build();
+        seatService.saveSeat(seatRequestDto, reservation);
     }
 
     @Transactional

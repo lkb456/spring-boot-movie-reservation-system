@@ -56,7 +56,7 @@ public class Reservation {
     @Column(name = "FEE")
     private BigDecimal fee; // 예매 요금
 
-    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reservation")
     private List<Seat> seats = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
