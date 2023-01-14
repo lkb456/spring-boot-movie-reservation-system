@@ -17,17 +17,17 @@ public class SeatService {
     private final SeatRepository seatRepository;
 
     @Transactional
-    public Seat saveSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
+    public void saveSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
         if (seatRepository.existsBySeatNumber(seatRequestDto.getSeatNumber())) {
-            return mergeSeat(seatRequestDto, reservation);
-        }
+            mergeSeat(seatRequestDto, reservation);
 
-        return saveNewSeat(seatRequestDto, reservation);
+        } else {
+            saveNewSeat(seatRequestDto, reservation);
+        }
     }
 
-    private Seat mergeSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
-        Seat seat = seatRepository.findBySeatNumber(seatRequestDto.getSeatNumber())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 좌석입니다."));
+    private void mergeSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
+        Seat seat = findSeat(seatRequestDto.getSeatNumber());
 
         if (!seat.isAvailable()) {
             throw new IllegalArgumentException("이미 예약된 좌석입니다.");
@@ -35,7 +35,6 @@ public class SeatService {
 
         seat.reserve(reservation);
         seat.updateReserveStatus(ReservationStatus.RESERVATION);
-        return seat;
     }
 
     private Seat saveNewSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
