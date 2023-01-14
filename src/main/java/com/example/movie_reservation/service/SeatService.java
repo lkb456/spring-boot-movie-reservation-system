@@ -18,12 +18,16 @@ public class SeatService {
 
     @Transactional
     public void saveSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
-        if (seatRepository.existsBySeatNumber(seatRequestDto.getSeatNumber())) {
+        if (isExists(seatRequestDto.getSeatNumber())) {
             mergeSeat(seatRequestDto, reservation);
 
         } else {
             saveNewSeat(seatRequestDto, reservation);
         }
+    }
+
+    private boolean isExists(Integer seatNumber) {
+        return seatRepository.existsBySeatNumber(seatNumber);
     }
 
     private void mergeSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
