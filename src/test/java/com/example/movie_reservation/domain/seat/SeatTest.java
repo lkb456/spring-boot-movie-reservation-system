@@ -1,11 +1,11 @@
 package com.example.movie_reservation.domain.seat;
 
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.screening.Screening;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
+import com.example.movie_reservation.util.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +30,8 @@ class SeatTest {
         seat.reserve(reservation);
 
         // then
-        assertThat(seat.getColumNumber()).isEqualTo(reservation.getSeats().get(0).getColumNumber());
-        assertThat(seat.getRowNumber()).isEqualTo(reservation.getSeats().get(0).getRowNumber());
+        assertThat(seat.getSeatNumber()).isEqualTo(reservation.getSeats().get(0).getSeatNumber());
+        assertThat(seat.getSeatNumber()).isEqualTo(reservation.getSeats().get(0).getSeatNumber());
 
     }
 }

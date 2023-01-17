@@ -4,12 +4,12 @@ import com.example.movie_reservation.controller.reservation.dto.ReservationRespo
 import com.example.movie_reservation.controller.reservation.dto.ReservationSaveRequestDto;
 import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.screening.Screening;
 import com.example.movie_reservation.fixture.CreateEntity;
 import com.example.movie_reservation.service.ReservationService;
+import com.example.movie_reservation.util.Money;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,7 +61,7 @@ class ReservationControllerTest {
                         .consumerId(1L)
                         .audienceCount(5)
                         .seatSaveRequestDto(List.of(SeatRequestDto.builder()
-                                .seatId(1L)
+                                .seatNumber(1)
                                 .build()))
                         .build())))
                 .andDo(print())

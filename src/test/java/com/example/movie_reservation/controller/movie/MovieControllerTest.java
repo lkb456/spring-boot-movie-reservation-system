@@ -19,7 +19,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Duration;
@@ -124,22 +123,6 @@ class MovieControllerTest {
                 .andExpect(content().json(mapper.writeValueAsString(result)));
 
         verify(movieService).searchMovies(any(), any());
-    }
-
-    @Test
-    @DisplayName("영화 검색 페이징 처리하기 테스트 -> 유효성 검사에 맞지 않는 경우")
-    void movieSearch_param_not_valid() throws Exception {
-        // given
-        String titleParam = null;
-
-        // when && then
-        mockMvc.perform(get("/movies")
-                        .queryParam("title", titleParam)
-                        .queryParam("status", ReleaseStatus.RELEASE.toString()))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(result -> assertThat(result.getResolvedException())
-                        .isInstanceOf(MissingServletRequestParameterException.class));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.example.movie_reservation.controller.consumer;
 
-import com.example.movie_reservation.controller.consumer.dto.ConsumerResponseDto;
 import com.example.movie_reservation.controller.consumer.dto.ConsumerRequestDto;
+import com.example.movie_reservation.controller.consumer.dto.ConsumerResponseDto;
 import com.example.movie_reservation.domain.consumer.Consumer;
 import com.example.movie_reservation.fixture.CreateDto;
 import com.example.movie_reservation.fixture.CreateEntity;
@@ -21,7 +21,8 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = ConsumerController.class)
 class ConsumerControllerTest {

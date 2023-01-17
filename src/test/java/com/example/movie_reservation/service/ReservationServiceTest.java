@@ -3,7 +3,6 @@ package com.example.movie_reservation.service;
 import com.example.movie_reservation.controller.reservation.dto.PopularMovieResponseDto;
 import com.example.movie_reservation.controller.reservation.dto.ReservationResponseDto;
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.reservation.ReservationRepository;
@@ -15,6 +14,7 @@ import com.example.movie_reservation.domain.ticket.TicketRepository;
 import com.example.movie_reservation.fixture.CreateDto;
 import com.example.movie_reservation.fixture.CreateEntity;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
+import com.example.movie_reservation.util.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,13 +63,14 @@ class ReservationServiceTest {
         Movie movie = CreateEntity.createMovie();
         Screening screening = CreateEntity.createScreening(movie);
         Seat seat = CreateEntity.createSingleSeat(1);
+
         given(discountPolicy.calculateDiscountAmount(any())).willReturn(Money.ZERO);
         Reservation reservation = screening.reserve(consumer, 1, Money.ZERO);
+
         seat.reserve(reservation);
 
         given(consumerService.findConsumer(any())).willReturn(consumer);
         given(screeningService.findScreen(any())).willReturn(screening);
-        given(seatService.findSeat(any())).willReturn(seat);
         given(reservationRepository.save(any())).willReturn(reservation);
 
         // when
@@ -81,10 +82,9 @@ class ReservationServiceTest {
         assertThat(result.getScreeningSaveResponseDto().getMovie().getTitle()).isEqualTo(movie.getTitle());
         assertThat(result.getSeats().size()).isEqualTo(reservation.getAudienceCount());
 
-        verify(consumerService, atLeastOnce()).findConsumer(any());
-        verify(screeningService, atLeastOnce()).findScreen(any());
-        verify(seatService, times(reservation.getAudienceCount())).findSeat(any());
-        verify(reservationRepository, atLeastOnce()).save(any());
+        verify(consumerService).findConsumer(any());
+        verify(screeningService).findScreen(any());
+        verify(reservationRepository).save(any());
     }
 
     @Test

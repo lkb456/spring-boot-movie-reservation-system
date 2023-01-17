@@ -11,14 +11,10 @@ import com.example.movie_reservation.domain.movie.ReleaseStatus;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CreateDto {
 
@@ -60,21 +56,13 @@ public class CreateDto {
         return ScreeningSaveResponseDto.of(CreateEntity.createScreening(CreateEntity.createMovie()));
     }
 
-    public static List<String[]> createFileContent(Path path) throws IOException {
-        List<String> contents = Files.readAllLines(path);
-        List<String[]> list = contents.stream()
-                .map(data -> data.split(", "))
-                .collect(Collectors.toList());
-        return list;
-    }
-
     public static ReservationSaveRequestDto CreateReservationSaveRequestDto() {
         return ReservationSaveRequestDto.builder()
                 .screeningId(1L)
                 .consumerId(1L)
                 .audienceCount(1)
                 .seatSaveRequestDto(List.of(
-                        SeatRequestDto.builder().seatId(1L).build()))
+                        SeatRequestDto.builder().seatNumber(1).build()))
                 .build();
     }
 }

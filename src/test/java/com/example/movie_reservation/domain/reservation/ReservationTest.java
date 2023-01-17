@@ -1,11 +1,11 @@
 package com.example.movie_reservation.domain.reservation;
 
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.screening.Screening;
 import com.example.movie_reservation.domain.ticket.Ticket;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
+import com.example.movie_reservation.util.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,6 @@ import com.example.movie_reservation.domain.consumer.Consumer;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.reservation.ReservationRepository;
 import com.example.movie_reservation.domain.screening.Screening;
-import com.example.movie_reservation.domain.seat.SeatRepository;
 import com.example.movie_reservation.domain.ticket.Ticket;
 import com.example.movie_reservation.domain.ticket.TicketRepository;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
@@ -31,7 +30,6 @@ public class ReservationService {
     private final TicketRepository ticketRepository;
     private final ReservationRepository reservationRepository;
     private final DiscountPolicy discountPolicy;
-    private final SeatRepository seatRepository;
 
     @Transactional
     public ReservationResponseDto reserveSave(ReservationSaveRequestDto reservationSaveRequestDto) {

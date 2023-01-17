@@ -2,14 +2,14 @@ package com.example.movie_reservation.fixture;
 
 import com.example.movie_reservation.domain.actor.Actor;
 import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
+import com.example.movie_reservation.domain.movie.ReleaseStatus;
 import com.example.movie_reservation.domain.reservation.Reservation;
+import com.example.movie_reservation.domain.reservation.ReservationStatus;
 import com.example.movie_reservation.domain.screening.Screening;
 import com.example.movie_reservation.domain.seat.Seat;
 import com.example.movie_reservation.domain.ticket.Ticket;
-import com.example.movie_reservation.domain.movie.ReleaseStatus;
-import com.example.movie_reservation.domain.reservation.ReservationStatus;
+import com.example.movie_reservation.util.Money;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -63,25 +63,15 @@ public class CreateEntity {
 
     public static Seat createSeatForReservation(Reservation reservation) {
         return Seat.builder()
-                .rowNumber("A열")
-                .columNumber(1)
+                .seatNumber(1)
                 .reservationStatus(ReservationStatus.RESERVATION)
                 .reservation(reservation)
                 .build();
     }
 
-    public static Seat createInitSeat(String[] seatRowAndColum) {
-        return Seat.builder()
-                .rowNumber(seatRowAndColum[0])
-                .columNumber(Integer.valueOf(seatRowAndColum[1]))
-                .reservationStatus(ReservationStatus.UN_RESERVATION)
-                .build();
-    }
-
     public static Seat createSingleSeat(int number) {
         return Seat.builder()
-                .rowNumber("A열")
-                .columNumber(number)
+                .seatNumber(number)
                 .reservationStatus(ReservationStatus.UN_RESERVATION)
                 .build();
     }
