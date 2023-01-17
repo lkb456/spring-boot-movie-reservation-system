@@ -40,10 +40,6 @@ public class MovieService {
         );
     }
 
-    public void deleteMovie(Long movieId) {
-        movieRepository.deleteById(movieId);
-    }
-
     public Movie findMovie(Long movieId) {
         return movieRepository.findById(movieId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
@@ -52,6 +48,10 @@ public class MovieService {
     public MovieResponsePageDto searchMovies(String title, Pageable pageable) {
         Page<MovieResponseDto> result = movieRepository.findByTitleContainingOrderByTitle(title, pageable);
         return MovieResponsePageDto.of(result);
+    }
+
+    public void deleteMovie(Long movieId) {
+        movieRepository.deleteById(movieId);
     }
 
     @Transactional

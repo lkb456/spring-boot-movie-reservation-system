@@ -1,5 +1,6 @@
 package com.example.movie_reservation.controller.movie.dto;
 
+import com.example.movie_reservation.controller.actor.dto.ActorResponseDto;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.movie.ReleaseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor
@@ -28,6 +31,9 @@ public class MovieResponseDto {
     @JsonProperty("status")
     private final ReleaseStatus releaseStatus; // 개봉 상태
 
+    @JsonProperty("actors")
+    private final Set<ActorResponseDto> actorResponseDtos;
+
     @JsonProperty("create_at")
     private final LocalDateTime createAt; // 정보 저장 시간
 
@@ -38,6 +44,9 @@ public class MovieResponseDto {
         this.fee = movie.getFee();
         this.runningTime = movie.getRunningTime();
         this.releaseStatus = movie.getReleaseStatus();
+        this.actorResponseDtos = movie.getActors().stream()
+                .map(ActorResponseDto::of)
+                .collect(Collectors.toSet());
         this.createAt = movie.getCreateAt();
     }
 
