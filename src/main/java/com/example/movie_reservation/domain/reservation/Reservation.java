@@ -1,11 +1,14 @@
 package com.example.movie_reservation.domain.reservation;
 
-import com.example.movie_reservation.util.Money;
+import com.example.movie_reservation.domain.consumer.Consumer;
 import com.example.movie_reservation.domain.screening.Screening;
 import com.example.movie_reservation.domain.seat.Seat;
 import com.example.movie_reservation.domain.ticket.Ticket;
-import com.example.movie_reservation.domain.consumer.Consumer;
-import lombok.*;
+import com.example.movie_reservation.util.Money;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 

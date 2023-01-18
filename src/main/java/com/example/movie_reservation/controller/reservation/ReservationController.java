@@ -44,7 +44,6 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.OK).body(reservationResponseDto);
     }
 
-    // 제일 많이 예매하는 영화 찾아보기
     @GetMapping("/reservation/popular")
     public ResponseEntity<List<PopularMovieResponseDto>> findPopularMovie() {
         List<PopularMovieResponseDto> popularMovieResponseDto = reservationService.bestMovieFind();

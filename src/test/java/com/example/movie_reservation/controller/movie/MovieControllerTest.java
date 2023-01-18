@@ -56,7 +56,6 @@ class MovieControllerTest {
         given(movieService.saveMovie(any())).willReturn(expectedId);
 
         // when && then
-
         mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(CreateDto.createMovieRequestDto())))
