@@ -6,20 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@NamedEntityGraph(
-        name = "seatWithReservation",
-        attributeNodes = {
-                @NamedAttributeNode(value = "reservation", subgraph = "reservationWithSeat"),
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "reservationWithSeat",
-                        attributeNodes = {
-                                @NamedAttributeNode("seats")
-                        }
-                )
-        }
-)
 @Getter
 @Entity
 @Table(name = "SEATS")

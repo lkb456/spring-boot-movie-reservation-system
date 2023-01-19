@@ -20,10 +20,10 @@ public class SeatService {
     public void saveSeat(SeatRequestDto seatRequestDto, Reservation reservation) {
         if (isExists(seatRequestDto.getSeatNumber())) {
             mergeSeat(seatRequestDto, reservation);
-
-        } else {
-            saveNewSeat(seatRequestDto, reservation);
+            return;
         }
+
+        saveNewSeat(seatRequestDto, reservation);
     }
 
     private boolean isExists(Integer seatNumber) {
