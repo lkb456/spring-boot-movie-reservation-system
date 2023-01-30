@@ -1,9 +1,11 @@
 package com.example.movie_reservation.controller.movie.dto;
 
-import com.example.movie_reservation.util.Money;
 import com.example.movie_reservation.domain.movie.Movie;
 import com.example.movie_reservation.domain.movie.ReleaseStatus;
+import com.example.movie_reservation.util.Money;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Duration;
 
+@ApiModel(value = "영화 정보", description = "제목, 요금, 상영 시간, 개봉 상태")
 @Getter
 @Builder
 @NoArgsConstructor
@@ -20,18 +23,22 @@ import java.time.Duration;
 public class MovieRequestDto {
 
     @NotBlank(message = "공백 또는 빈칸을 입력하면 안됩니다.")
-    private String title; // 제목
+    @ApiModelProperty(value = "영화 제목", example = "범죄도시")
+    private String title;
 
     @NotNull
-    private Long fee; // 요금
+    @ApiModelProperty(value = "요금", example = "14000")
+    private Long fee;
 
     @NotNull
     @JsonProperty("time")
-    private Duration runningTime; // 상영 시간
+    @ApiModelProperty(value = "상영 시간", example = "18000")
+    private Duration runningTime;
 
     @JsonProperty("status")
     @NotNull(message = "공백 또는 빈칸을 입력하면 안됩니다.")
-    private ReleaseStatus releaseStatus; // 개봉 상태
+    @ApiModelProperty(value = "개봉 상태", example = "RELEASE")
+    private ReleaseStatus releaseStatus;
 
     public Movie toEntity() {
         return Movie.builder()
