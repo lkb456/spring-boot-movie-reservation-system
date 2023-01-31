@@ -2,6 +2,8 @@ package com.example.movie_reservation.controller.reservation.dto;
 
 import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +13,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@ApiModel(value = "예매 정보", description = "상영영화 식별자, 고객 식별자, 예매 인원 수, 좌석 예매 리스트")
 @Getter
 @Builder
 @NoArgsConstructor
@@ -19,17 +22,21 @@ public class ReservationSaveRequestDto {
 
     @NotNull
     @JsonProperty("screen_id")
-    private Long screeningId; // 상영 정보
+    @ApiModelProperty(value = "상영영화 식별자", example = "1")
+    private Long screeningId;
 
     @NotNull
     @JsonProperty("consumer_id")
-    private Long consumerId; // 고객 식별자
+    @ApiModelProperty(value = "고객 식별자", example = "1")
+    private Long consumerId;
 
     @Max(value = 10, message = "최대 예매 인원 수는 10명입니다.")
     @JsonProperty("audience_count")
-    private int audienceCount; // 예매 인원 수
+    @ApiModelProperty(value = "예매 인원 수", example = "5")
+    private int audienceCount;
 
     @JsonProperty("seat")
-    private List<SeatRequestDto> seatSaveRequestDto; // 좌석 예메 정보
+    @ApiModelProperty(value = "좌석 예매 리스트")
+    private List<SeatRequestDto> seatSaveRequestDto;
 
 }
