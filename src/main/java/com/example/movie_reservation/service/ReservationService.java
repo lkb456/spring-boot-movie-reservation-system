@@ -56,9 +56,17 @@ public class ReservationService {
     }
 
     private void createSeat(Reservation reservation, Integer seatNumber) {
-        SeatRequestDto seatRequestDto = SeatRequestDto.builder().seatNumber(seatNumber).build();
+        SeatRequestDto seatRequestDto = SeatRequestDto.builder()
+                .seatNumber(seatNumber)
+                .build();
 
         List<Reservation> all = reservationRepository.findByScreening(reservation.getScreening());
+        duplicatedSeatNumberCheck(seatNumber, all);
+
+        seatService.saveSeat(seatRequestDto, reservation);
+    }
+
+    private  void duplicatedSeatNumberCheck(Integer seatNumber, List<Reservation> all) {
         for (Reservation findReservation : all) {
             List<Seat> seats = findReservation.getSeats();
 
@@ -68,8 +76,6 @@ public class ReservationService {
                 }
             }
         }
-
-        seatService.saveSeat(seatRequestDto, reservation);
     }
 
     @Transactional
