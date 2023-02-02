@@ -6,9 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
-public interface SeatRepository extends JpaRepository<Seat, Long> {
+public interface SeatRepository extends JpaRepository<Seat, Long>{
 
     Optional<Seat> findBySeatNumber(Integer seatNumber);
-
-    boolean existsBySeatNumber(Integer seatNumber);
 }
