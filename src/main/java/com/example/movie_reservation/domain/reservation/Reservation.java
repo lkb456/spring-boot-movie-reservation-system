@@ -102,9 +102,5 @@ public class Reservation {
 
         this.consumer.cancelTicket();
         this.reservationStatus = ReservationStatus.CANCELLED_BY_CUSTOMER;
-
-        for (Seat seat : seats) {
-            seat.updateReserveStatus(ReservationStatus.CANCELLED_BY_CUSTOMER);
-        }
     }
 }
