@@ -26,6 +26,6 @@ public class ScreeningSaveRequestDto {
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd-HH:mm")
-    @ApiModelProperty(value = "상영 시간", example = "2022-01-01-08:30")
+    @ApiModelProperty(value = "상영 시간", example = "2023-02-20-08:30")
     private LocalDateTime when;
 }
