@@ -53,7 +53,7 @@ public class ReservationController {
     }
 
     @PutMapping("/reservation/{id}/cancel")
-    @Operation(summary = "예매 티켓 취소", description = "티켓 발행을 취소합니다.")
+    @Operation(summary = "예매 취소", description = "예매를 취소합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "발행된 티켓 취소 성공"),
             @ApiResponse(code = 400, message = "요청 데이터 유효성 검사 실패")
