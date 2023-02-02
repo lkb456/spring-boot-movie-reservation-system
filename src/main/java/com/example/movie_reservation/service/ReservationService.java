@@ -8,6 +8,7 @@ import com.example.movie_reservation.domain.consumer.Consumer;
 import com.example.movie_reservation.domain.reservation.Reservation;
 import com.example.movie_reservation.domain.reservation.ReservationRepository;
 import com.example.movie_reservation.domain.screening.Screening;
+import com.example.movie_reservation.domain.seat.Seat;
 import com.example.movie_reservation.domain.ticket.Ticket;
 import com.example.movie_reservation.domain.ticket.TicketRepository;
 import com.example.movie_reservation.infra.policy.DiscountPolicy;
@@ -56,6 +57,18 @@ public class ReservationService {
 
     private void createSeat(Reservation reservation, Integer seatNumber) {
         SeatRequestDto seatRequestDto = SeatRequestDto.builder().seatNumber(seatNumber).build();
+
+        List<Reservation> all = reservationRepository.findByScreening(reservation.getScreening());
+        for (Reservation findReservation : all) {
+            List<Seat> seats = findReservation.getSeats();
+
+            for (Seat seat : seats) {
+                if (seat.getSeatNumber().equals(seatNumber)) {
+                    throw new IllegalArgumentException("이미 예약된 좌석입니다.");
+                }
+            }
+        }
+
         seatService.saveSeat(seatRequestDto, reservation);
     }
 
