@@ -1,9 +1,16 @@
 spring:
   profiles:
+    active: dev
     group:
-      "local" : "local,common"
-      "dev" : "dev,common"
+      local:
+        - common
+      dev:
+        - common
 
+logging:
+  level:
+    com.example.movie_reservation: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
 ---
 
 spring:
@@ -50,7 +57,3 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-
-  logging:
-    level:
-      com.example.movie_reservation: debug
