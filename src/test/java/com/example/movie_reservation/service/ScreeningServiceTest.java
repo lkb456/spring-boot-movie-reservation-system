@@ -1,12 +1,14 @@
 package com.example.movie_reservation.service;
 
-import com.example.movie_reservation.controller.screening.dto.PageScreenResponseDto;
-import com.example.movie_reservation.controller.screening.dto.ScreeningSaveResponseDto;
-import com.example.movie_reservation.domain.movie.Movie;
-import com.example.movie_reservation.domain.screening.Screening;
-import com.example.movie_reservation.domain.screening.ScreeningRepository;
+import com.example.movie_reservation.module.screening.dto.PageScreenResponseDto;
+import com.example.movie_reservation.module.screening.dto.ScreeningSaveResponseDto;
+import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
+import com.example.movie_reservation.module.screening.domain.movie.service.MovieService;
+import com.example.movie_reservation.module.screening.domain.Screening;
+import com.example.movie_reservation.module.screening.domain.ScreeningRepository;
 import com.example.movie_reservation.fixture.CreateDto;
 import com.example.movie_reservation.fixture.CreateEntity;
+import com.example.movie_reservation.module.screening.service.ScreeningService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

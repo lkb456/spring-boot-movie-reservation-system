@@ -1,8 +1,8 @@
 package com.example.movie_reservation.controller.actor;
 
-import com.example.movie_reservation.controller.actor.dto.ActorRequestDto;
-import com.example.movie_reservation.controller.actor.dto.ActorResponseDto;
-import com.example.movie_reservation.domain.actor.ActorRepository;
+import com.example.movie_reservation.module.actor.controller.dto.ActorRequestDto;
+import com.example.movie_reservation.module.actor.controller.dto.ActorResponseDto;
+import com.example.movie_reservation.module.actor.domain.ActorRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,10 @@
 package com.example.movie_reservation.service;
 
-import com.example.movie_reservation.controller.consumer.dto.ConsumerRequestDto;
-import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.domain.consumer.ConsumerRepository;
+import com.example.movie_reservation.module.consumer.dto.ConsumerRequestDto;
+import com.example.movie_reservation.module.consumer.domain.Consumer;
+import com.example.movie_reservation.module.consumer.domain.ConsumerRepository;
 import com.example.movie_reservation.fixture.CreateDto;
+import com.example.movie_reservation.module.consumer.service.ConsumerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

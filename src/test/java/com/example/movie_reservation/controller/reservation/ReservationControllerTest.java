@@ -1,15 +1,16 @@
 package com.example.movie_reservation.controller.reservation;
 
-import com.example.movie_reservation.controller.reservation.dto.ReservationResponseDto;
-import com.example.movie_reservation.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
-import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.domain.movie.Movie;
-import com.example.movie_reservation.domain.reservation.Reservation;
-import com.example.movie_reservation.domain.screening.Screening;
+import com.example.movie_reservation.module.reservation.dto.ReservationResponseDto;
+import com.example.movie_reservation.module.reservation.dto.ReservationSaveRequestDto;
+import com.example.movie_reservation.module.reservation.controller.ReservationController;
+import com.example.movie_reservation.module.seat.dto.SeatRequestDto;
+import com.example.movie_reservation.module.consumer.domain.Consumer;
+import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
+import com.example.movie_reservation.module.reservation.domain.Reservation;
+import com.example.movie_reservation.module.screening.domain.Screening;
 import com.example.movie_reservation.fixture.CreateEntity;
-import com.example.movie_reservation.service.ReservationService;
-import com.example.movie_reservation.util.Money;
+import com.example.movie_reservation.module.reservation.service.ReservationService;
+import com.example.movie_reservation.infra.util.Money;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

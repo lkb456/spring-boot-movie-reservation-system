@@ -1,13 +1,13 @@
 package com.example.movie_reservation.fixture;
 
-import com.example.movie_reservation.controller.consumer.dto.ConsumerRequestDto;
-import com.example.movie_reservation.controller.movie.dto.MovieRequestDto;
-import com.example.movie_reservation.controller.movie.dto.MovieResponseDto;
-import com.example.movie_reservation.controller.reservation.dto.ReservationSaveRequestDto;
-import com.example.movie_reservation.controller.screening.dto.ScreeningSaveRequestDto;
-import com.example.movie_reservation.controller.screening.dto.ScreeningSaveResponseDto;
-import com.example.movie_reservation.controller.seat.dto.SeatRequestDto;
-import com.example.movie_reservation.domain.movie.ReleaseStatus;
+import com.example.movie_reservation.module.consumer.dto.ConsumerRequestDto;
+import com.example.movie_reservation.module.screening.domain.movie.dto.MovieRequestDto;
+import com.example.movie_reservation.module.screening.domain.movie.dto.MovieResponseDto;
+import com.example.movie_reservation.module.reservation.dto.ReservationSaveRequestDto;
+import com.example.movie_reservation.module.screening.dto.ScreeningSaveRequestDto;
+import com.example.movie_reservation.module.screening.dto.ScreeningSaveResponseDto;
+import com.example.movie_reservation.module.seat.dto.SeatRequestDto;
+import com.example.movie_reservation.module.screening.domain.movie.domain.ReleaseStatus;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 

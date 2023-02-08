@@ -1,8 +1,8 @@
 package com.example.movie_reservation.infra;
 
-import com.example.movie_reservation.util.Money;
-import com.example.movie_reservation.infra.condition.PeriodCondition;
-import com.example.movie_reservation.infra.policy.AmountDiscountPolicy;
+import com.example.movie_reservation.infra.util.Money;
+import com.example.movie_reservation.module.screening.policy.condition.PeriodCondition;
+import com.example.movie_reservation.module.screening.policy.AmountDiscountPolicy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

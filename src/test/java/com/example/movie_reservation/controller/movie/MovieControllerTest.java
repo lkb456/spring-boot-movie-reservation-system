@@ -1,14 +1,15 @@
 package com.example.movie_reservation.controller.movie;
 
-import com.example.movie_reservation.controller.movie.dto.MovieRequestDto;
-import com.example.movie_reservation.controller.movie.dto.MovieResponseDto;
-import com.example.movie_reservation.controller.movie.dto.MovieResponsePageDto;
-import com.example.movie_reservation.domain.movie.Movie;
-import com.example.movie_reservation.domain.movie.MovieRepository;
-import com.example.movie_reservation.domain.movie.ReleaseStatus;
+import com.example.movie_reservation.module.screening.domain.movie.dto.MovieRequestDto;
+import com.example.movie_reservation.module.screening.domain.movie.dto.MovieResponseDto;
+import com.example.movie_reservation.module.screening.domain.movie.dto.MovieResponsePageDto;
+import com.example.movie_reservation.module.screening.domain.movie.controller.MovieController;
+import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
+import com.example.movie_reservation.module.screening.domain.movie.domain.MovieRepository;
+import com.example.movie_reservation.module.screening.domain.movie.domain.ReleaseStatus;
 import com.example.movie_reservation.fixture.CreateDto;
 import com.example.movie_reservation.fixture.CreateEntity;
-import com.example.movie_reservation.service.MovieService;
+import com.example.movie_reservation.module.screening.domain.movie.service.MovieService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

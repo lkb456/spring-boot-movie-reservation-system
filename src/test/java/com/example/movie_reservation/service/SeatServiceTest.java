@@ -1,8 +1,9 @@
 package com.example.movie_reservation.service;
 
-import com.example.movie_reservation.domain.seat.Seat;
-import com.example.movie_reservation.domain.seat.SeatRepository;
+import com.example.movie_reservation.module.seat.domain.Seat;
+import com.example.movie_reservation.module.seat.domain.SeatRepository;
 import com.example.movie_reservation.fixture.CreateEntity;
+import com.example.movie_reservation.module.seat.service.SeatService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

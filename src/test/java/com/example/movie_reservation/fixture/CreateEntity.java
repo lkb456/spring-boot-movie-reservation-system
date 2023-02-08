@@ -1,15 +1,15 @@
 package com.example.movie_reservation.fixture;
 
-import com.example.movie_reservation.domain.actor.Actor;
-import com.example.movie_reservation.domain.consumer.Consumer;
-import com.example.movie_reservation.domain.movie.Movie;
-import com.example.movie_reservation.domain.movie.ReleaseStatus;
-import com.example.movie_reservation.domain.reservation.Reservation;
-import com.example.movie_reservation.domain.reservation.ReservationStatus;
-import com.example.movie_reservation.domain.screening.Screening;
-import com.example.movie_reservation.domain.seat.Seat;
-import com.example.movie_reservation.domain.ticket.Ticket;
-import com.example.movie_reservation.util.Money;
+import com.example.movie_reservation.module.actor.domain.Actor;
+import com.example.movie_reservation.module.consumer.domain.Consumer;
+import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
+import com.example.movie_reservation.module.screening.domain.movie.domain.ReleaseStatus;
+import com.example.movie_reservation.module.reservation.domain.Reservation;
+import com.example.movie_reservation.module.reservation.domain.ReservationStatus;
+import com.example.movie_reservation.module.screening.domain.Screening;
+import com.example.movie_reservation.module.seat.domain.Seat;
+import com.example.movie_reservation.module.ticket.domain.Ticket;
+import com.example.movie_reservation.infra.util.Money;
 
 import java.time.Duration;
 import java.time.LocalDate;

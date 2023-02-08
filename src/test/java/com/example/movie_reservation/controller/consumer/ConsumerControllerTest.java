@@ -1,11 +1,12 @@
 package com.example.movie_reservation.controller.consumer;
 
-import com.example.movie_reservation.controller.consumer.dto.ConsumerRequestDto;
-import com.example.movie_reservation.controller.consumer.dto.ConsumerResponseDto;
-import com.example.movie_reservation.domain.consumer.Consumer;
+import com.example.movie_reservation.module.consumer.dto.ConsumerRequestDto;
+import com.example.movie_reservation.module.consumer.dto.ConsumerResponseDto;
+import com.example.movie_reservation.module.consumer.controller.ConsumerController;
+import com.example.movie_reservation.module.consumer.domain.Consumer;
 import com.example.movie_reservation.fixture.CreateDto;
 import com.example.movie_reservation.fixture.CreateEntity;
-import com.example.movie_reservation.service.ConsumerService;
+import com.example.movie_reservation.module.consumer.service.ConsumerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

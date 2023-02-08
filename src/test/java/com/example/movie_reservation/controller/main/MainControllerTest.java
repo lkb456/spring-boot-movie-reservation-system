@@ -1,10 +1,11 @@
 package com.example.movie_reservation.controller.main;
 
-import com.example.movie_reservation.controller.main.dto.SearchMovieOrActorResponseDto;
-import com.example.movie_reservation.domain.actor.Actor;
-import com.example.movie_reservation.domain.movie.Movie;
+import com.example.movie_reservation.module.main.dto.SearchMovieOrActorResponseDto;
+import com.example.movie_reservation.module.actor.domain.Actor;
+import com.example.movie_reservation.module.main.controller.SearchController;
+import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
 import com.example.movie_reservation.fixture.CreateEntity;
-import com.example.movie_reservation.service.SearchService;
+import com.example.movie_reservation.module.main.service.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MainController.class)
+@WebMvcTest(SearchController.class)
 class MainControllerTest {
 
     @MockBean
