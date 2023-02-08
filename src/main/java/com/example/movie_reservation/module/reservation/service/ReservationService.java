@@ -1,5 +1,6 @@
 package com.example.movie_reservation.module.reservation.service;
 
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import com.example.movie_reservation.module.reservation.dto.PopularMovieResponseDto;
 import com.example.movie_reservation.module.reservation.dto.ReservationResponseDto;
 import com.example.movie_reservation.module.reservation.dto.ReservationSaveRequestDto;
@@ -96,7 +97,7 @@ public class ReservationService {
 
     public Reservation findReservation(Long reservationId) {
         return reservationRepository.findById(reservationId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 예매정보입니다."));
+                .orElseThrow(NotFoundEntityException::new);
     }
 
     public List<PopularMovieResponseDto> bestMovieFind() {

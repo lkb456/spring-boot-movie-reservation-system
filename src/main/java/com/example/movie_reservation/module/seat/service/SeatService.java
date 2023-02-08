@@ -1,5 +1,6 @@
 package com.example.movie_reservation.module.seat.service;
 
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import com.example.movie_reservation.module.seat.dto.SeatRequestDto;
 import com.example.movie_reservation.module.reservation.domain.Reservation;
 import com.example.movie_reservation.module.seat.domain.Seat;
@@ -26,6 +27,6 @@ public class SeatService {
 
     public Seat findSeat(Integer seatNumber) {
         return seatRepository.findBySeatNumber(seatNumber)
-                .orElseThrow(() -> new IllegalArgumentException("좌석 정보가 존재하지 않습니다."));
+                .orElseThrow(NotFoundEntityException::new);
     }
 }

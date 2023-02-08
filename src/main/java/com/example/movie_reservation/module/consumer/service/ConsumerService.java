@@ -1,5 +1,6 @@
 package com.example.movie_reservation.module.consumer.service;
 
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import com.example.movie_reservation.module.consumer.dto.ConsumerRequestDto;
 import com.example.movie_reservation.module.consumer.domain.Consumer;
 import com.example.movie_reservation.module.consumer.domain.ConsumerRepository;
@@ -47,6 +48,6 @@ public class ConsumerService {
 
     public Consumer findConsumer(Long consumerId) {
         return consumerRepository.findById(consumerId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객정보입니다."));
+                .orElseThrow(NotFoundEntityException::new);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.movie_reservation.module.actor.service;
 
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import com.example.movie_reservation.module.actor.domain.ActorRepository;
 import com.example.movie_reservation.module.actor.controller.dto.ActorRequestDto;
 import com.example.movie_reservation.module.actor.controller.dto.ActorResponseDto;
@@ -20,6 +21,6 @@ public class ActorService {
 
     public Actor findActor(Long actorId) {
         return actorRepository.findById(actorId)
-                .orElseThrow(() -> new IllegalArgumentException("Actor Entity is Not Found !!"));
+                .orElseThrow(NotFoundEntityException::new);
     }
 }

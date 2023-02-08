@@ -8,6 +8,7 @@ import com.example.movie_reservation.module.screening.domain.movie.domain.MovieR
 import com.example.movie_reservation.module.screening.domain.movie.dto.MovieRequestDto;
 import com.example.movie_reservation.module.screening.domain.movie.dto.MovieResponseDto;
 import com.example.movie_reservation.module.screening.domain.movie.dto.MovieResponsePageDto;
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +43,7 @@ public class MovieService {
 
     public Movie findMovie(Long movieId) {
         return movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("Not Fount Entity"));
+                .orElseThrow(NotFoundEntityException::new);
     }
 
     public MovieResponsePageDto searchMovies(String title, Pageable pageable) {

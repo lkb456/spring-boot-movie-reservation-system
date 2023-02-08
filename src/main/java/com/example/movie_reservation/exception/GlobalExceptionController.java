@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionController {
 
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    public ResponseEntity<ExceptionResponseDto> illegalArgumentException(final IllegalArgumentException e) {
+    @ExceptionHandler(value = NotFoundEntityException.class)
+    public ResponseEntity<ExceptionResponseDto> notFoundEntityException(final NotFoundEntityException e) {
+        ErrorCode errorCode = e.getErrorCode();
         ExceptionResponseDto exceptionResponseDto = ExceptionResponseDto.builder()
-                .status(HttpStatus.BAD_REQUEST)
-                .message(e.getMessage())
+                .status(errorCode.getHttpStatus())
+                .message(errorCode.getMessage())
                 .build();
 
         log.info("Exception message : {}", e.getMessage());

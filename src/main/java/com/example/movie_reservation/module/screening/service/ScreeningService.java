@@ -1,5 +1,6 @@
 package com.example.movie_reservation.module.screening.service;
 
+import com.example.movie_reservation.exception.NotFoundEntityException;
 import com.example.movie_reservation.module.screening.domain.Screening;
 import com.example.movie_reservation.module.screening.domain.ScreeningRepository;
 import com.example.movie_reservation.module.screening.domain.movie.domain.Movie;
@@ -45,6 +46,6 @@ public class ScreeningService {
 
     public Screening findScreen(Long screenId) {
         return screeningRepository.findById(screenId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상영정보입니다."));
+                .orElseThrow(NotFoundEntityException::new);
     }
 }
