@@ -1,5 +1,6 @@
-package com.example.movie_reservation.domain.movie;
+package com.example.movie_reservation.domain.movie.dtos;
 
+import com.example.movie_reservation.domain.movie.Movie;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;

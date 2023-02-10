@@ -8,5 +8,5 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    List<Movie> findByReleaseDateBetweenAndTitleStartingWith(LocalDate firstDate, LocalDate secondDate, String title);
+    List<Movie> findByReleaseDateBetweenAndTitleStartingWith(LocalDate firstDate, LocalDate secondDate, String keyword);
 }

@@ -1,5 +1,7 @@
 package com.example.movie_reservation.domain.movie;
 
+import com.example.movie_reservation.domain.movie.dtos.RequestMovieDto;
+import com.example.movie_reservation.domain.movie.dtos.ResponseMovieDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -10,20 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Validated
 @RequiredArgsConstructor
 @RestController
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     @PostMapping("/movies")
     public ResponseEntity<Long> movieSave(@Valid @RequestBody RequestMovieDto requestMovieDto) {
-        Movie movie = requestMovieDto.toEntity();
-        Long id = movieRepository.save(movie).getId();
-        return ResponseEntity.status(HttpStatus.CREATED).body(id);
+        Long savedId = movieService.saveMovie(requestMovieDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedId);
     }
 
     @GetMapping("/movies")
@@ -31,16 +31,14 @@ public class MovieController {
                                                               @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstDate,
                                                               @RequestParam("second")
                                                               @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate secondDate,
-                                                              @RequestParam(required = false) String title) {
-        List<Movie> list = movieRepository.findByReleaseDateBetweenAndTitleStartingWith(firstDate, secondDate, title);
-        return ResponseEntity.status(HttpStatus.OK).body(list.stream().map(ResponseMovieDto::of).collect(Collectors.toList()));
+                                                              @RequestParam(required = false) String keyword) {
+        List<ResponseMovieDto> responseMovieDtos = movieService.searchMovie(firstDate, secondDate, keyword);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMovieDtos);
     }
 
     @GetMapping("/movies/{id}")
     public ResponseEntity<ResponseMovieDto> movieFind(@PathVariable("id") Long movieId) {
-        Movie movie = movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화정보입니다."));
-        ResponseMovieDto of = ResponseMovieDto.of(movie);
-        return ResponseEntity.status(HttpStatus.OK).body(of);
+        ResponseMovieDto responseMovieDto = movieService.findMovie(movieId);
+        return ResponseEntity.status(HttpStatus.OK).body(responseMovieDto);
     }
 }

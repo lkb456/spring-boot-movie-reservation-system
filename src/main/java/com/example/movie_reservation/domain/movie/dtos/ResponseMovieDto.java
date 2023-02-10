@@ -1,5 +1,6 @@
-package com.example.movie_reservation.domain.movie;
+package com.example.movie_reservation.domain.movie.dtos;
 
+import com.example.movie_reservation.domain.movie.Movie;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
